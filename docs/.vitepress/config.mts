@@ -18,4 +18,8 @@ export default defineConfig({
 	vite: {
 		plugins: [tailwindcss()],
 	},
+
+	head: [
+		['link', { rel: 'icon', href: '/favicon.ico' }],
+	],
 });
