@@ -1,5 +1,90 @@
 @import 'tailwindcss';
 
+@theme {
+	/* Blue 色系 */
+	--color-blue-300: #93c5fd;
+	--color-blue-400: #60a5fa;
+	--color-blue-500: #3b82f6;
+
+	/* Indigo 色系 */
+	--color-indigo-300: #a5b4fc;
+
+	/* Violet 色系 */
+	--color-violet-200: #ddd6fe;
+
+	/* 自定义动画 Keyframes */
+	--animate-aurora: aurora 60s linear infinite;
+	--animate-grow: grow 2s ease-in-out forwards;
+	--animate-shrink: shrink 2s ease-in-out forwards;
+
+	/* Keyframes 定义 */
+	@keyframes aurora {
+		from {
+			background-position: 50% 50%, 50% 50%;
+		}
+
+		to {
+			background-position: 350% 50%, 350% 50%;
+		}
+	}
+
+	@keyframes grow {
+		0% {
+			stroke-dasharray: 0 350px;
+			opacity: 0;
+		}
+
+		10% {
+			opacity: 1;
+		}
+
+		40% {
+			stroke-dasharray: 350px 0;
+		}
+
+		100% {
+			stroke-dasharray: 350px 0;
+			opacity: 1;
+		}
+	}
+
+	@keyframes shrink {
+		0% {
+			stroke-dasharray: 350px 0;
+			opacity: 1;
+		}
+
+		99% {
+			stroke-dasharray: 0 350px;
+			opacity: 1;
+		}
+
+		100% {
+			stroke-dasharray: 0 350px;
+			opacity: 0;
+		}
+	}
+}
+
+:root {
+	/* 基础颜色 */
+	--black: #000000;
+	--white: #ffffff;
+	--transparent: transparent;
+
+	--blue-300: var(--color-blue-300);
+	--blue-400: var(--color-blue-400);
+	--blue-500: var(--color-blue-500);
+	--indigo-300: var(--color-indigo-300);
+	--violet-200: var(--color-violet-200);
+}
+
+/* Glass morphism 效果 */
+.glass {
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+}
+
 /* 基础样式重置 */
 *,
 *::before,
