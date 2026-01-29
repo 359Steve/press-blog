@@ -1,23 +1,31 @@
 @import 'tailwindcss';
 
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
 @theme {
-	/* Blue 色系 */
 	--color-blue-300: #93c5fd;
 	--color-blue-400: #60a5fa;
 	--color-blue-500: #3b82f6;
-
-	/* Indigo 色系 */
 	--color-indigo-300: #a5b4fc;
-
-	/* Violet 色系 */
 	--color-violet-200: #ddd6fe;
 
-	/* 自定义动画 Keyframes */
+	--color-black: #000000;
+	--color-white: #ffffff;
+	--color-transparent: transparent;
+
 	--animate-aurora: aurora 60s linear infinite;
 	--animate-grow: grow 2s ease-in-out forwards;
 	--animate-shrink: shrink 2s ease-in-out forwards;
 
-	/* Keyframes 定义 */
 	@keyframes aurora {
 		from {
 			background-position: 50% 50%, 50% 50%;
@@ -66,33 +74,72 @@
 	}
 }
 
-:root {
-	/* 基础颜色 */
-	--black: #000000;
-	--white: #ffffff;
-	--transparent: transparent;
+@layer base {
+	:root {
+		--aurora: repeating-linear-gradient(
+			100deg,
+			var(--color-blue-500) 10%,
+			var(--color-indigo-300) 15%,
+			var(--color-blue-300) 20%,
+			var(--color-violet-200) 25%,
+			var(--color-blue-400) 30%
+		);
 
-	--blue-300: var(--color-blue-300);
-	--blue-400: var(--color-blue-400);
-	--blue-500: var(--color-blue-500);
-	--indigo-300: var(--color-indigo-300);
-	--violet-200: var(--color-violet-200);
+		--dark-gradient: repeating-linear-gradient(
+			100deg,
+			var(--color-black) 0%,
+			var(--color-black) 7%,
+			var(--color-transparent) 10%,
+			var(--color-transparent) 12%,
+			var(--color-black) 16%
+		);
+
+		--white-gradient: repeating-linear-gradient(
+			100deg,
+			var(--color-white) 0%,
+			var(--color-white) 7%,
+			var(--color-transparent) 10%,
+			var(--color-transparent) 12%,
+			var(--color-white) 16%
+		);
+	}
 }
 
-/* Glass morphism 效果 */
-.glass {
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
+@layer components {
+	.aurora-bg {
+		@apply 	pointer-events-none
+				absolute
+				-inset-2.5
+				opacity-50
+				blur-[10px]
+				invert
+				filter
+				will-change-transform
+				[background-image:var(--white-gradient),var(--aurora)]
+				bg-position-[50%_50%,50%_50%]
+				bg-size-[300%,200%]
+				after:absolute
+				after:inset-0
+				after:animate-aurora
+				after:mix-blend-difference
+				after:content-['']
+				after:bg-fixed
+				after:[background-image:var(--white-gradient),var(--aurora)] 
+				after:bg-size-[200%,100%]
+				dark:invert-0
+				dark:[background-image:var(--dark-gradient),var(--aurora)]
+				after:dark:[background-image:var(--dark-gradient),var(--aurora)]
+	}
 }
 
-/* 基础样式重置 */
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
+@layer utilities {
+	.mask-bg {
+		@apply mask-[radial-gradient(ellipse_at_100%_0%,black_10%,var(--color-transparent)_90%)]
+	}
+
+	.glass {
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+	}
 }
 
-body {
-	margin: 0;
-	padding: 0;
-}
