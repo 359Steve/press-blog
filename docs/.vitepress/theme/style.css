@@ -115,6 +115,9 @@ body,
 			var(--color-transparent) 12%,
 			var(--color-white) 16%
 		);
+
+		--prose-width: 90ch;
+		--prose-margin: calc(calc(calc(100vw - min(var(--prose-width), 100%)) / 2) - 8px);
 	}
 }
 
