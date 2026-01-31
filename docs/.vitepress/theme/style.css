@@ -128,34 +128,13 @@ body,
 
 @layer components {
 	.aurora-bg {
-		@apply 	pointer-events-none
-				absolute
-				-inset-2.5
-				opacity-50
-				blur-[10px]
-				invert
-				filter
-				will-change-transform
-				[background-image:var(--white-gradient),var(--aurora)]
-				bg-position-[50%_50%,50%_50%]
-				bg-size-[300%,200%]
-				after:absolute
-				after:inset-0
-				after:animate-aurora
-				after:mix-blend-difference
-				after:content-['']
-				after:bg-fixed
-				after:[background-image:var(--white-gradient),var(--aurora)] 
-				after:bg-size-[200%,100%]
-				dark:invert-0
-				dark:[background-image:var(--dark-gradient),var(--aurora)]
-				after:dark:[background-image:var(--dark-gradient),var(--aurora)]
+		@apply after:animate-aurora pointer-events-none absolute -inset-2.5 [background-image:var(--white-gradient),var(--aurora)] bg-size-[300%,200%] bg-position-[50%_50%,50%_50%] opacity-50 blur-[10px] invert filter will-change-transform after:absolute after:inset-0 after:[background-image:var(--white-gradient),var(--aurora)] after:bg-size-[200%,100%] after:bg-fixed after:mix-blend-difference after:content-[''] dark:[background-image:var(--dark-gradient),var(--aurora)] dark:invert-0 after:dark:[background-image:var(--dark-gradient),var(--aurora)];
 	}
 }
 
 @layer utilities {
 	.mask-bg {
-		@apply mask-[radial-gradient(ellipse_at_100%_0%,black_10%,var(--color-transparent)_90%)]
+		@apply mask-[radial-gradient(ellipse_at_100%_0%,black_10%,var(--color-transparent)_90%)];
 	}
 
 	.glass {
@@ -163,4 +142,3 @@ body,
 		-webkit-backdrop-filter: blur(12px);
 	}
 }
-
