@@ -5,11 +5,9 @@ const { showRadialGradient = true } = defineProps<{
 </script>
 
 <template>
-	<div v-bind="$attrs" class="transition-bg bg-zinc-50 dark:bg-zinc-900">
+	<div class="transition-bg fixed inset-0 z-[-1] h-dvh w-full bg-zinc-50 dark:bg-zinc-900">
 		<div class="absolute inset-0 overflow-hidden">
-			<div class="aurora-bg" :class="[
-				showRadialGradient ? 'mask-bg' : '',
-			]" />
+			<div class="aurora-bg" :class="[showRadialGradient ? 'mask-bg' : '']" />
 		</div>
 		<slot />
 	</div>
