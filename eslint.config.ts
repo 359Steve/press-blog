@@ -13,5 +13,6 @@ export default antfu({
 		'style/brace-style': 'warn',
 		'ts/no-empty-object-type': 'warn',
 		'style/no-tabs': 'off',
+		'style/operator-linebreak': 'off',
 	},
 });
