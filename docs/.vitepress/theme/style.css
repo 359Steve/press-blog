@@ -119,6 +119,11 @@ body,
 		--prose-width: 90ch;
 		--prose-margin: calc(calc(calc(100vw - min(var(--prose-width), 100%)) / 2) - 8px);
 	}
+
+	.dark {
+		--color-blog-primary: #ffffff;
+		--color-bg-blog-primary: #1a1a1a;
+	}
 }
 
 @layer components {
