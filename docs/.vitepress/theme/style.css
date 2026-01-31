@@ -32,6 +32,9 @@ body,
 	--animate-grow: grow 5s ease forwards;
 	--animate-shrink: shrink 1s ease forwards;
 
+	--color-blog-primary: #1a1a1a;
+	--color-bg-blog-primary: #ffffff;
+
 	@keyframes aurora {
 		from {
 			background-position: 50% 50%, 50% 50%;
