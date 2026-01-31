@@ -1,17 +1,36 @@
 <script lang="ts" setup>
-import { Content } from 'vitepress';
-import RecordBackground from './components/RecordBackground.vue';
+import { useWindowScroll } from '@vueuse/core';
+import { Content, useData } from 'vitepress';
+import { onMounted, watch } from 'vue';
+import HeaderBox from './components/HeaderBox.vue';
+import { useJojoHeader } from './store/jojoHeader';
+
+const { page } = useData();
+const { setScroll, getHeaderHeight } = useJojoHeader();
+
+onMounted(() => {
+	const { y } = useWindowScroll();
+
+	watch(
+		y,
+		(newY, oldY) => {
+			setScroll(newY > (oldY ?? 0) && newY > getHeaderHeight());
+		},
+		{ immediate: true },
+	);
+});
 </script>
 
 <template>
-	<div class="relative w-full">
-		<ClientOnly>
-			<RecordBackground class-name="w-full h-[100dvh] fixed inset-0 z-[-1]" />
-		</ClientOnly>
-		<div class="flex h-full min-h-screen w-full flex-col">
-			<Content />
-		</div>
-	</div>
+	<RecordBackground />
+
+	<MainPress>
+		<template #header>
+			<HeaderBox />
+		</template>
+		<NotFound v-if="page.isNotFound" />
+		<Content v-else />
+	</MainPress>
 </template>
 
 <style lang="scss" scoped></style>
