@@ -29,8 +29,8 @@ body,
 	--color-transparent: transparent;
 
 	--animate-aurora: aurora 60s linear infinite;
-	--animate-grow: grow 2s ease-in-out forwards;
-	--animate-shrink: shrink 2s ease-in-out forwards;
+	--animate-grow: grow 5s ease forwards;
+	--animate-shrink: shrink 1s ease forwards;
 
 	@keyframes aurora {
 		from {
