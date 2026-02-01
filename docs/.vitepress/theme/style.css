@@ -100,16 +100,7 @@ body,
 			var(--color-blue-400) 30%
 		);
 
-		--dark-gradient: repeating-linear-gradient(
-			100deg,
-			var(--color-black) 0%,
-			var(--color-black) 7%,
-			var(--color-transparent) 10%,
-			var(--color-transparent) 12%,
-			var(--color-black) 16%
-		);
-
-		--white-gradient: repeating-linear-gradient(
+		--record-gradient: repeating-linear-gradient(
 			100deg,
 			var(--color-white) 0%,
 			var(--color-white) 7%,
@@ -125,12 +116,26 @@ body,
 	.dark {
 		--color-blog-primary: #ffffff;
 		--color-bg-blog-primary: #1a1a1a;
+
+		--record-gradient: repeating-linear-gradient(
+			100deg,
+			var(--color-black) 0%,
+			var(--color-black) 7%,
+			var(--color-transparent) 10%,
+			var(--color-transparent) 12%,
+			var(--color-black) 16%
+		);
 	}
 }
 
 @layer components {
 	.aurora-bg {
-		@apply after:animate-aurora pointer-events-none absolute -inset-2.5 [background-image:var(--white-gradient),var(--aurora)] bg-size-[300%,200%] bg-position-[50%_50%,50%_50%] opacity-50 blur-[10px] invert filter will-change-transform after:absolute after:inset-0 after:[background-image:var(--white-gradient),var(--aurora)] after:bg-size-[200%,100%] after:bg-fixed after:mix-blend-difference after:content-[''] dark:[background-image:var(--dark-gradient),var(--aurora)] dark:invert-0 after:dark:[background-image:var(--dark-gradient),var(--aurora)];
+		@apply after:animate-aurora pointer-events-none absolute -inset-2.5 bg-size-[300%,200%] bg-position-[50%_50%,50%_50%] opacity-50 blur-[10px] invert filter will-change-transform after:absolute after:inset-0 after:bg-size-[200%,100%] after:bg-fixed after:mix-blend-difference after:content-[''] dark:invert-0;
+		background-image: var(--record-gradient), var(--aurora);
+	}
+
+	.aurora-bg::after {
+		background-image: var(--record-gradient), var(--aurora);
 	}
 }
 
