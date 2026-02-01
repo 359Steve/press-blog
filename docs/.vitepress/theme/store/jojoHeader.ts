@@ -1,6 +1,3 @@
-import { defineStore } from 'pinia';
-import { reactive, ref } from 'vue';
-
 export const useJojoHeader = defineStore('jojoHeader', () => {
 	const isScroll = ref<boolean>(false); // 是否滚动
 	const headerHeight = ref<number>(0); // 导航栏高度

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, useTemplateRef } from 'vue';
-
 // 仙人掌对象类型
 interface CactusType {
 	x: number;

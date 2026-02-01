@@ -1,10 +1,4 @@
 <script lang="ts" setup>
-import { useWindowScroll } from '@vueuse/core';
-import { Content, useData } from 'vitepress';
-import { onMounted, watch } from 'vue';
-import HeaderBox from './components/HeaderBox.vue';
-import { useJojoHeader } from './store/jojoHeader';
-
 const { page } = useData();
 const { setScroll, getHeaderHeight } = useJojoHeader();
 
