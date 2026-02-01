@@ -1,3 +1,6 @@
+/**
+ * @description 菜单项类型
+ */
 interface ThemeVavbarItem {
 	text: string;
 	link: string;
