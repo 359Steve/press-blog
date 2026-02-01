@@ -4,3 +4,10 @@ interface ThemeVavbarItem {
 	activeMatch?: string;
 	[key: string]: any;
 }
+
+/**
+ * @description 顶部导航菜单列表类型
+ */
+interface ThemeNavbarConfig extends ThemeVavbarItem {
+	icon: string;
+}
