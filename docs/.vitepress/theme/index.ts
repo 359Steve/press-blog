@@ -1,8 +1,10 @@
 import type { Theme } from 'vitepress';
 import { Icon } from '@iconify/vue';
 import { createPinia } from 'pinia';
-import HeaderMenuList from './components/HeaderMenuList.vue';
-import LogoBasicLogo from './components/LogoBasicLogo.vue';
+import HeaderBox from './components/header/HeaderBox.vue';
+import HeaderItem from './components/header/HeaderItem.vue';
+import HeaderMenuList from './components/header/HeaderMenuList.vue';
+import LogoBasicLogo from './components/header/LogoBasicLogo.vue';
 import MainPress from './components/MainPress.vue';
 import NodetFound from './components/NotFound.vue';
 import RecordBackground from './components/RecordBackground.vue';
@@ -21,6 +23,8 @@ export default {
 			.component('NotFound', NodetFound)
 			.component('TRexRunner', TRexRunner)
 			.component('LogoBasicLogo', LogoBasicLogo)
+			.component('HeaderBox', HeaderBox)
+			.component('HeaderItem', HeaderItem)
 			.component('HeaderMenuList', HeaderMenuList);
 	},
 } satisfies Theme;
