@@ -1,4 +1,6 @@
 import tailwindcss from '@tailwindcss/vite';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
@@ -13,7 +15,20 @@ export default defineConfig({
 	srcDir: 'src',
 
 	vite: {
-		plugins: [tailwindcss()],
+		plugins: [
+			AutoImport({
+				imports: ['vitepress', 'vue', '@vueuse/core', 'pinia'],
+				dirs: ['../.vitepress/theme/store'],
+				dts: '../.vitepress/theme/types/auto-imports.d.ts',
+			}),
+
+			Components({
+				dirs: ['../.vitepress/theme/components'],
+				extensions: ['vue'],
+				dts: '../.vitepress/theme/types/auto-components.d.ts',
+			}),
+			tailwindcss(),
+		],
 	},
 
 	themeConfig: {
