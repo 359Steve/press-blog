@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { page } = useData();
+const { page, isDark } = useData();
 const { setScroll, getHeaderHeight } = useJojoHeader();
 
 onMounted(() => {
