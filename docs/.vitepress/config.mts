@@ -38,6 +38,10 @@ export default defineConfig({
 			{ text: '首页', link: '/', activeMatch: '^/$' },
 			{ text: '博客', link: '/blog', activeMatch: '^/blog(/|$)' },
 			{ text: '日记', link: '/record', activeMatch: '^/record(/|$)' },
-		] satisfies ThemeVavbarItem[],
+		],
+		footer: {
+			copyright: 'Copyright © 2025-present Joseph Joestar',
+			message: '蜀ICP备2025171383号',
+		},
 	},
 });
