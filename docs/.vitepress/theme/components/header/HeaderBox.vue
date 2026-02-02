@@ -53,10 +53,10 @@ onMounted(() => {
 <template>
 	<header
 		ref="headerEl"
-		class="glass sticky top-0 z-10 flex h-12 w-full items-center justify-between border-x-0 px-4 transition-all duration-300 ease-in-out"
+		class="glass sticky top-0 z-10 flex h-15 w-full items-center justify-between border-x-0 px-4 transition-all duration-300 ease-in-out"
 		:class="[getScroll() ? '-translate-y-full' : 'translate-y-0']"
 	>
-		<div class="h-full w-24 cursor-pointer py-2" @click="router.go('/')">
+		<div class="h-full w-fit cursor-pointer py-4" @click="router.go('/')">
 			<LogoBasicLogo />
 		</div>
 		<div class="absolute left-[50%] hidden h-full translate-x-[-50%] items-center justify-center sm:flex">
@@ -77,7 +77,7 @@ onMounted(() => {
 				</a>
 			</HeaderItem>
 			<HeaderItem @click="changeTheme">
-				<Icon icon="ri:sun-fill" width="22" />
+				<Icon :icon="isDark ? 'ri:moon-clear-fill' : 'ri:sun-fill'" width="22" />
 			</HeaderItem>
 		</div>
 	</header>
