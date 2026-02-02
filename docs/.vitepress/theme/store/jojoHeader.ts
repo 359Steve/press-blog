@@ -1,8 +1,6 @@
 export const useJojoHeader = defineStore('jojoHeader', () => {
-	const isScroll = ref<boolean>(false); // 是否滚动
-	const headerHeight = ref<number>(0); // 导航栏高度
-
-	const drawer = ref<boolean>(false); // 是否打开侧边菜单弹窗
+	const isScroll = ref<boolean>(false);
+	const headerHeight = ref<number>(0);
 
 	const getScroll = () => {
 		return isScroll.value;
@@ -23,7 +21,6 @@ export const useJojoHeader = defineStore('jojoHeader', () => {
 	return {
 		isScroll,
 		headerHeight,
-		drawer,
 		getScroll,
 		setScroll,
 		getHeaderHeight,
