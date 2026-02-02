@@ -1,6 +1,8 @@
 import type { Theme } from 'vitepress';
 import { Icon } from '@iconify/vue';
 import { createPinia } from 'pinia';
+import BlogSearch from './components/blog/BlogSearch.vue';
+import FooterBox from './components/footer/FooterBox.vue';
 import HeaderBox from './components/header/HeaderBox.vue';
 import HeaderItem from './components/header/HeaderItem.vue';
 import HeaderMenuList from './components/header/HeaderMenuList.vue';
@@ -25,6 +27,8 @@ export default {
 			.component('LogoBasicLogo', LogoBasicLogo)
 			.component('HeaderBox', HeaderBox)
 			.component('HeaderItem', HeaderItem)
-			.component('HeaderMenuList', HeaderMenuList);
+			.component('HeaderMenuList', HeaderMenuList)
+			.component('FooterBox', FooterBox)
+			.component('BlogSearch', BlogSearch);
 	},
 } satisfies Theme;
