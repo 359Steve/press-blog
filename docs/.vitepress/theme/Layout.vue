@@ -55,6 +55,9 @@ onMounted(() => {
 		</template>
 		<NotFound v-if="page.isNotFound" />
 		<Content v-else />
+		<template #footer>
+			<FooterBox />
+		</template>
 	</MainPress>
 </template>
 
