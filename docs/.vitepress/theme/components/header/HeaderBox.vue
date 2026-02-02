@@ -38,13 +38,9 @@ const aLinks = ref<ThemeNavbarConfig[]>([
 	},
 ]);
 
-function enableTransitions() {
-	return 'startViewTransition' in document && window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
-}
+const toggleAppearance = inject<(e: MouseEvent) => Promise<void>>('toggle-appearance');
 
-function changeTheme() {
-	isDark.value = !isDark.value;
-}
+const changeTheme = (e: MouseEvent) => toggleAppearance?.(e);
 
 onMounted(() => {
 	nextTick(() => {
