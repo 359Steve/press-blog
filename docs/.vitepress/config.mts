@@ -33,6 +33,7 @@ export default defineConfig({
 
 	themeConfig: {
 		siteTitle: false,
+		i18nRouting: false,
 		nav: [
 			{ text: '首页', link: '/', activeMatch: '^/$' },
 			{ text: '博客', link: '/blog', activeMatch: '^/blog(/|$)' },
