@@ -7,7 +7,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
 	lang: 'zh-CN',
 	title: 'JoJo的个人博客',
-	titleTemplate: ':title - JoJo',
+	titleTemplate: ':title | JoJo',
 	description: 'JoJo的个人博客，分享技术文章、生活记录和项目经验',
 	head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
 
