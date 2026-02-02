@@ -4,7 +4,7 @@ const route = useRoute();
 const { theme } = useData<{
 	nav: ThemeVavbarItem[];
 }>();
-const menuList = ref(theme.value.nav);
+const menuList = computed(() => theme.value.nav);
 
 function isActive(item: ThemeVavbarItem): boolean {
 	if (!item.activeMatch) {
