@@ -24,7 +24,7 @@ async function toPath(item: (typeof menuList.value)[number]) {
 			<li
 				v-for="item in menuList"
 				:key="item.link"
-				class="text-bg h-full px-0 text-[20px] leading-12 hover:cursor-pointer"
+				class="h-full px-0 text-[18px] leading-12 hover:cursor-pointer"
 				:class="[!isActive(item) && 'hover:text-blog-primary']"
 				@click="toPath(item)"
 			>
