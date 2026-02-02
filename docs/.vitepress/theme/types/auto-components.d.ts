@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    FooterBox: typeof import('./../components/footer/FooterBox.vue')['default']
     HeaderBox: typeof import('./../components/header/HeaderBox.vue')['default']
     HeaderItem: typeof import('./../components/header/HeaderItem.vue')['default']
     HeaderMenuList: typeof import('./../components/header/HeaderMenuList.vue')['default']
