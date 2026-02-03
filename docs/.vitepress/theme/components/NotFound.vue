@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-	<div class="flex h-screen w-full flex-col justify-center text-center">
+	<div class="flex w-full flex-col justify-center text-center">
 		<div
 			class="h-62.5 w-full bg-[url(/images/404-ezgif.com-gif-maker.gif)] bg-contain bg-center bg-no-repeat sm:h-87.5 md:h-100"
 		>
