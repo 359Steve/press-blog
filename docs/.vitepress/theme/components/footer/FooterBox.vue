@@ -11,12 +11,12 @@ const footerMessage = computed(() => theme.value.footer);
 <template>
 	<div class="mt-8 grid w-full grid-cols-1 gap-2 py-2 sm:grid-cols-2">
 		<div class="col-span-1 flex items-center justify-center gap-2 sm:col-span-2">
-			<span class="text-[1em]">{{ footerMessage.copyright }}</span>
+			<span>{{ footerMessage.copyright }}</span>
 			<a
 				href="http://beian.miit.gov.cn/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="mr-4 hidden items-center gap-2 text-[1em] sm:flex"
+				class="mr-4 hidden items-center gap-2 sm:flex"
 			>
 				{{ footerMessage.message }}
 			</a>
@@ -26,7 +26,7 @@ const footerMessage = computed(() => theme.value.footer);
 				href="http://beian.miit.gov.cn/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex items-center gap-2 text-[1em]"
+				class="flex items-center gap-2"
 			>
 				{{ footerMessage.message }}
 			</a>
