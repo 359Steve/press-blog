@@ -5,7 +5,7 @@ import BlogList from './components/blog/BlogList.vue';
 import BlogSearch from './components/blog/BlogSearch.vue';
 import Layout from './Layout.vue';
 import 'vitepress/theme';
-import './style.css';
+import '../theme/css/style.css';
 
 export default {
 	Layout,
