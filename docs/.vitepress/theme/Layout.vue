@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { page, isDark } = useData();
+const { page, isDark, frontmatter } = useData();
 const { setScroll, getHeaderHeight } = useJojoHeader();
 
 function enableTransitions() {
@@ -54,7 +54,12 @@ onMounted(() => {
 			<HeaderBox />
 		</template>
 		<NotFound v-if="page.isNotFound" />
-		<Content v-else />
+		<template v-else>
+			<BlogPress v-if="frontmatter.blog">
+				<BlogContentHeader :title="frontmatter.title" :date="frontmatter.date" />
+			</BlogPress>
+			<Content />
+		</template>
 		<template #footer>
 			<FooterBox />
 		</template>
