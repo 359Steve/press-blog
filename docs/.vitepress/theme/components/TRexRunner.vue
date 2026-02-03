@@ -290,7 +290,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<div class="flex h-screen w-full items-center justify-center">
+	<div class="flex w-full items-center justify-center">
 		<div ref="DinoBox" class="relative h-100 w-full">
 			<div class="relative flex h-1/2 w-full items-center justify-center p-4">
 				<div
