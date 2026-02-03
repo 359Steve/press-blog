@@ -1,5 +1,6 @@
 {
 	"name": "press-blog",
+	"type": "module",
 	"scripts": {
 		"dev": "vitepress dev docs",
 		"build": "vitepress build docs",
