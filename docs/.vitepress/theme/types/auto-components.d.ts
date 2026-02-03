@@ -11,6 +11,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BlogContentHeader: typeof import('./../components/blog/BlogContentHeader.vue')['default']
+    BlogList: typeof import('./../components/blog/BlogList.vue')['default']
+    BlogPress: typeof import('./../components/BlogPress.vue')['default']
+    BlogSearch: typeof import('./../components/blog/BlogSearch.vue')['default']
+    Content: typeof Content
     FooterBox: typeof import('./../components/footer/FooterBox.vue')['default']
     HeaderBox: typeof import('./../components/header/HeaderBox.vue')['default']
     HeaderItem: typeof import('./../components/header/HeaderItem.vue')['default']
