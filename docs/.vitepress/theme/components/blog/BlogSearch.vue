@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-const search = ref<string>('');
+const search = defineModel<string>('search');
 </script>
 
 <template>
 	<div
-		class="glass relative mb-4 flex h-full w-full flex-col items-center justify-start overflow-hidden rounded-[30px] border border-gray-200 bg-white/40 shadow-md transition-all sm:mb-8 dark:border-white/10 dark:bg-white/5 dark:shadow-[0_0_10px_rgba(255,255,255,0.08)] dark:shadow-gray-600"
+		class="glass relative mb-4 flex h-full w-full flex-col items-center justify-start overflow-hidden rounded-[30px] border border-black/5 bg-white/30 shadow-md transition-all sm:mb-8 dark:border-white/8 dark:bg-white/8 dark:shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
 	>
 		<div class="flex h-10 w-full items-center justify-start gap-2 px-2 sm:h-12 md:h-14 md:px-6">
 			<div class="opacity-100">
@@ -17,6 +17,7 @@ const search = ref<string>('');
 					placeholder="输入搜索内容"
 					class="w-full bg-transparent ring-0 outline-none"
 					type="text"
+					@change.stop
 				/>
 			</div>
 		</div>
