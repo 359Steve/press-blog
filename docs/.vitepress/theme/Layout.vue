@@ -49,21 +49,20 @@ onMounted(() => {
 <template>
 	<RecordBackground />
 
-	<MainPress>
+	<MainLayout>
 		<template #header>
 			<HeaderBox />
 		</template>
 		<NotFound v-if="page.isNotFound" />
 		<template v-else>
-			<BlogPress v-if="frontmatter.blog">
-				<BlogContentHeader :title="frontmatter.title" :date="frontmatter.date" />
-			</BlogPress>
-			<Content />
+			<BlogIndexLayout v-if="frontmatter.layout === 'blog'" />
+			<BlogListLayout v-else-if="frontmatter.blog" />
+			<Content v-else />
 		</template>
 		<template #footer>
 			<FooterBox />
 		</template>
-	</MainPress>
+	</MainLayout>
 </template>
 
 <style lang="scss" scoped></style>
