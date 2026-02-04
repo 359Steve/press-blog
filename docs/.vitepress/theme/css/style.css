@@ -18,7 +18,7 @@ body,
 	padding: 0;
 	margin: 0;
 	height: 100%;
-	scrollbar-color: #eeeeee transparent;
+	scrollbar-color: #9ca3af transparent;
 }
 
 html::-webkit-scrollbar-thumb,
@@ -45,6 +45,7 @@ body::-webkit-scrollbar-thumb,
 	--color-blog-primary: #1a1a1a;
 	--color-bg-blog-primary: #ffffff;
 	--color-blog-tertiary: #9ca3af;
+	--color-blog-secondary: #6b7280;
 
 	@keyframes aurora {
 		from {
@@ -110,7 +111,7 @@ body::-webkit-scrollbar-thumb,
 			var(--color-white) 16%
 		);
 
-		--prose-width: 110ch;
+		--prose-width: 100ch;
 		--prose-margin: calc(calc(calc(100vw - min(var(--prose-width), 100%)) / 2) - 8px);
 	}
 
@@ -118,6 +119,7 @@ body::-webkit-scrollbar-thumb,
 		--color-blog-primary: #ffffff;
 		--color-bg-blog-primary: #1a1a1a;
 		--color-blog-tertiary: #98989f;
+		--color-blog-secondary: #9ca3af;
 
 		--record-gradient: repeating-linear-gradient(
 			100deg,

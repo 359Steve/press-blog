@@ -28,7 +28,7 @@
 }
 
 .vp-doc p img {
-	@apply my-5 aspect-video w-full cursor-pointer;
+	@apply my-5 w-full cursor-pointer object-cover;
 }
 
 .vp-doc hr {
@@ -41,4 +41,24 @@
 
 .vp-doc table {
 	@apply my-0 table w-max min-w-full table-fixed border-collapse;
+}
+
+.vp-doc :is(h1, h2, h3, h4, h5, h6) {
+	@apply border-0 pt-0;
+}
+
+.vp-doc :is(h1, h2, h3, h4, h5, h6) .header-anchor {
+	@apply top-0;
+}
+
+.vp-doc ul li {
+	@apply list-disc;
+}
+
+.vp-doc .toc ul li {
+	@apply list-none text-[0.85rem];
+}
+
+.vp-doc .toc ul li a {
+	@apply text-blog-tertiary hover:text-blog-secondary dark:text-blog-tertiary dark:hover:text-blog-secondary transition-colors;
 }
