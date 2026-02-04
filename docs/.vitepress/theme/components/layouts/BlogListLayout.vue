@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { transformDate } from '@/theme/utils';
 
-const { frontmatter } = useData();
+const { frontmatter, page } = useData();
 const router = useRouter();
 
 const getDate = computed(() => {
@@ -22,6 +22,7 @@ const getDate = computed(() => {
 			<span class="cursor-pointer border-b border-gray-400">cd . .</span>
 		</div>
 	</div>
+	<TocList />
 </template>
 
 <style lang="scss" scoped></style>
