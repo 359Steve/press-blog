@@ -9,7 +9,7 @@ const footerMessage = computed(() => theme.value.footer);
 </script>
 
 <template>
-	<div class="mt-8 grid w-full grid-cols-1 gap-2 py-2 sm:grid-cols-2">
+	<div class="mt-8 grid w-full grid-cols-1 gap-2 py-2 text-sm sm:grid-cols-2">
 		<div class="col-span-1 flex items-center justify-center gap-2 sm:col-span-2">
 			<span>{{ footerMessage.copyright }}</span>
 			<a
