@@ -1,3 +1,4 @@
+import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
@@ -29,6 +30,11 @@ export default defineConfig({
 			}),
 			tailwindcss(),
 		],
+		resolve: {
+			alias: {
+				'@': path.resolve(__dirname, '../.vitepress'),
+			},
+		},
 	},
 
 	themeConfig: {
