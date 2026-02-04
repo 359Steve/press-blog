@@ -11,18 +11,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    BlogContentHeader: typeof import('./../components/blog/BlogContentHeader.vue')['default']
     BlogIndexLayout: typeof import('./../components/layouts/BlogIndexLayout.vue')['default']
-    BlogLayout: typeof import('./../components/BlogLayout.vue')['default']
     BlogList: typeof import('./../components/blog/BlogList.vue')['default']
     BlogListLayout: typeof import('./../components/layouts/BlogListLayout.vue')['default']
     BlogSearch: typeof import('./../components/blog/BlogSearch.vue')['default']
-    Content: typeof Content
+    DocTable: typeof import('./../components/DocTable.vue')['default']
     FooterBox: typeof import('./../components/footer/FooterBox.vue')['default']
     HeaderBox: typeof import('./../components/header/HeaderBox.vue')['default']
     HeaderItem: typeof import('./../components/header/HeaderItem.vue')['default']
     HeaderMenuList: typeof import('./../components/header/HeaderMenuList.vue')['default']
-    Icon: typeof Icon
     LogoBasicLogo: typeof import('./../components/header/LogoBasicLogo.vue')['default']
     MainLayout: typeof import('./../components/layouts/MainLayout.vue')['default']
     NotFound: typeof import('./../components/NotFound.vue')['default']
