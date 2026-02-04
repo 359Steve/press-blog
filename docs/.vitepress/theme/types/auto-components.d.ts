@@ -12,8 +12,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BlogContentHeader: typeof import('./../components/blog/BlogContentHeader.vue')['default']
+    BlogIndexLayout: typeof import('./../components/layouts/BlogIndexLayout.vue')['default']
+    BlogLayout: typeof import('./../components/BlogLayout.vue')['default']
     BlogList: typeof import('./../components/blog/BlogList.vue')['default']
-    BlogPress: typeof import('./../components/BlogPress.vue')['default']
+    BlogListLayout: typeof import('./../components/layouts/BlogListLayout.vue')['default']
     BlogSearch: typeof import('./../components/blog/BlogSearch.vue')['default']
     Content: typeof Content
     FooterBox: typeof import('./../components/footer/FooterBox.vue')['default']
@@ -22,7 +24,7 @@ declare module 'vue' {
     HeaderMenuList: typeof import('./../components/header/HeaderMenuList.vue')['default']
     Icon: typeof Icon
     LogoBasicLogo: typeof import('./../components/header/LogoBasicLogo.vue')['default']
-    MainPress: typeof import('./../components/MainPress.vue')['default']
+    MainLayout: typeof import('./../components/layouts/MainLayout.vue')['default']
     NotFound: typeof import('./../components/NotFound.vue')['default']
     RecordBackground: typeof import('./../components/RecordBackground.vue')['default']
     TRexRunner: typeof import('./../components/TRexRunner.vue')['default']
