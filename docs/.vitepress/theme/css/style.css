@@ -18,6 +18,13 @@ body,
 	padding: 0;
 	margin: 0;
 	height: 100%;
+	scrollbar-color: #eeeeee transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+#app::-webkit-scrollbar-thumb {
+	border-radius: 2px;
 }
 
 @theme {
@@ -37,6 +44,7 @@ body,
 
 	--color-blog-primary: #1a1a1a;
 	--color-bg-blog-primary: #ffffff;
+	--color-blog-tertiary: #9ca3af;
 
 	@keyframes aurora {
 		from {
@@ -44,45 +52,37 @@ body,
 				50% 50%,
 				50% 50%;
 		}
-
 		to {
 			background-position:
 				350% 50%,
 				350% 50%;
 		}
 	}
-
 	@keyframes grow {
 		0% {
 			stroke-dasharray: 0 350px;
 			opacity: 0;
 		}
-
 		10% {
 			opacity: 1;
 		}
-
 		40% {
 			stroke-dasharray: 350px 0;
 		}
-
 		100% {
 			stroke-dasharray: 350px 0;
 			opacity: 1;
 		}
 	}
-
 	@keyframes shrink {
 		0% {
 			stroke-dasharray: 350px 0;
 			opacity: 1;
 		}
-
 		99% {
 			stroke-dasharray: 0 350px;
 			opacity: 1;
 		}
-
 		100% {
 			stroke-dasharray: 0 350px;
 			opacity: 0;
@@ -110,13 +110,14 @@ body,
 			var(--color-white) 16%
 		);
 
-		--prose-width: 102ch;
+		--prose-width: 110ch;
 		--prose-margin: calc(calc(calc(100vw - min(var(--prose-width), 100%)) / 2) - 8px);
 	}
 
 	.dark {
 		--color-blog-primary: #ffffff;
 		--color-bg-blog-primary: #1a1a1a;
+		--color-blog-tertiary: #98989f;
 
 		--record-gradient: repeating-linear-gradient(
 			100deg,
