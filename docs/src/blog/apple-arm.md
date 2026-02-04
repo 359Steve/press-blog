@@ -1,8 +1,8 @@
 ---
 blog: true
-title: 'ARM架构和x86架构的区别'
-cover: '/images/apple-arm/arm.png'
-description: '时隔 15 年，苹果的自研 ARM 芯片为何能取代 Intel 处理器？'
+title: ARM架构和x86架构的区别
+cover: /images/apple-arm/arm.png
+description: 时隔 15 年，苹果的自研 ARM 芯片为何能取代 Intel 处理器？
 tags:
     - name: Apple
       icon: mdi:apple
@@ -14,6 +14,12 @@ tags:
       url: https://www.microsoft.com/
 date: 2020-06-25
 ---
+
+<TocList>
+
+[[toc]]
+
+</TocList>
 
 > 此文章发表于 2020 年 6 月 25 日，现根据最新信息进行了部分修改和补充。
 
