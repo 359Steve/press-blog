@@ -1,6 +1,7 @@
 import type { Theme } from 'vitepress';
 import { Icon } from '@iconify/vue';
 import { createPinia } from 'pinia';
+import TocList from './components/blog/TocList.vue';
 import DocTable from './components/DocTable.vue';
 import Layout from './Layout.vue';
 import 'vitepress/theme';
@@ -10,6 +11,6 @@ export default {
 	Layout,
 	enhanceApp({ app }) {
 		app.use(createPinia());
-		app.component('Icon', Icon).component('DocTable', DocTable);
+		app.component('Icon', Icon).component('DocTable', DocTable).component('TocList', TocList);
 	},
 } satisfies Theme;
