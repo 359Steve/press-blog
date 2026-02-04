@@ -17,7 +17,7 @@ const filtered = computed(() => {
 </script>
 
 <template>
-	<div v-if="filtered && filtered.length > 0" class="grid grid-cols-1 gap-4 md:grid-cols-2">
+	<div v-if="filtered && filtered.length > 0" class="grid grid-cols-1 gap-6">
 		<div
 			v-for="item in filtered"
 			:key="item.url"
