@@ -24,6 +24,7 @@ declare module 'vue' {
     MainLayout: typeof import('./../components/layouts/MainLayout.vue')['default']
     NotFound: typeof import('./../components/NotFound.vue')['default']
     RecordBackground: typeof import('./../components/RecordBackground.vue')['default']
+    TocList: typeof import('./../components/blog/TocList.vue')['default']
     TRexRunner: typeof import('./../components/TRexRunner.vue')['default']
   }
 }
