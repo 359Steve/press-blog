@@ -50,4 +50,10 @@ export default defineConfig({
 			message: '蜀ICP备2025171383号',
 		},
 	},
+
+	markdown: {
+		container: {
+			detailsLabel: '点我查看代码',
+		},
+	},
 });
