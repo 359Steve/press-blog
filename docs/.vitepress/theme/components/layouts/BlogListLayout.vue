@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { transformDate } from '@/theme/utils';
 
-const { frontmatter, page } = useData();
+const { frontmatter } = useData();
 const router = useRouter();
 
 const getDate = computed(() => {
