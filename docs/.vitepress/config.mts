@@ -68,5 +68,8 @@ export default defineConfig({
 		container: {
 			detailsLabel: '点我查看代码',
 		},
+		image: {
+			lazyLoading: true,
+		},
 	},
 });
