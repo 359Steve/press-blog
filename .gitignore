@@ -3,6 +3,19 @@
 # Dependencies
 node_modules
 
+# Environment
+.env
+.env.*
+!.env.example
+
 # VitePress build output
 docs/.vitepress/dist
 docs/.vitepress/cache
+
+# IDE
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
