@@ -34,6 +34,7 @@ onMounted(() => {
 		})
 		.filter(Boolean) as { id: string; el: HTMLElement }[];
 
+	// 监听滚动获取活动标题的id
 	if (headings.length) {
 		observer.value = new IntersectionObserver(
 			(entries) => {
@@ -52,7 +53,10 @@ onMounted(() => {
 		headings.forEach(({ el }) => observer.value!.observe(el));
 	}
 
+	// 初始化时添加活动样式
 	updateActiveByHash();
+
+	// 地址栏改变时添加活动样式
 	window.addEventListener('hashchange', updateActiveByHash);
 });
 
