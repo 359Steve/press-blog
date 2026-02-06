@@ -10,7 +10,17 @@ export default defineConfig({
 	title: 'JoJo的个人博客',
 	titleTemplate: ':title | JoJo',
 	description: 'JoJo的个人博客，分享技术文章、生活记录和项目经验',
-	head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+
+	base: '/',
+
+	head: [
+		['link', { rel: 'icon', href: '/favicon.ico' }],
+		['meta', { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' }],
+		['meta', { name: 'theme-color', content: '#0f0f0f', media: '(prefers-color-scheme: dark)' }],
+		['meta', { property: 'og:type', content: 'website' }],
+		['meta', { property: 'og:title', content: 'JoJo的个人博客' }],
+		['meta', { property: 'og:description', content: 'JoJo的个人博客，分享技术文章、生活记录和项目经验' }],
+	],
 
 	cleanUrls: true,
 	srcDir: 'src',
