@@ -1,8 +1,54 @@
+import type MarkdownIt from 'markdown-it';
 import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
+import attrs from 'markdown-it-attrs';
+import container from 'markdown-it-container';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vitepress';
+
+function registerComponentContainer(md: MarkdownIt, name: string, component: string) {
+	md.use(container, name, {
+		render(tokens: any, idx: number) {
+			const token = tokens[idx];
+			if (name !== 'contentimage') {
+				return token.nesting === 1 ? `<${component}>\n` : `</${component}>\n`;
+			}
+
+			if (token.nesting === 1) {
+				let end = idx + 1;
+				while (tokens[end].type !== `container_${name}_close`) end++;
+
+				const inner = tokens.slice(idx + 1, end);
+
+				const images: ImageType[] = [];
+
+				inner.forEach((t: any) => {
+					if (t.type === 'inline') {
+						t.children?.forEach((child: any) => {
+							if (child.type === 'image') {
+								const attrs = Object.fromEntries(child.attrs || []);
+
+								const is_live: string = child.attrGet('is_live') || 'false';
+								const alt = child.children?.map((c: any) => c.content).join('') || '';
+
+								images.push({
+									...attrs,
+									alt,
+									is_live: JSON.parse(is_live.toLowerCase()),
+								} as ImageType);
+							}
+						});
+					}
+				});
+
+				return `<${component} :images='${JSON.stringify(images)}'>`;
+			}
+
+			return `</${component}>`;
+		},
+	});
+}
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -70,6 +116,12 @@ export default defineConfig({
 		},
 		image: {
 			lazyLoading: true,
+		},
+		config(md) {
+			md.use(attrs);
+			registerComponentContainer(md, 'toclist', 'TocList');
+			registerComponentContainer(md, 'doctable', 'DocTable');
+			registerComponentContainer(md, 'contentimage', 'ContentImage');
 		},
 	},
 });
