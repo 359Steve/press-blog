@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const route = useRoute();
 
-const isNotFound = computed(() => route.data.title === '404');
+const notMd = computed(() => route.data.title === '404' || route.path === '/');
 </script>
 
 <template>
@@ -9,7 +9,7 @@ const isNotFound = computed(() => route.data.title === '404');
 		<slot name="header" />
 		<div
 			class="vp-doc m-auto w-full max-w-(--prose-width) flex-1 px-6 py-2"
-			:class="isNotFound && 'flex items-center justify-center'"
+			:class="notMd && 'flex items-center justify-center'"
 		>
 			<slot />
 		</div>
