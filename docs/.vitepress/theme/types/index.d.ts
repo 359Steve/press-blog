@@ -39,3 +39,11 @@ interface Post {
 	html: string | undefined;
 	excerpt: string | undefined;
 }
+
+// 图片类型
+interface ImageType {
+	src: string;
+	alt: string;
+	is_live: boolean;
+	[key: string]: any;
+}
