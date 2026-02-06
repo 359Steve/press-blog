@@ -1,6 +1,13 @@
 <script lang="ts" setup>
+import type { Component } from 'vue';
+
 const { page, isDark, frontmatter } = useData();
 const { setScroll, getHeaderHeight } = useJojoHeader();
+
+const layouts: Record<string, Component> = {
+	home: defineAsyncComponent(() => import('@/theme/components/layouts/HomeLayout.vue')),
+	blog: defineAsyncComponent(() => import('@/theme/components/layouts/BlogIndexLayout.vue')),
+};
 
 function enableTransitions() {
 	return 'startViewTransition' in document && window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
@@ -55,9 +62,7 @@ onMounted(() => {
 		</template>
 		<NotFound v-if="page.isNotFound" />
 		<template v-else>
-			<BlogIndexLayout v-if="frontmatter.layout === 'blog'" />
-			<BlogListLayout v-else-if="frontmatter.blog" />
-			<Content v-else />
+			<component :is="layouts[frontmatter.layout] || 'Content'" />
 		</template>
 		<template #footer>
 			<FooterBox />
