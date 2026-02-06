@@ -2,7 +2,7 @@
 layout: blog
 blog: true
 title: ARM架构和x86架构的区别
-cover: /images/apple-arm/arm.png
+cover: /images/posts/apple-arm/arm.png
 description: 时隔 15 年，苹果的自研 ARM 芯片为何能取代 Intel 处理器？
 tags:
     - name: Apple
@@ -52,7 +52,7 @@ Intel芯片最为消费者所诟病的是在性能上常年“挤牙膏”，至
 
 :::contentimage
 
-![arm1](/images/apple-arm/arm1.png)
+![arm1](/images/posts/apple-arm/arm1.png)
 
 :::
 
@@ -109,7 +109,7 @@ Intel芯片最为消费者所诟病的是在性能上常年“挤牙膏”，至
 
 :::contentimage
 
-![arm3](/images/apple-arm/arm3.png)
+![arm3](/images/posts/apple-arm/arm3.png)
 
 :::
 
@@ -131,7 +131,7 @@ iPhone凭借自身优秀产品力征服了全世界的消费者。从用户体�
 
 :::contentimage
 
-![arm4](/images/apple-arm/arm4.png)
+![arm4](/images/posts/apple-arm/arm4.png)
 
 :::
 

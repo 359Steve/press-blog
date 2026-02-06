@@ -2,7 +2,7 @@
 layout: blog
 blog: true
 title: Next、Nuxt、Nest、Gatsby：到底该用哪个？
-cover: /images/nuxt-nest/1.png
+cover: /images/posts/nuxt-nest/1.png
 description: 名字相似却完全不是一回事，带你快速区分这几个常被混淆的框架。
 tags:
     - name: Nuxt
@@ -367,7 +367,7 @@ export class AppModule {}
 
 :::contentimage
 
-![框架对比](/images/nuxt-nest/1.png)
+![框架对比](/images/posts/nuxt-nest/1.png)
 
 :::
 
