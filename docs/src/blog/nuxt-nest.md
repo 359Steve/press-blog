@@ -1,4 +1,5 @@
 ---
+layout: blog
 blog: true
 title: Next、Nuxt、Nest、Gatsby：到底该用哪个？
 cover: /images/nuxt-nest/1.png
@@ -21,11 +22,11 @@ date: 2023-04-06
 
 ---
 
-<TocList>
+:::toclist
 
 [[toc]]
 
-</TocList>
+:::
 
 这篇文章适合那些正在寻找新的 JavaScript 后端框架的人。如果你也想更好地理解 Gatsby、Next.js、Nest 和 Nust 框架，那么本文就是为你准备的。本文解释框架之间的相似之处和差异，它们的性能特征，为什么会流行，以及如何选择最适合您的框架。
 
@@ -339,7 +340,7 @@ export class AppModule {}
 
 检查了来自 npm 的下载数量以及来自 GitHub 和 StackOverflow 的一些社区统计数据。该数据截至 2022 年 12 月是准确的。
 
-<DocTable>
+:::doctable
 
 |                 | Next.js | Gatsby | NuxtJs  | Nest  |
 | --------------- | ------- | ------ | ------- | ----- |
@@ -350,7 +351,7 @@ export class AppModule {}
 | GHContributors  | 2.4k    | 3.9k   | 340\*   | 350   |
 | SOQuestions     | 25k     | 5.6k   | 10.9k   | 9.8k  |
 
-</DocTable>
+:::
 
 ---
 
@@ -364,7 +365,11 @@ export class AppModule {}
 
 此决策树包括以下问题，将帮助您专注于您可能想要考虑的框架：
 
+:::contentimage
+
 ![框架对比](/images/nuxt-nest/1.png)
+
+:::
 
 **个人的建议**：如果您想学习新知识，建议您查看 Next.js。如果您想构建一个使用 React 的网站，并且具有信息丰富但没有大量交互的网站，例如公司网站、博客或产品的登录页面，这非常好。如果你想构建这样一个网站但更喜欢 Vue.js，那么 Nuxt 将适合你。
 
