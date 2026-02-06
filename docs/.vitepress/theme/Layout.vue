@@ -48,7 +48,7 @@ onMounted(() => {
 
 <template>
 	<RecordBackground />
-
+	<ImageMask />
 	<MainLayout>
 		<template #header>
 			<HeaderBox />
