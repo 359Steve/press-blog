@@ -72,6 +72,9 @@ export default defineConfig({
 	srcDir: 'src',
 
 	vite: {
+		server: {
+			port: 3000,
+		},
 		plugins: [
 			AutoImport({
 				imports: ['vitepress', 'vue', '@vueuse/core', 'pinia'],
