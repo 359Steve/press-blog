@@ -1,29 +1,17 @@
 export const useJojoHeader = defineStore('jojoHeader', () => {
-	const isScroll = ref<boolean>(false);
-	const headerHeight = ref<number>(0);
+	const showSidebar = ref<boolean>(false);
 
-	const getScroll = () => {
-		return isScroll.value;
+	const setShowSidebar = (data: boolean) => {
+		showSidebar.value = data;
 	};
 
-	const setScroll = (value: boolean) => {
-		isScroll.value = value;
-	};
-
-	const getHeaderHeight = () => {
-		return headerHeight.value;
-	};
-
-	const setHeaderHeight = (value: number) => {
-		headerHeight.value = value;
+	const getShowSidebar = () => {
+		return showSidebar.value;
 	};
 
 	return {
-		isScroll,
-		headerHeight,
-		getScroll,
-		setScroll,
-		getHeaderHeight,
-		setHeaderHeight,
+		showSidebar,
+		setShowSidebar,
+		getShowSidebar,
 	};
 });
