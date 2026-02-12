@@ -1,20 +1,22 @@
 <script lang="ts" setup>
 const route = useRoute();
 
-const notMd = computed(() => route.data.title === '404' || route.path === '/');
+const notMd = computed(() => route.data.title === '404');
 </script>
 
 <template>
-	<main class="relative box-border flex! min-h-screen flex-col">
-		<slot name="header" />
-		<div
-			class="vp-doc m-auto w-full max-w-(--prose-width) flex-1 px-6 py-2"
-			:class="notMd && 'flex items-center justify-center'"
-		>
-			<slot />
+	<main class="relative h-screen">
+		<HeaderBox />
+
+		<div class="mx-auto flex h-[calc(100%-48px)] max-w-6xl gap-6 px-4 py-6 lg:h-full">
+			<AsideBox />
+			<!-- 主内容 -->
+			<section class="scroll-y-hidden w-full flex-1" :class="notMd && 'flex items-center justify-center'">
+				<NotFound v-if="notMd" />
+				<Content v-else />
+			</section>
 		</div>
-		<slot name="footer" />
 	</main>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped lang="scss"></style>
