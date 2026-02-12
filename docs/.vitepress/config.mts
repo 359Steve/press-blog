@@ -1,4 +1,5 @@
 import type MarkdownIt from 'markdown-it';
+import type { NavItemWithIcon, SocialWithColor } from './theme/types/vitepress-types';
 import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import attrs from 'markdown-it-attrs';
@@ -106,6 +107,35 @@ export default defineConfig({
 			{ text: '珍藏回忆', link: '/photos', activeMatch: '^/photos(/|$)', icon: 'ri:camera-3-fill' },
 			{ text: '关于博客', link: '/about', activeMatch: '^/about(/|$)', icon: 'ri:game-fill' },
 		] as NavItemWithIcon[],
+
+		socialLinks: [
+			{ icon: 'ri:github-fill', link: 'https://github.com/359Steve', bgcolor: '#f4f4f5', color: '#181717' },
+			{
+				icon: 'ri:bilibili-fill',
+				link: 'https://space.bilibili.com/457627448?spm_id_from=333.1007.0.0',
+				bgcolor: '#ffeaf2',
+				color: '#fb7299',
+			},
+			{ icon: 'ri:youtube-fill', link: 'https://www.youtube.com/@hujosef', bgcolor: '#ffeaea', color: '#ff0000' },
+			{
+				icon: 'ri:facebook-circle-fill',
+				link: 'https://facebook.com',
+				bgcolor: '#edf4ff',
+				color: '#1877f2',
+			},
+			{
+				icon: 'ri:instagram-line',
+				link: 'https://www.instagram.com/josehqiao/',
+				bgcolor: '#f8f0ff',
+				color: '#c13584',
+			},
+			{ icon: 'ri:telegram-2-fill', link: 'https://telegram.org/', bgcolor: '#eaf7ff', color: '#26a5e4' },
+			{ icon: 'ri:tiktok-line', link: 'https://www.tiktok.com/@josefqiao', bgcolor: '#f3f4f6', color: '#000000' },
+			{ icon: 'ri:weibo-fill', link: 'https://weibo.com/u/7361217822', bgcolor: '#ffeff1', color: '#e6162d' },
+		] as SocialWithColor[],
+
+		logo: '/images/avatar.png',
+		logoLink: '/',
 
 		outline: { level: [2, 4], label: '本页目录' },
 
