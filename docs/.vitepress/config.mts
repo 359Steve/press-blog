@@ -100,10 +100,12 @@ export default defineConfig({
 		siteTitle: false,
 		i18nRouting: false,
 		nav: [
-			{ text: '首页', link: '/', activeMatch: '^/$' },
-			{ text: '博客', link: '/blog', activeMatch: '^/blog(/|$)' },
-			{ text: '日记', link: '/record', activeMatch: '^/record(/|$)' },
-		],
+			{ text: '回到首页', link: '/', activeMatch: '^/$', icon: 'ri:ghost-smile-fill' },
+			{ text: '文章归档', link: '/blog', activeMatch: '^/blog(/|$)', icon: 'mdi:bookmark-multiple' },
+			{ text: '心路历程', link: '/record', activeMatch: '^/record(/|$)', icon: 'ri:article-fill' },
+			{ text: '珍藏回忆', link: '/photos', activeMatch: '^/photos(/|$)', icon: 'ri:camera-3-fill' },
+			{ text: '关于博客', link: '/about', activeMatch: '^/about(/|$)', icon: 'ri:game-fill' },
+		] as NavItemWithIcon[],
 
 		outline: { level: [2, 4], label: '本页目录' },
 
