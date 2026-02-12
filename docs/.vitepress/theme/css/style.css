@@ -47,6 +47,8 @@ body::-webkit-scrollbar-thumb,
 	--color-bg-blog-primary: #ffffff;
 	--color-blog-tertiary: #9ca3af;
 	--color-blog-secondary: #6b7280;
+	--color-blog-accent: #f43f5e;
+	--color-blog-shadow: rgba(156, 163, 175, 0.3);
 
 	@keyframes aurora {
 		from {
@@ -112,7 +114,7 @@ body::-webkit-scrollbar-thumb,
 			var(--color-white) 16%
 		);
 
-		--prose-width: 100ch;
+		--prose-width: 120ch;
 		--prose-margin: calc(calc(calc(100vw - min(var(--prose-width), 100%)) / 2) - 8px);
 	}
 
@@ -122,6 +124,8 @@ body::-webkit-scrollbar-thumb,
 		--color-bg-blog-primary: #1a1a1a;
 		--color-blog-tertiary: #98989f;
 		--color-blog-secondary: #9ca3af;
+		--color-blog-accent: #f43f5e;
+		--color-blog-shadow: rgba(0, 0, 0, 0.8);
 
 		--record-gradient: repeating-linear-gradient(
 			100deg,
@@ -153,5 +157,15 @@ body::-webkit-scrollbar-thumb,
 	.glass {
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
+	}
+
+	.scroll-y-hidden {
+		overflow-y: auto;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+
+	.scroll-y-hidden::-webkit-scrollbar {
+		display: none;
 	}
 }
