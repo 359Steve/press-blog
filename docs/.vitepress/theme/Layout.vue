@@ -2,7 +2,6 @@
 import type { Component } from 'vue';
 
 const { page, isDark, frontmatter } = useData();
-const { setScroll, getHeaderHeight } = useJojoHeader();
 
 const layouts: Record<string, Component> = {
 	home: defineAsyncComponent(() => import('@/theme/components/layouts/HomeLayout.vue')),
@@ -39,25 +38,13 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 		},
 	);
 });
-
-onMounted(() => {
-	const { y } = useWindowScroll();
-
-	watch(
-		y,
-		(newY, oldY) => {
-			setScroll(newY > (oldY ?? 0) && newY > getHeaderHeight());
-		},
-		{ immediate: true },
-	);
-});
 </script>
 
 <template>
-	<RecordBackground />
 	<ImageMask />
+
 	<MainLayout>
-		<template #header>
+		<!-- <template #header>
 			<HeaderBox />
 		</template>
 		<NotFound v-if="page.isNotFound" />
@@ -66,7 +53,7 @@ onMounted(() => {
 		</template>
 		<template #footer>
 			<FooterBox />
-		</template>
+		</template> -->
 	</MainLayout>
 </template>
 
