@@ -11,6 +11,12 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AsideAvatar: typeof import('./../components/aside/AsideAvatar.vue')['default']
+    AsideBox: typeof import('./../components/aside/AsideBox.vue')['default']
+    AsideCount: typeof import('./../components/aside/AsideCount.vue')['default']
+    AsideMenu: typeof import('./../components/aside/AsideMenu.vue')['default']
+    AsideSearch: typeof import('./../components/aside/AsideSearch.vue')['default']
+    AsideSocialize: typeof import('./../components/aside/AsideSocialize.vue')['default']
     BlogIndexLayout: typeof import('./../components/layouts/BlogIndexLayout.vue')['default']
     BlogList: typeof import('./../components/blog/BlogList.vue')['default']
     BlogListLayout: typeof import('./../components/layouts/BlogListLayout.vue')['default']
