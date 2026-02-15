@@ -44,16 +44,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 	<ModalHost />
 
 	<MainLayout>
-		<!-- <template #header>
-			<HeaderBox />
-		</template>
-		<NotFound v-if="page.isNotFound" />
-		<template v-else>
-			<component :is="layouts[frontmatter.layout] || 'Content'" />
-		</template>
-		<template #footer>
-			<FooterBox />
-		</template> -->
+		<component :is="layouts[frontmatter.layout] || 'Content'" />
 	</MainLayout>
 </template>
 
