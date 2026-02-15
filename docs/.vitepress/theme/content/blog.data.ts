@@ -4,7 +4,7 @@ import { transformDate } from '../utils';
 declare const data: Post[];
 export { data };
 
-export default createContentLoader('blog/*.md', {
+export default createContentLoader('index/*.md', {
 	excerpt: true,
 	transform(raw): Post[] {
 		return raw
