@@ -13,7 +13,7 @@ const notMd = computed(() => route.data.title === '404');
 			<!-- 主内容 -->
 			<section class="scroll-y-hidden w-full flex-1" :class="notMd && 'flex items-center justify-center'">
 				<NotFound v-if="notMd" />
-				<Content v-else />
+				<slot v-else />
 			</section>
 		</div>
 	</main>
