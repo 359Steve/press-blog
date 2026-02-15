@@ -1,6 +1,6 @@
 ---
-layout: blog
-blog: true
+layout: index
+index: true
 title: Next、Nuxt、Nest、Gatsby：到底该用哪个？
 cover: /images/posts/nuxt-nest/1.png
 description: 名字相似却完全不是一回事，带你快速区分这几个常被混淆的框架。
@@ -21,12 +21,6 @@ date: 2023-04-06
 > 感谢作者 [WhaleFE](https://juejin.cn/user/1767670426376023/posts){.text-blog-primary} 允许转载，原文链接：[Next,Nuxt,Nest,Nust傻傻分不清](https://juejin.cn/post/7218739623245774885){.text-blog-primary}
 
 ---
-
-:::toclist
-
-[[toc]]
-
-:::
 
 这篇文章适合那些正在寻找新的 JavaScript 后端框架的人。如果你也想更好地理解 Gatsby、Next.js、Nest 和 Nust 框架，那么本文就是为你准备的。本文解释框架之间的相似之处和差异，它们的性能特征，为什么会流行，以及如何选择最适合您的框架。
 
