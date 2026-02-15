@@ -3,13 +3,14 @@ import type { Directive } from 'vue';
 export const preview: Directive<HTMLElement, ImageType> = {
 	mounted(el: HTMLElement, binding) {
 		const handler = () => {
-			const { setPreviewSrc, setAlt, setPreviewVisible } = usePreviewImg();
+			const { open } = useModals();
 			if (binding.value) {
 				const data = binding.value;
 
-				setPreviewSrc(data.src);
-				setAlt(data.alt);
-				setPreviewVisible(true);
+				open('ImageMask', {
+					src: data.src,
+					alt: data.alt,
+				});
 			}
 		};
 
