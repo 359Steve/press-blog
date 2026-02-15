@@ -41,7 +41,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 </script>
 
 <template>
-	<ImageMask />
+	<ModalHost />
 
 	<MainLayout>
 		<!-- <template #header>
