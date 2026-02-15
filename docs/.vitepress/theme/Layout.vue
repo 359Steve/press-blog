@@ -4,8 +4,8 @@ import type { Component } from 'vue';
 const { page, isDark, frontmatter } = useData();
 
 const layouts: Record<string, Component> = {
-	home: defineAsyncComponent(() => import('@/theme/components/layouts/HomeLayout.vue')),
-	blog: defineAsyncComponent(() => import('@/theme/components/layouts/BlogIndexLayout.vue')),
+	index: defineAsyncComponent(() => import('@/theme/components/layouts/IndexLayout.vue')),
+	about: defineAsyncComponent(() => import('@/theme/components/layouts/AboutLayout.vue')),
 };
 
 function enableTransitions() {
