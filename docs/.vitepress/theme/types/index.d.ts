@@ -32,3 +32,8 @@ interface ImageType {
 	is_live: boolean;
 	[key: string]: any;
 }
+
+/**
+ * @description 提取组件props
+ */
+type PropsOf<T> = T extends new () => { $props: infer P } ? P : never;
