@@ -2,12 +2,29 @@
 import { data as posts } from '../../content/blog.data';
 
 const router = useRouter();
+const useindex = useIndex();
+const { setLabelName } = useindex;
+const { labelName } = storeToRefs(useindex);
+
+const filteredPosts = computed(() => {
+	const list = posts ?? [];
+	const tagName = labelName.value;
+	if (!tagName) {
+		return list;
+	}
+	return list.filter((item) => item.tags?.some((t) => t.name === tagName));
+});
 </script>
 
 <template>
-	<div v-if="posts && posts.length > 0" class="index-list grid w-full grid-cols-1 gap-5 sm:gap-6">
+	<div v-if="labelName" class="text-blog-secondary mb-4 flex items-center gap-2 text-sm">
+		<span>当前筛选：</span>
+		<span class="font-medium">#{{ labelName }}</span>
+		<a href="/" class="text-blog-accent! ml-1 hover:underline!" @click="setLabelName('')">清除</a>
+	</div>
+	<div v-if="filteredPosts && filteredPosts.length > 0" class="index-list grid w-full grid-cols-1 gap-5 sm:gap-6">
 		<article
-			v-for="item in posts"
+			v-for="item in filteredPosts"
 			:key="item.url"
 			class="index-list__card group focus-within:ring-blog-accent cursor-pointer overflow-hidden rounded-xl transition-all duration-200 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-(--color-bg-blog-primary) hover:shadow-md"
 			@click="router.go(item.url)"
@@ -51,6 +68,10 @@ const router = useRouter();
 				</div>
 			</div>
 		</article>
+	</div>
+	<div v-else-if="labelName" class="text-blog-secondary flex flex-col items-center gap-3 py-12 text-center">
+		<p>当前标签「{{ labelName }}」下暂无文章</p>
+		<a href="/" class="text-blog-accent hover:underline" @click.prevent="router.go('/')">查看全部</a>
 	</div>
 	<ClientOnly v-else>
 		<TRexRunner />
