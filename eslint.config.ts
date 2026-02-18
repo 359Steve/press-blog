@@ -14,5 +14,6 @@ export default antfu({
 		'ts/no-empty-object-type': 'warn',
 		'style/no-tabs': 'off',
 		'style/operator-linebreak': 'off',
+		'style/arrow-parens': 'off',
 	},
 });
