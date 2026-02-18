@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-	<div class="mt-6 w-full sm:mt-10">
+	<div class="w-full pb-3">
 		<IndexList />
 	</div>
 </template>
