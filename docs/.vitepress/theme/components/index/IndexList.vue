@@ -5,11 +5,11 @@ const router = useRouter();
 </script>
 
 <template>
-	<div v-if="posts && posts.length > 0" class="grid grid-cols-1 gap-6">
+	<div v-if="posts && posts.length > 0" class="grid w-full grid-cols-1 gap-6">
 		<div
 			v-for="item in posts"
 			:key="item.url"
-			class="group glass flex cursor-pointer flex-col space-y-4 rounded-xl border border-black/5 bg-white/30 p-3 shadow-md transition-all sm:flex-row sm:space-y-0 sm:space-x-4 dark:border-white/8 dark:bg-white/8 dark:shadow-none dark:[box-shadow:inset_0_1px_0_rgba(255,255,255,0.06)]"
+			class="group glass flex w-full cursor-pointer flex-col space-y-4 rounded-lg border border-black/5 bg-white/30 p-3 shadow-md transition-all sm:space-y-0 sm:space-x-4 dark:border-white/8 dark:bg-white/8 dark:shadow-none dark:[box-shadow:inset_0_1px_0_rgba(255,255,255,0.06)]"
 			@click="router.go(item.url)"
 		>
 			<img
@@ -17,7 +17,7 @@ const router = useRouter();
 				alt="博客封面"
 				loading="lazy"
 				decoding="async"
-				class="rounded-base aspect-video max-h-40 w-full shrink-0 object-cover sm:h-50 sm:max-h-none sm:w-50"
+				class="rounded-base aspect-video w-full shrink-0 object-cover"
 			/>
 			<div class="flex min-h-0 flex-1 flex-col justify-between overflow-hidden">
 				<div class="min-h-0 flex-1">
