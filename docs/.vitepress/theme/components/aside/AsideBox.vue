@@ -33,6 +33,8 @@ function toPath(path: string): void {
 
 			<AsideSearch />
 
+			<AsideLabel />
+
 			<AsideSocialize :social-links="theme.socialLinks" />
 		</div>
 	</aside>
