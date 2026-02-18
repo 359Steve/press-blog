@@ -15,6 +15,7 @@ declare module 'vue' {
     AsideAvatar: typeof import('./../components/aside/AsideAvatar.vue')['default']
     AsideBox: typeof import('./../components/aside/AsideBox.vue')['default']
     AsideCount: typeof import('./../components/aside/AsideCount.vue')['default']
+    AsideLabel: typeof import('./../components/aside/AsideLabel.vue')['default']
     AsideMenu: typeof import('./../components/aside/AsideMenu.vue')['default']
     AsideSearch: typeof import('./../components/aside/AsideSearch.vue')['default']
     AsideSocialize: typeof import('./../components/aside/AsideSocialize.vue')['default']
