@@ -5,7 +5,7 @@ defineEmits<{ (e: 'close'): void }>();
 
 <template>
 	<Transition name="fade">
-		<div v-if="visible" class="glass fixed inset-0 z-500 flex" @click="$emit('close')">
+		<div v-if="visible" class="glass fixed inset-0 z-99 flex" @click="$emit('close')">
 			<div class="absolute inset-0 z-[-1] bg-black/50" />
 			<slot />
 		</div>
