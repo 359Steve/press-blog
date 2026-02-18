@@ -3,7 +3,9 @@ const { open } = useModals();
 </script>
 
 <template>
-	<div class="glass w-full rounded-lg p-3 shadow-[0_0_20px_var(--color-blog-shadow)]">
+	<div
+		class="glass w-full rounded-lg border border-black/5 bg-white/30 p-3 shadow-md dark:border-white/8 dark:bg-white/8 dark:[box-shadow:inset_0_1px_0_rgba(255,255,255,0.06)]"
+	>
 		<button
 			type="button"
 			class="text-blog-tertiary! h-full w-full text-left text-base"
