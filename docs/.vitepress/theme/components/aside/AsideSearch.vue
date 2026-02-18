@@ -4,7 +4,7 @@ const { open } = useModals();
 
 <template>
 	<div
-		class="glass w-full rounded-lg border border-black/5 bg-white/30 p-3 shadow-md dark:border-white/8 dark:bg-white/8 dark:[box-shadow:inset_0_1px_0_rgba(255,255,255,0.06)]"
+		class="glass w-full rounded-lg border border-black/5 bg-white/30 p-3 transition-all duration-200 hover:shadow-md dark:border-white/8 dark:bg-white/8"
 	>
 		<button
 			type="button"

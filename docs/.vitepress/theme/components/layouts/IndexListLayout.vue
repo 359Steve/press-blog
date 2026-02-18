@@ -10,7 +10,7 @@ const getDate = computed(() => {
 </script>
 
 <template>
-	<div class="vp-doc mt-6 w-full pt-10 sm:mt-10">
+	<div class="vp-doc mt-6 w-full">
 		<h1 class="text-3xl font-semibold">
 			{{ frontmatter.title }}
 		</h1>
