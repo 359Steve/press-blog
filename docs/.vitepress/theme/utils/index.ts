@@ -22,6 +22,42 @@ export function getMonthName(month: number) {
 }
 
 /**
+ * 获取文章数据
+ */
+export function groupedPosts(posts: Post[], labelName: string) {
+	const list = posts ?? [];
+	const tagName = labelName;
+	const filtered = tagName ? list.filter((item) => item.tags?.some((t) => t.name === tagName)) : list;
+
+	// 按年份和月份分组
+	const grouped: Record<string, GroupedPost> = {};
+
+	filtered.forEach((post) => {
+		const date = new Date(post.date.time);
+		const year = date.getFullYear();
+		const month = date.getMonth() + 1;
+		const key = `${year}-${month}`;
+
+		if (!grouped[key]) {
+			grouped[key] = {
+				year,
+				month,
+				posts: [],
+			};
+		}
+		grouped[key].posts.push(post);
+	});
+
+	// 转换为数组并按时间倒序排序
+	return Object.values(grouped).sort((a, b) => {
+		if (a.year !== b.year) {
+			return b.year - a.year;
+		}
+		return b.month - a.month;
+	});
+}
+
+/**
  * 统计数据
  */
 export function stats(posts: Post[], labelName: string) {
