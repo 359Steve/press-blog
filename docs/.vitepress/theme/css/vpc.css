@@ -66,3 +66,7 @@
 .VPLocalSearchBox .backdrop {
 	@apply bg-inherit!;
 }
+
+.vp-doc blockquote {
+	@apply border-l-blog-accent border-l-2 italic;
+}
