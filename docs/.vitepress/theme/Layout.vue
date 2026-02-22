@@ -5,6 +5,7 @@ const { page, isDark, frontmatter } = useData();
 
 const layouts: Record<string, Component> = {
 	index: defineAsyncComponent(() => import('@/theme/components/layouts/IndexLayout.vue')),
+	blog: defineAsyncComponent(() => import('@/theme/components/layouts/BlogLayout.vue')),
 	about: defineAsyncComponent(() => import('@/theme/components/layouts/AboutLayout.vue')),
 };
 
