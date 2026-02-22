@@ -24,7 +24,7 @@ function toPath(path: string): void {
 		class="bg-bg-blog-primary scroll-y-hidden fixed inset-y-0 left-0 z-50 h-full w-64 transform px-2 transition-transform lg:static lg:w-60 lg:translate-x-0 lg:bg-inherit lg:px-0"
 		:class="showSidebar ? 'translate-x-0' : '-translate-x-full'"
 	>
-		<div class="sticky top-6 flex flex-wrap justify-center gap-6 px-4 pb-3">
+		<div class="sticky top-6 flex flex-wrap justify-center gap-6 px-4 py-3">
 			<AsideAvatar :logo="theme.logo" :logo-link="theme.logoLink" @to-path="toPath" />
 
 			<AsideCount />
