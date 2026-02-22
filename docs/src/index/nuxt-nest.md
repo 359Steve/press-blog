@@ -4,6 +4,7 @@ index: true
 title: Next、Nuxt、Nest、Gatsby：到底该用哪个？
 cover: /images/posts/nuxt-nest/1.png
 description: 名字相似却完全不是一回事，带你快速区分这几个常被混淆的框架。
+category: web
 tags:
     - name: Nuxt
       icon: vscode-icons:file-type-nuxt
