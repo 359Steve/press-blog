@@ -19,6 +19,7 @@ declare module 'vue' {
     AsideMenu: typeof import('./../components/aside/AsideMenu.vue')['default']
     AsideSearch: typeof import('./../components/aside/AsideSearch.vue')['default']
     AsideSocialize: typeof import('./../components/aside/AsideSocialize.vue')['default']
+    BlogLayout: typeof import('./../components/layouts/BlogLayout.vue')['default']
     ContentImage: typeof import('./../components/md/ContentImage.vue')['default']
     DocTable: typeof import('./../components/DocTable.vue')['default']
     FooterBox: typeof import('./../components/footer/FooterBox.vue')['default']
