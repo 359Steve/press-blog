@@ -4,6 +4,7 @@ index: true
 title: ARM架构和x86架构的区别
 cover: /images/posts/apple-arm/arm.png
 description: 时隔 15 年，苹果的自研 ARM 芯片为何能取代 Intel 处理器？
+category: cpu
 tags:
     - name: Apple
       icon: mdi:apple
