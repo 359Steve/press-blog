@@ -1,3 +1,6 @@
+/**
+ * 转换日期
+ */
 export function transformDate(raw: Date): Post['date'] {
 	raw.setUTCHours(12);
 	return {
