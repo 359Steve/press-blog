@@ -23,9 +23,6 @@ const tagList = computed(() => {
 
 function goToTag(tagName: string) {
 	setLabelName(tagName);
-	setTimeout(() => {
-		router.go('/');
-	}, 0);
 }
 </script>
 
