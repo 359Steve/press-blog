@@ -12,6 +12,7 @@ export default createContentLoader('index/*.md', {
 				title: frontmatter.title,
 				cover: frontmatter.cover,
 				description: frontmatter.description,
+				category: frontmatter.category,
 				date: transformDate(new Date(frontmatter.date)),
 				author: frontmatter.author,
 				tags: frontmatter.tags,
