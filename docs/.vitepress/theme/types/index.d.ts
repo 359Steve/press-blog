@@ -5,6 +5,7 @@ interface Post {
 	title: string;
 	cover: string;
 	description: string;
+	category: string;
 	date: {
 		time: number;
 		string: string;
