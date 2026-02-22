@@ -38,3 +38,12 @@ interface ImageType {
  * @description 提取组件props
  */
 type PropsOf<T> = T extends new () => { $props: infer P } ? P : never;
+
+/**
+ * @description 文章归档类型
+ */
+interface GroupedPost {
+	year: number;
+	month: number;
+	posts: Post[];
+}
