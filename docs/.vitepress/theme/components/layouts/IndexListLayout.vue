@@ -15,7 +15,6 @@ const getDate = computed(() => {
 			{{ frontmatter.title }}
 		</h1>
 		<p class="text-blog-tertiary my-2">发布于 {{ getDate.string }}</p>
-		<br />
 		<Content />
 		<div class="text-blog-tertiary mt-10 flex w-fit items-center gap-1 text-lg" @click="router.go('/index')">
 			<Icon icon="mdi:chevron-right" width="24" />
