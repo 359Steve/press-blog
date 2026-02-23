@@ -36,6 +36,7 @@ declare module 'vue' {
     MaskBox: typeof import('./../components/modal/MaskBox.vue')['default']
     ModalHost: typeof import('./../components/modal/ModalHost.vue')['default']
     NotFound: typeof import('./../components/NotFound.vue')['default']
+    PhotosLayout: typeof import('./../components/layouts/PhotosLayout.vue')['default']
     RecordBackground: typeof import('./../components/RecordBackground.vue')['default']
     SearchMask: typeof import('./../components/modal/SearchMask.vue')['default']
     TRexRunner: typeof import('./../components/TRexRunner.vue')['default']
