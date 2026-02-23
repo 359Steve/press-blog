@@ -18,7 +18,8 @@ export function transformDate(raw: Date): Post['date'] {
  */
 export function getMonthName(month: number) {
 	const months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
-	return months[month - 1];
+	const index = Math.max(0, Math.min(month - 1, 11));
+	return months[index] ?? '一月';
 }
 
 /**
@@ -33,7 +34,8 @@ export function groupedPosts(posts: Post[], labelName: string) {
 	const grouped: Record<string, GroupedPost> = {};
 
 	filtered.forEach((post) => {
-		const date = new Date(post.date.time);
+		const time = post?.date?.time;
+		const date = typeof time === 'number' && Number.isFinite(time) ? new Date(time) : new Date(0);
 		const year = date.getFullYear();
 		const month = date.getMonth() + 1;
 		const key = `${year}-${month}`;
@@ -69,7 +71,9 @@ export function stats(posts: Post[], labelName: string) {
 	allPosts.forEach((post) => {
 		post.tags?.forEach((tag) => allTags.add(tag.name));
 		years.add(new Date(post.date.time).getFullYear());
-		categorys.add(post.category);
+		if (post.category != null && post.category !== '') {
+			categorys.add(post.category);
+		}
 	});
 
 	return {

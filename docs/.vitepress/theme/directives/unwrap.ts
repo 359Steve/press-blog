@@ -20,7 +20,9 @@ function runUnwrap(el: HTMLElement, tag: string, predicate: UnwrapValue): void {
 			return;
 		}
 
-		node.replaceWith(...node.childNodes);
+		if (node.childNodes.length > 0) {
+			node.replaceWith(...node.childNodes);
+		}
 	});
 }
 
