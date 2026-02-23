@@ -2,6 +2,11 @@
 	--vp-c-brand-1: #f43f5e;
 }
 
+::selection {
+	background: var(--color-blog-accent);
+	color: white;
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
 	animation: none;
