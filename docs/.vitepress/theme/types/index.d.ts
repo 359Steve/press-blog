@@ -47,3 +47,20 @@ interface GroupedPost {
 	month: number;
 	posts: Post[];
 }
+
+/**
+ * @description 图片数据信息类型
+ */
+interface PhotoMate {
+	text?: string;
+	lang?: string;
+	blurhash?: string;
+}
+
+/**
+ * @description 图片类型
+ */
+interface Photo extends PhotoMate {
+	name: string;
+	url: string;
+}
