@@ -1,0 +1,61 @@
+name: Deploy VitePress to Aliyun
+
+on:
+    push:
+        branches: [main, master]
+    workflow_dispatch:
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 检出代码
+              uses: actions/checkout@v4
+
+            - name: 设置 Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '24.x'
+                  cache: 'npm'
+
+            - name: 安装依赖
+              run: |
+                  npm config set registry https://registry.npmmirror.com
+                  npm ci
+
+            - name: 执行 photos 脚本
+              run: npm run photos
+
+            - name: 构建 VitePress
+              run: npm run build
+
+            - name: 打包 dist
+              run: tar -czf dist.tar.gz -C docs/.vitepress dist
+
+            - name: 上传到服务器
+              uses: appleboy/scp-action@v0.1.7
+              with:
+                  host: ${{ secrets.ALIYUN_HOST }}
+                  username: ${{ secrets.ALIYUN_USER }}
+                  key: ${{ secrets.ALIYUN_SSH_KEY }}
+                  port: ${{ secrets.ALIYUN_PORT || 22 }}
+                  source: 'dist.tar.gz'
+                  target: '/tmp/'
+
+            - name: 解压到服务器
+              uses: appleboy/ssh-action@v1.0.3
+              with:
+                  host: ${{ secrets.ALIYUN_HOST }}
+                  username: ${{ secrets.ALIYUN_USER }}
+                  key: ${{ secrets.ALIYUN_SSH_KEY }}
+                  port: ${{ secrets.ALIYUN_PORT || 22 }}
+                  script: |
+                      echo "📂 进入部署目录"
+                      cd /var/www/vitepress-blog
+                      echo "🧹 清理旧 dist"
+                      rm -rf dist
+                      echo "📦 解压新版本"
+                      tar -xzf /tmp/dist.tar.gz
+                      rm /tmp/dist.tar.gz
+                      echo "✅ 部署完成"
