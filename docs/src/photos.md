@@ -1,5 +1,4 @@
 ---
 title: 相册
+layout: photos
 ---
-
-photos
