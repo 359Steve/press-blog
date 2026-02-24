@@ -3,6 +3,8 @@ import type { NavItemWithIcon, SocialWithColor } from '@/theme/types/vitepress-t
 
 const router = useRouter();
 const useHeader = useJojoHeader();
+const useindex = useIndex();
+const { showLabel } = storeToRefs(useindex);
 const { showSidebar } = storeToRefs(useHeader);
 const { setShowSidebar } = useHeader;
 const { theme } = useData<{
@@ -33,7 +35,7 @@ function toPath(path: string): void {
 
 			<AsideSearch />
 
-			<AsideLabel />
+			<AsideLabel v-if="showLabel" />
 
 			<AsideSocialize :social-links="theme.socialLinks" />
 		</div>

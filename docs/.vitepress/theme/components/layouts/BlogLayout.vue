@@ -33,14 +33,13 @@ const gatherList = computed(() => {
 
 <template>
 	<div class="w-full">
-		<div class="mb-8">
-			<h1 class="text-blog-primary mb-2 text-3xl font-bold">文章归档</h1>
-			<p class="text-blog-secondary text-sm">记录每一篇文字，见证每一次成长</p>
+		<div class="mb-4 w-full">
+			<AsideLabel :show-count="true" :show-shadow="false" />
 		</div>
 
 		<!-- 统计信息  -->
 		<div
-			class="glass mb-8 grid grid-cols-2 gap-4 rounded-xl border border-black/6 bg-white/40 p-4 sm:grid-cols-4 dark:border-white/10 dark:bg-white/6"
+			class="glass mb-4 grid grid-cols-2 gap-4 rounded-lg border border-black/5 bg-white/30 p-3 transition-all duration-200 lg:grid-cols-4 dark:border-white/8 dark:bg-white/8"
 		>
 			<div v-for="(item, index) in gatherList" :key="index" class="flex flex-col">
 				<span class="text-blog-secondary text-center text-xs">{{ item.name }}</span>
@@ -89,14 +88,14 @@ const gatherList = computed(() => {
 					<article
 						v-for="post in group.posts"
 						:key="post.url"
-						class="glass group cursor-pointer overflow-hidden rounded-lg border border-black/6 bg-white/40 p-4 transition-all duration-200 hover:shadow-md dark:border-white/10 dark:bg-white/6"
+						class="glass group cursor-pointer overflow-hidden rounded-lg border border-black/5 bg-white/30 p-4 transition-all duration-200 dark:border-white/8 dark:bg-white/8"
 						@click="router.go(post.url)"
 					>
 						<div class="flex flex-col gap-2">
 							<!-- 标题和日期 -->
 							<div class="flex items-start justify-between gap-4">
 								<h3
-									class="text-blog-primary group-hover:text-blog-accent line-clamp-2 flex-1 text-base font-medium transition-colors"
+									class="text-blog-accent line-clamp-2 flex-1 text-base font-medium transition-colors"
 								>
 									{{ post.title }}
 								</h3>
@@ -114,14 +113,14 @@ const gatherList = computed(() => {
 							</p>
 
 							<!-- 标签 -->
-							<div v-if="post.tags && post.tags.length > 0" class="flex flex-wrap gap-1.5">
+							<div v-if="post.tags && post.tags.length > 0" class="flex flex-wrap gap-4">
 								<a
 									v-for="tag in post.tags"
 									:key="tag.name"
 									:href="tag.url"
 									target="_blank"
 									rel="noopener noreferrer"
-									class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium transition-colors hover:opacity-80"
+									class="inline-flex items-center gap-1 rounded-full py-0.5 text-xs font-medium transition-colors hover:opacity-80"
 									:style="{ color: tag.color, backgroundColor: `${tag.color}18` }"
 									@click.stop
 								>

@@ -1,7 +1,18 @@
 <script lang="ts" setup>
 import type { Component } from 'vue';
 
+const { setShowLabel } = useIndex();
 const { page, isDark, frontmatter } = useData();
+
+watch(
+	page,
+	() => {
+		setShowLabel(page.value.filePath || '');
+	},
+	{
+		immediate: true,
+	},
+);
 
 const layouts: Record<string, Component> = {
 	index: defineAsyncComponent(() => import('@/theme/components/layouts/IndexLayout.vue')),
