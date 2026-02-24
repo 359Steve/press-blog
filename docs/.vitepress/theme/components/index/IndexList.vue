@@ -26,7 +26,7 @@ const filteredPosts = computed(() => {
 		<div
 			v-for="item in filteredPosts"
 			:key="item.url"
-			class="glass flex w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-black/5 bg-white/30 shadow-md transition-all duration-200 dark:border-white/8 dark:bg-white/8"
+			class="glass flex w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-black/5 shadow-md transition-all duration-200 dark:border-white/8"
 			@click="router.go(item.url)"
 		>
 			<div class="bg-blog-primary relative aspect-video w-full shrink-0 overflow-hidden">

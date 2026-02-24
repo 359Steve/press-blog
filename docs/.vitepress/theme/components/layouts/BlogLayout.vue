@@ -39,7 +39,7 @@ const gatherList = computed(() => {
 
 		<!-- 统计信息  -->
 		<div
-			class="glass mb-4 grid grid-cols-2 gap-4 rounded-lg border border-black/5 bg-white/30 p-3 transition-all duration-200 lg:grid-cols-4 dark:border-white/8 dark:bg-white/8"
+			class="glass mb-4 grid grid-cols-2 gap-4 rounded-lg border border-black/5 p-3 transition-all duration-200 lg:grid-cols-4 dark:border-white/8"
 		>
 			<div v-for="(item, index) in gatherList" :key="index" class="flex flex-col">
 				<span class="text-blog-secondary text-center text-xs">{{ item.name }}</span>
@@ -88,7 +88,7 @@ const gatherList = computed(() => {
 					<article
 						v-for="post in group.posts"
 						:key="post.url"
-						class="glass group cursor-pointer overflow-hidden rounded-lg border border-black/5 bg-white/30 p-4 transition-all duration-200 dark:border-white/8 dark:bg-white/8"
+						class="glass group cursor-pointer overflow-hidden rounded-lg border border-black/5 p-4 transition-all duration-200 dark:border-white/8"
 						@click="router.go(post.url)"
 					>
 						<div class="flex flex-col gap-2">

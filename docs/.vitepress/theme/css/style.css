@@ -50,6 +50,7 @@ body::-webkit-scrollbar-thumb,
 	--color-blog-secondary: #6b7280;
 	--color-blog-accent: #f43f5e;
 	--color-blog-shadow: rgba(156, 163, 175, 0.3);
+	--color-blog-glass: rgba(0 0 0 / 0.01);
 
 	@keyframes aurora {
 		from {
@@ -127,6 +128,7 @@ body::-webkit-scrollbar-thumb,
 		--color-blog-secondary: #9ca3af;
 		--color-blog-accent: #f43f5e;
 		--color-blog-shadow: rgba(0, 0, 0, 0.8);
+		--color-blog-glass: rgba(255, 255, 255, 0.03);
 
 		--record-gradient: repeating-linear-gradient(
 			100deg,
@@ -156,6 +158,7 @@ body::-webkit-scrollbar-thumb,
 	}
 
 	.glass {
+		background: var(--color-blog-glass);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 	}

@@ -42,7 +42,7 @@ function goToTag(tagName: string) {
 	<div
 		v-if="tagList.length > 0"
 		:class="[showShadow && 'shadow-md']"
-		class="glass w-full rounded-lg border border-black/5 bg-white/30 p-3 transition-all duration-200 dark:border-white/8 dark:bg-white/8"
+		class="glass w-full rounded-lg border border-black/5 p-3 transition-all duration-200 dark:border-white/8"
 	>
 		<div class="flex flex-wrap gap-2">
 			<div

@@ -8,7 +8,7 @@ const { socialLinks } = defineProps<{
 
 <template>
 	<div
-		class="glass w-full rounded-lg border border-black/5 bg-white/30 p-3 shadow-md transition-all duration-200 dark:border-white/8 dark:bg-white/8"
+		class="glass w-full rounded-lg border border-black/5 p-3 shadow-md transition-all duration-200 dark:border-white/8"
 	>
 		<div class="grid w-full grid-cols-4 gap-4">
 			<span v-for="item in socialLinks" :key="item.link">
