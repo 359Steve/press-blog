@@ -25,8 +25,6 @@ declare module 'vue' {
     DocTable: typeof import('./../components/DocTable.vue')['default']
     FooterBox: typeof import('./../components/footer/FooterBox.vue')['default']
     HeaderBox: typeof import('./../components/header/HeaderBox.vue')['default']
-    HeaderItem: typeof import('./../components/header/HeaderItem.vue')['default']
-    HeaderMenuList: typeof import('./../components/header/HeaderMenuList.vue')['default']
     ImageMask: typeof import('./../components/modal/ImageMask.vue')['default']
     IndexLayout: typeof import('./../components/layouts/IndexLayout.vue')['default']
     IndexList: typeof import('./../components/index/IndexList.vue')['default']
