@@ -56,6 +56,10 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 <template>
 	<ModalHost />
 
+	<ClientOnly>
+		<BranchCanvas />
+	</ClientOnly>
+
 	<MainLayout>
 		<component :is="layouts[frontmatter.layout] || 'Content'" />
 	</MainLayout>
