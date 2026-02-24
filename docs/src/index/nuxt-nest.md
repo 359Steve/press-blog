@@ -14,6 +14,10 @@ tags:
       icon: vscode-icons:file-type-nestjs
       color: #000000
       url: https://nestjs.bootcss.com/
+    - name: Windows
+      icon: mdi:microsoft-windows
+      color: #000000
+      url: https://www.microsoft.com/
 date: 2023-04-06
 ---
 
