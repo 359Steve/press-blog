@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import type { Component } from 'vue';
+import AboutLayout from './components/layouts/AboutLayout.vue';
+import BlogLayout from './components/layouts/BlogLayout.vue';
+import IndexLayout from './components/layouts/IndexLayout.vue';
+import PhotosLayout from './components/layouts/PhotosLayout.vue';
 
 const { setShowLabel } = useIndex();
 const { page, isDark, frontmatter } = useData();
@@ -15,10 +19,10 @@ watch(
 );
 
 const layouts: Record<string, Component> = {
-	index: defineAsyncComponent(() => import('@/theme/components/layouts/IndexLayout.vue')),
-	blog: defineAsyncComponent(() => import('@/theme/components/layouts/BlogLayout.vue')),
-	about: defineAsyncComponent(() => import('@/theme/components/layouts/AboutLayout.vue')),
-	photos: defineAsyncComponent(() => import('@/theme/components/layouts/PhotosLayout.vue')),
+	index: IndexLayout,
+	blog: BlogLayout,
+	about: AboutLayout,
+	photos: PhotosLayout,
 };
 
 function enableTransitions() {
