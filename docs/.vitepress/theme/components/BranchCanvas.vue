@@ -9,7 +9,13 @@ const color = '#88888825';
 const el = ref<HTMLCanvasElement | null>(null);
 
 const { random } = Math;
-const size = reactive(useWindowSize());
+const size = ref<{
+	width: ShallowRef<number>;
+	height: ShallowRef<number>;
+}>({
+	width: shallowRef(0),
+	height: shallowRef(0),
+});
 
 const start = ref<Fn>(() => {});
 const MIN_BRANCH = 30;
@@ -53,116 +59,119 @@ function polar2cart(x = 0, y = 0, r = 0, theta = 0) {
 }
 
 onMounted(async () => {
-	const canvas = el.value!;
-	const ctx = initCanvas(canvas, size.width, size.height);
-	const { width, height } = canvas;
+	nextTick(() => {
+		size.value = useWindowSize();
+		const canvas = el.value!;
+		const ctx = initCanvas(canvas, size.value.width, size.value.height);
+		const { width, height } = canvas;
 
-	let steps: Fn[] = [];
-	let prevSteps: Fn[] = [];
+		let steps: Fn[] = [];
+		let prevSteps: Fn[] = [];
 
-	/**
-	 * 绘制线条方法
-	 * @param x 起点
-	 * @param y 七点
-	 * @param rad 弧度
-	 * @param counter 深度
-	 */
-	const step = (x: number, y: number, rad: number, counter: { value: number } = { value: 0 }) => {
-		// 生成随机长度
-		const length = random() * len.value;
+		/**
+		 * 绘制线条方法
+		 * @param x 起点
+		 * @param y 七点
+		 * @param rad 弧度
+		 * @param counter 深度
+		 */
+		const step = (x: number, y: number, rad: number, counter: { value: number } = { value: 0 }) => {
+			// 生成随机长度
+			const length = random() * len.value;
 
-		// 深度加一
-		counter.value += 1;
+			// 深度加一
+			counter.value += 1;
 
-		// 计算终点坐标
-		const [nx, ny] = polar2cart(x, y, length, rad);
+			// 计算终点坐标
+			const [nx, ny] = polar2cart(x, y, length, rad);
 
-		// 绘制线条从起点绘制到终点
-		ctx.beginPath();
-		ctx.moveTo(x, y);
-		ctx.lineTo(nx, ny);
-		ctx.stroke();
+			// 绘制线条从起点绘制到终点
+			ctx.beginPath();
+			ctx.moveTo(x, y);
+			ctx.lineTo(nx, ny);
+			ctx.stroke();
 
-		// 计算左右分叉方向，每次偏一点点
-		const rad1 = rad + random() * r15;
-		const rad2 = rad - random() * r15;
+			// 计算左右分叉方向，每次偏一点点
+			const rad1 = rad + random() * r15;
+			const rad2 = rad - random() * r15;
 
-		// 超出视口边界则不再分叉
-		if (nx < -100 || nx > size.width + 100 || ny < -100 || ny > size.height + 100) return;
+			// 超出视口边界则不再分叉
+			if (nx < -100 || nx > size.value.width + 100 || ny < -100 || ny > size.value.height + 100) return;
 
-		// 根据深度决定分叉概率 MIN_BRANCH = 30，前30层0.8后面就0.5
-		const rate = counter.value <= MIN_BRANCH ? 0.8 : 0.5;
+			// 根据深度决定分叉概率 MIN_BRANCH = 30，前30层0.8后面就0.5
+			const rate = counter.value <= MIN_BRANCH ? 0.8 : 0.5;
 
-		// 左分支
-		if (random() < rate) steps.push(() => step(nx, ny, rad1, counter));
+			// 左分支
+			if (random() < rate) steps.push(() => step(nx, ny, rad1, counter));
 
-		// 右分支
-		if (random() < rate) steps.push(() => step(nx, ny, rad2, counter));
-	};
+			// 右分支
+			if (random() < rate) steps.push(() => step(nx, ny, rad2, counter));
+		};
 
-	// 获取加载完成时长
-	let lastTime = performance.now();
-	// 生长速度限制在40帧每秒
-	const interval = 1000 / 40;
+		// 获取加载完成时长
+		let lastTime = performance.now();
+		// 生长速度限制在40帧每秒
+		const interval = 1000 / 40;
 
-	let controls: ReturnType<typeof useRafFn>;
+		let controls: ReturnType<typeof useRafFn>;
 
-	const frame = () => {
-		// 如果距离上一次执行还没到 25ms 直接跳过
-		if (performance.now() - lastTime < interval) return;
+		const frame = () => {
+			// 如果距离上一次执行还没到 25ms 直接跳过
+			if (performance.now() - lastTime < interval) return;
 
-		// 把上一帧积累的任务拿出来执行，然后清空当前队列
-		prevSteps = steps;
-		steps = [];
-		lastTime = performance.now();
+			// 把上一帧积累的任务拿出来执行，然后清空当前队列
+			prevSteps = steps;
+			steps = [];
+			lastTime = performance.now();
 
-		// 没任务了就停
-		if (!prevSteps.length) {
+			// 没任务了就停
+			if (!prevSteps.length) {
+				controls.pause();
+				stopped.value = true;
+			}
+
+			// 执行上一帧收集的步进，约 50% 延后到下一帧，使生长更自然
+			prevSteps.forEach((i) => {
+				if (random() < 0.5) steps.push(i);
+				else i();
+			});
+		};
+
+		controls = useRafFn(frame, { immediate: false });
+
+		/** 返回 0.2～0.8 的随机数，用于在边框中段位置发芽 */
+		const randomMiddle = () => random() * 0.6 + 0.2;
+
+		start.value = () => {
 			controls.pause();
-			stopped.value = true;
-		}
 
-		// 执行上一帧收集的步进，约 50% 延后到下一帧，使生长更自然
-		prevSteps.forEach((i) => {
-			if (random() < 0.5) steps.push(i);
-			else i();
-		});
-	};
+			// 从左上角0，0坐标清楚画布
+			ctx.clearRect(0, 0, width, height);
+			// 设置线条样式
+			ctx.lineWidth = 1;
+			ctx.strokeStyle = color;
 
-	controls = useRafFn(frame, { immediate: false });
+			// 清空历史绘制队列
+			prevSteps = [];
 
-	/** 返回 0.2～0.8 的随机数，用于在边框中段位置发芽 */
-	const randomMiddle = () => random() * 0.6 + 0.2;
+			// 初始化第一批生长任务
+			steps = [
+				// 上方
+				() => step(randomMiddle() * size.value.width, -5, r90),
+				// 下方
+				() => step(randomMiddle() * size.value.width, size.value.height + 5, -r90),
+				// 左方
+				() => step(-5, randomMiddle() * size.value.height, 0),
+				// 右方
+				() => step(size.value.width + 5, randomMiddle() * size.value.height, r180),
+			];
+			if (size.value.width < 500) steps = steps.slice(0, 2);
+			controls.resume();
+			stopped.value = false;
+		};
 
-	start.value = () => {
-		controls.pause();
-
-		// 从左上角0，0坐标清楚画布
-		ctx.clearRect(0, 0, width, height);
-		// 设置线条样式
-		ctx.lineWidth = 1;
-		ctx.strokeStyle = color;
-
-		// 清空历史绘制队列
-		prevSteps = [];
-
-		// 初始化第一批生长任务
-		steps = [
-			// 上方
-			() => step(randomMiddle() * size.width, -5, r90),
-			// 下方
-			() => step(randomMiddle() * size.width, size.height + 5, -r90),
-			// 左方
-			() => step(-5, randomMiddle() * size.height, 0),
-			// 右方
-			() => step(size.width + 5, randomMiddle() * size.height, r180),
-		];
-		if (size.width < 500) steps = steps.slice(0, 2);
-		controls.resume();
-		stopped.value = false;
-	};
-
-	start.value();
+		start.value();
+	});
 });
 
 // 径向渐变遮罩：中心透明、边缘黑色，使树枝在边缘淡出

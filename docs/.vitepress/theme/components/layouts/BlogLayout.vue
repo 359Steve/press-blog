@@ -34,7 +34,7 @@ const gatherList = computed(() => {
 <template>
 	<div class="w-full">
 		<div class="mb-4 w-full">
-			<!-- <AsideLabel :show-count="true" :show-shadow="false" /> -->
+			<AsideLabel :show-count="true" :show-shadow="false" />
 		</div>
 
 		<!-- 统计信息  -->
