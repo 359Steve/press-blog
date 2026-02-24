@@ -101,10 +101,6 @@ export default defineConfig({
 				'@': path.resolve(__dirname, '../.vitepress'),
 			},
 		},
-
-		build: {
-			minify: false,
-		},
 	},
 
 	themeConfig: {
