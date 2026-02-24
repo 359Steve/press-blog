@@ -35,7 +35,7 @@ function toPath(path: string): void {
 
 			<AsideSearch />
 
-			<AsideLabel v-if="showLabel" />
+			<!-- <AsideLabel v-if="showLabel" /> -->
 
 			<AsideSocialize :social-links="theme.socialLinks" />
 		</div>

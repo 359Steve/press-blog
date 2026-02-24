@@ -1,12 +1,14 @@
 <script lang="ts" setup>
+import type { NavItemWithIcon } from '@/theme/types/vitepress-types';
+
 const router = useRouter();
 const route = useRoute();
 const { theme } = useData<{
-	nav: ThemeVavbarItem[];
+	nav: NavItemWithIcon[];
 }>();
 const menuList = computed(() => theme.value.nav);
 
-function isActive(item: ThemeVavbarItem): boolean {
+function isActive(item: NavItemWithIcon): boolean {
 	if (!item.activeMatch) {
 		return false;
 	}

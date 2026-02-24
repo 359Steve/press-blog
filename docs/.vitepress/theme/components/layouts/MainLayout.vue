@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-const route = useRoute();
+const { page } = useData();
 
-const notMd = computed(() => route.data.title === '404');
+const notMd = computed(
+	() => page.value?.isNotFound === true || page.value?.title === '404',
+);
 </script>
 
 <template>
