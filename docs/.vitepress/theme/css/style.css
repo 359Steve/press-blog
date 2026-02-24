@@ -159,8 +159,8 @@ body::-webkit-scrollbar-thumb,
 
 	.glass {
 		background: var(--color-blog-glass);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
 	}
 
 	.scroll-y-hidden {
