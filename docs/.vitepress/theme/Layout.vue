@@ -4,6 +4,7 @@ import AboutLayout from './components/layouts/AboutLayout.vue';
 import BlogLayout from './components/layouts/BlogLayout.vue';
 import IndexLayout from './components/layouts/IndexLayout.vue';
 import PhotosLayout from './components/layouts/PhotosLayout.vue';
+import RecordLayout from './components/layouts/RecordLayout.vue';
 
 const { setShowLabel } = useIndex();
 const { page, isDark, frontmatter } = useData();
@@ -21,6 +22,7 @@ watch(
 const layouts: Record<string, Component> = {
 	index: IndexLayout,
 	blog: BlogLayout,
+	record: RecordLayout,
 	about: AboutLayout,
 	photos: PhotosLayout,
 };
