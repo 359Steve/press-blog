@@ -1,36 +1,20 @@
 <script lang="ts" setup>
-const { theme } = useData<{
-	footer: {
-		copyright: string;
-		message: string;
-	};
-}>();
-const footerMessage = computed(() => theme.value.footer);
+const nowYear = computed(() => new Date().getFullYear());
 </script>
 
 <template>
-	<div class="mt-8 grid w-full grid-cols-1 gap-2 py-2 text-sm sm:grid-cols-2">
-		<div class="col-span-1 flex items-center justify-center gap-2 sm:col-span-2">
-			<span>{{ footerMessage.copyright }}</span>
+	<div class="mt-4 w-full truncate py-2 pl-2">
+		<span class="text-blog-tertiary text-base">
+			Copyright © {{ nowYear }} Joseph Joestar
 			<a
 				href="http://beian.miit.gov.cn/"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="mr-4 hidden items-center gap-2 sm:flex"
+				class="text-blog-tertiary! text-base font-normal!"
 			>
-				{{ footerMessage.message }}
+				蜀ICP备2025171383号
 			</a>
-		</div>
-		<div class="flex items-center justify-center sm:hidden">
-			<a
-				href="http://beian.miit.gov.cn/"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="flex items-center gap-2"
-			>
-				{{ footerMessage.message }}
-			</a>
-		</div>
+		</span>
 	</div>
 </template>
 
