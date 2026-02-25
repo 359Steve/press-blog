@@ -20,6 +20,7 @@ const getDate = computed(() => {
 			<Icon icon="mdi:chevron-right" width="24" />
 			<span class="cursor-pointer border-b border-gray-400">cd . .</span>
 		</div>
+		<FooterBox />
 	</div>
 </template>
 
