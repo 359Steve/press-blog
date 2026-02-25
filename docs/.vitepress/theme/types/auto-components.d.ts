@@ -37,6 +37,7 @@ declare module 'vue' {
     NotFound: typeof import('./../components/NotFound.vue')['default']
     PhotosLayout: typeof import('./../components/layouts/PhotosLayout.vue')['default']
     RecordBackground: typeof import('./../components/RecordBackground.vue')['default']
+    RecordLayout: typeof import('./../components/layouts/RecordLayout.vue')['default']
     SearchMask: typeof import('./../components/modal/SearchMask.vue')['default']
     TRexRunner: typeof import('./../components/TRexRunner.vue')['default']
   }
