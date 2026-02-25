@@ -60,6 +60,10 @@
 	@apply list-disc;
 }
 
+.vp-doc ol li {
+	@apply list-decimal;
+}
+
 .vp-doc .toc ul li {
 	@apply list-none text-[0.85rem];
 }
@@ -74,4 +78,19 @@
 
 .vp-doc blockquote {
 	@apply border-l-blog-accent border-l-2 italic;
+}
+
+.vp-doc .stroke-year {
+	@apply absolute top-8 -z-1 text-[8em] font-bold text-transparent opacity-[0.1];
+	-webkit-text-stroke-width: 6px;
+	--un-text-stroke-opacity: 1;
+	-webkit-text-stroke-color: rgb(170 170 170 / 1);
+}
+
+.vp-doc.record li {
+	@apply hover:text-blog-accent text-lg font-normal text-(--vp-c-text-1) no-underline;
+}
+
+.vp-doc.record a {
+	@apply hover:text-blog-accent text-lg font-normal text-(--vp-c-text-1) no-underline;
 }
