@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 const { page } = useData();
 
-const notMd = computed(
-	() => page.value?.isNotFound === true || page.value?.title === '404',
-);
+const notMd = computed(() => page.value?.isNotFound);
 </script>
 
 <template>
@@ -13,8 +11,15 @@ const notMd = computed(
 		<div class="mx-auto flex h-[calc(100%-48px)] max-w-6xl gap-2 px-4 py-6 lg:h-full">
 			<AsideBox />
 			<!-- 主内容 -->
-			<section class="scroll-y-hidden w-full flex-1 pb-3" :class="[notMd && 'flex items-center justify-center']">
-				<NotFound v-if="notMd" />
+			<section
+				class="scroll-y-hidden w-full flex-1 pb-3"
+				:class="{
+					'flex items-center justify-center': notMd,
+				}"
+			>
+				<ClientOnly v-if="notMd">
+					<NotFound />
+				</ClientOnly>
 				<slot v-else />
 			</section>
 		</div>
