@@ -68,6 +68,13 @@ export default defineConfig({
 
 	head: [
 		['link', { rel: 'icon', href: '/favicon.ico' }],
+		[
+			'link',
+			{
+				rel: 'stylesheet',
+				href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap',
+			},
+		],
 		['meta', { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' }],
 		['meta', { name: 'theme-color', content: '#0f0f0f', media: '(prefers-color-scheme: dark)' }],
 		['meta', { property: 'og:type', content: 'website' }],
