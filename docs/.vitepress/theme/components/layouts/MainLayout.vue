@@ -11,15 +11,8 @@ const notMd = computed(() => page.value?.isNotFound);
 		<div class="mx-auto flex h-[calc(100%-48px)] max-w-6xl gap-2 px-4 py-6 lg:h-full">
 			<AsideBox />
 			<!-- 主内容 -->
-			<section
-				class="scroll-y-hidden w-full flex-1 pb-3"
-				:class="{
-					'flex items-center justify-center': notMd,
-				}"
-			>
-				<ClientOnly v-if="notMd">
-					<NotFound />
-				</ClientOnly>
+			<section class="scroll-y-hidden w-full flex-1 pb-3">
+				<NotFound v-if="notMd" />
 				<slot v-else />
 			</section>
 		</div>
