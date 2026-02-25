@@ -75,7 +75,7 @@ const gatherList = computed(() => {
 				</div>
 
 				<div
-					class="border-blog-accent/50 bg-blog-primary/4 dark:bg-blog-primary/10 mb-4 rounded-r-lg border-l-2 py-2 pt-2.5 pl-4"
+					class="glass border-blog-accent/50 bg-blog-primary/5! dark:bg-blog-primary/10! mb-4 rounded-r-lg border-l-2 py-2 pt-2.5 pl-4"
 				>
 					<h2 class="text-blog-primary text-lg font-semibold tracking-tight">
 						{{ group.year }} 年 {{ getMonthName(group.month) }}
