@@ -9,7 +9,7 @@ const notMd = computed(() => page.value?.isNotFound);
 		<HeaderBox />
 
 		<div class="mx-auto flex h-[calc(100%-48px)] max-w-6xl gap-2 px-4 py-6 lg:h-full">
-			<!-- <AsideBox /> -->
+			<AsideBox />
 			<!-- 主内容 -->
 			<section class="scroll-y-hidden w-full flex-1 pb-3">
 				<NotFound v-if="notMd" />
