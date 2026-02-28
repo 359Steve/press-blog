@@ -6,6 +6,8 @@ const { showCount = false, showShadow = true } = defineProps<{
 	showShadow?: boolean;
 }>();
 
+const route = useRoute();
+const router = useRouter();
 const { setLabelName } = useIndex();
 
 const tagList = computed(() => {
@@ -35,6 +37,9 @@ const tagList = computed(() => {
 
 function goToTag(tagName: string) {
 	setLabelName(tagName);
+	if (route.path !== '/' && route.path !== '/blog') {
+		router.go('/');
+	}
 }
 </script>
 
