@@ -17,3 +17,16 @@ description: 绵阳最后的记忆
 透过橱窗向外看，街道、行人、车辆都在各自的轨道上移动。世界依旧忙碌，但那段时间的我，像是暂时站在一旁，只负责观察。风景在变，心却慢慢静了下来。
 
 思绪也在那样的节奏里放缓。不再急着为下一步做决定，只是接受当下的状态。那一个月，没有发生什么特别的事，却在不知不觉中，让人学会与时间和平相处。
+
+---
+
+:::contentimage
+
+![arm1](/images/record/biye1.png)
+![arm1](/images/record/biye2.png)
+![arm1](/images/record/biye3.png)
+![arm1](/images/record/biye4.png)
+![arm1](/images/record/biye5.png)
+![arm1](/images/record/biye6.png)
+
+:::

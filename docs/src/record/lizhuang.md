@@ -19,3 +19,18 @@ description: 李庄古镇
 按理说，这样的夜景应该让人感到轻松。可站在河边的时候，心里却有一丝说不清的暗淡。明明风景安静而完整，情绪却像被悄悄抽走了一部分。那种感觉并不强烈，却始终存在。
 
 当时并没有意识到什么，只当是旅途中的疲惫。直到不久之后，真正的离别发生，再回想起那天的李庄古镇，才发现那份情绪或许早已提前出现。那一晚的灯光、水影和安静的街道，也因此变成了一段带着预感的记忆。
+
+---
+
+:::contentimage
+
+![arm1](/images/record/lizhuang1.png)
+![arm1](/images/record/lizhuang2.png)
+![arm1](/images/record/lizhuang3.png)
+![arm1](/images/record/lizhuang4.png)
+![arm1](/images/record/lizhuang5.png)
+![arm1](/images/record/lizhuang6.png)
+![arm1](/images/record/lizhuang7.png)
+![arm1](/images/record/lizhuang8.png)
+
+:::

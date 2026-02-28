@@ -23,3 +23,13 @@ description: 成都漫展
 这次漫展对我来说，意义并不止于“第一次”。在当时情绪尚未完全走出来的阶段，这次出行让我短暂地跳出了原有的生活节奏。通过与 up 主和 coser 的合影、参与集体活动，我重新感受到人与人之间自然的互动，也找回了一些对兴趣和生活的投入感。
 
 2024年6月9日，那天很热，但也因此成为我那一年里一段非常清晰、难忘的记忆。
+
+---
+
+:::contentimage
+
+![arm1](/images/record/comic1.png)
+![arm1](/images/record/comic2.png)
+![arm1](/images/record/comic3.png)
+
+:::

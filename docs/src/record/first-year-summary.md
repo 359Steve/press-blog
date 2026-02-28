@@ -15,3 +15,16 @@ description: 重庆老厂古镇
 这一年很快就过去了，比想象中的要快。刚开始的一两个月每周都期待会开发什么有趣的功能，久而久之发现只是在做着重复的工作，慢慢的也没了时间的概念变得越来越快。也不全是一直在工作，摸鱼的时候还是在做自己有趣的事情，看看视频、学点东西、写点有趣的代码比如这个博客。
 
 2026是继续在重庆还是另寻他路，是为了追求自己的热爱还是循规蹈矩上班。我想这个问题也是你们所面临的，我希望屏幕前的陌生人，如果你把自己的热爱变成了工作那我希望是追求你自己的热爱而不是纯粹的赚钱！
+
+---
+
+:::contentimage
+
+![arm1](/images/record/laochang1.png)
+![arm1](/images/record/laochang2.png)
+![arm1](/images/record/laochang3.png)
+![arm1](/images/record/laochang4.png)
+![arm1](/images/record/laochang5.png)
+![arm1](/images/record/laochang6.png)
+
+:::
