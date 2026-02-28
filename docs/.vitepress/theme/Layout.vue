@@ -6,18 +6,7 @@ import IndexLayout from './components/layouts/IndexLayout.vue';
 import PhotosLayout from './components/layouts/PhotosLayout.vue';
 import RecordLayout from './components/layouts/RecordLayout.vue';
 
-const { setShowLabel } = useIndex();
-const { page, isDark, frontmatter } = useData();
-
-watch(
-	page,
-	() => {
-		setShowLabel(page.value.filePath || '');
-	},
-	{
-		immediate: true,
-	},
-);
+const { isDark, frontmatter } = useData();
 
 const layouts: Record<string, Component> = {
 	index: IndexLayout,
