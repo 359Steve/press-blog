@@ -5,113 +5,126 @@ const times = ref<number[]>([0, 1, 1.5, 2.5, 3.2, 4.2]);
 const animationTimeouts = ref<ReturnType<typeof setTimeout>[]>([]);
 const isAnimating = ref(false);
 
+/* ====== 可调节节奏参数 ====== */
+const pauseAfterDraw = 2000; // 绘制完成后停顿
+const pauseAfterReverse = 2000; // 回退完成后停顿
+const reverseStepDelay = 500; // 每条 path 回退间隔
+
+/* ====== 工具函数 ====== */
+
 // 清除所有定时器
 function clearAllTimeouts(): void {
-	animationTimeouts.value.forEach((timeout) => {
-		clearTimeout(timeout);
-	});
+	animationTimeouts.value.forEach((timeout) => clearTimeout(timeout));
 	animationTimeouts.value = [];
 }
 
 // 重置所有路径状态
 function resetPaths(): void {
 	pathRefs.value.forEach((path) => {
-		if (path) {
-			path.style.animation = 'none';
-			path.style.opacity = '0';
-			path.style.strokeDasharray = '350px 0';
-			path.style.strokeDashoffset = '1px';
-		}
+		if (!path) return;
+
+		path.style.animation = 'none';
+		path.style.opacity = '0';
+		path.style.strokeDasharray = '350px 0';
+		path.style.strokeDashoffset = '1px';
 	});
 }
 
+// 正向绘制
 function play(): void {
-	// 重置所有路径
 	resetPaths();
 
-	// 顺序播放 grow 动画
 	pathRefs.value.forEach((path, i) => {
-		if (path) {
-			const timeout = setTimeout(() => {
-				if (path) {
-					path.style.animation = 'var(--animate-grow)';
-				}
-			}, times.value[i] * 1000);
-			animationTimeouts.value.push(timeout);
-		}
+		if (!path) return;
+
+		const timeout = setTimeout(() => {
+			path.style.animation = 'var(--animate-grow)';
+		}, times.value[i] * 1000);
+
+		animationTimeouts.value.push(timeout);
 	});
 }
 
+// 反向回退
 function reverse(): void {
-	const timeout = setTimeout(
-		() => {
-			const reversed = Array.from(pathRefs.value).reverse();
-			reversed.forEach((path, i) => {
-				if (path) {
-					const reverseTimeout = setTimeout(() => {
-						if (path) {
-							path.style.animation = 'var(--animate-shrink)';
-						}
-					}, i * 500);
-					animationTimeouts.value.push(reverseTimeout);
-				}
-			});
-		},
-		times.value[times.value.length - 1] * 1000 + 4000,
-	);
+	// 最后一个path执行的时间
+	const drawEnd = times.value[times.value.length - 1] * 1000;
+
+	// 整体回退停顿 +2s
+	const timeout = setTimeout(() => {
+		// 倒序所有path
+		const reversed = Array.from(pathRefs.value).reverse();
+
+		reversed.forEach((path, i) => {
+			if (!path) return;
+
+			// 每条path之间间隔500
+			const reverseTimeout = setTimeout(() => {
+				path.style.animation = 'var(--animate-shrink)';
+			}, i * reverseStepDelay);
+
+			animationTimeouts.value.push(reverseTimeout);
+		});
+	}, drawEnd + pauseAfterDraw);
 
 	animationTimeouts.value.push(timeout);
 }
 
+// 整个动画序列
 function playSequence(): void {
-	if (!isAnimating.value) {
-		return;
-	}
+	if (!isAnimating.value) return;
 
 	play();
 	reverse();
 
-	const nextSequenceTimeout = setTimeout(
-		() => {
-			if (isAnimating.value) {
-				playSequence();
-			}
-		},
-		times.value[times.value.length - 1] * 1000 * 2 + 2500,
-	);
+	const drawEnd = times.value[times.value.length - 1] * 1000;
+	const reverseDuration = pathRefs.value.length * reverseStepDelay;
+
+	// 绘制 → 停 → 回退 → 停”流程一共需要的时间
+	const totalDuration = drawEnd + pauseAfterDraw + reverseDuration + pauseAfterReverse;
+
+	// 重新开始
+	const nextSequenceTimeout = setTimeout(() => {
+		if (isAnimating.value) {
+			playSequence();
+		}
+	}, totalDuration);
 
 	animationTimeouts.value.push(nextSequenceTimeout);
 }
 
+// 启动动画
 function startAnimation(): void {
 	isAnimating.value = true;
 	clearAllTimeouts();
 	resetPaths();
+
 	nextTick(() => {
 		playSequence();
 	});
 }
 
+// 停止动画
 function stopAnimation(): void {
 	isAnimating.value = false;
 	clearAllTimeouts();
 	resetPaths();
 }
 
-// 监听页面可见性变化
+// 页面可见性监听
 function handleVisibilityChange(): void {
 	if (document.hidden) {
 		stopAnimation();
 	} else {
-		// 页面重新可见时，延迟重启动画
 		setTimeout(() => {
 			startAnimation();
 		}, 100);
 	}
 }
 
+/* ====== 生命周期 ====== */
+
 onMounted(() => {
-	// 添加页面可见性监听
 	document.addEventListener('visibilitychange', handleVisibilityChange);
 
 	nextTick(() => {
@@ -120,17 +133,14 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-	// 清理资源
 	document.removeEventListener('visibilitychange', handleVisibilityChange);
 	stopAnimation();
 });
 
-// 组件激活时重启动画
 onActivated(() => {
 	startAnimation();
 });
 
-// 组件停用时停止动画
 onDeactivated(() => {
 	stopAnimation();
 });
@@ -216,6 +226,6 @@ onDeactivated(() => {
 
 <style lang="postcss" scoped>
 path {
-	@apply fill-none stroke-3 opacity-0 [stroke-dasharray:350px_0] [stroke-dashoffset:1px] [stroke-linecap:round] [stroke-linejoin:round];
+	@apply fill-none stroke-5 opacity-0 [stroke-dasharray:350px_0] [stroke-dashoffset:1px] [stroke-linecap:round] [stroke-linejoin:round];
 }
 </style>
