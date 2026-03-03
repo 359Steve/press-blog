@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Component } from 'vue';
-import { BranchCanvas } from 'branch-canvas';
+import BranchCanvas from 'branch-canvas';
 import AboutLayout from './components/layouts/AboutLayout.vue';
 import BlogLayout from './components/layouts/BlogLayout.vue';
 import IndexLayout from './components/layouts/IndexLayout.vue';
