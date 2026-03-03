@@ -121,10 +121,11 @@ export function createLoadingIndicator(opts: Partial<LoadingProps> = {}) {
 	let done = false;
 	let rafId: number;
 
+	// 加载进度条之前等待定时器
 	let throttleTimeout: number | NodeJS.Timeout;
 	// 隐藏进度条定时器
 	let hideTimeout: number | NodeJS.Timeout;
-	// 充值进度定时器
+	// 重制进度定时器
 	let resetTimeout: number | NodeJS.Timeout;
 
 	// 清除定时器
@@ -154,46 +155,33 @@ export function createLoadingIndicator(opts: Partial<LoadingProps> = {}) {
 	}
 
 	// 强制完成
-	function finish(opts: { force?: boolean; error?: boolean } = {}) {
+	function finish() {
 		progress.value = 100;
 		done = true;
 		clear();
 		clearTimeouts();
-		if (opts.error) {
-			error.value = true;
-		}
-		if (opts.force) {
-			progress.value = 0;
-			isLoading.value = false;
-		} else {
-			hide();
-		}
+		hide();
 	}
 
 	// 自动递增进度
 	function startProgress() {
-		// 动画未完成
+		// 初始化动画未完成
 		done = false;
-		// 动画开始的时间戳
-		let startTimeStamp: number;
+		// 进度条开始时间
+		let startAnimationTime: number;
 
-		function step(timeStamp: number): void {
-			if (done) {
-				return;
-			}
-
-			startTimeStamp ??= timeStamp;
-
-			// 记录已经过了多长时间
-			const elapsed = timeStamp - startTimeStamp;
-			// 连续赋值
+		const step = (timeAnimation: number) => {
+			if (done) return;
+			startAnimationTime ??= timeAnimation;
+			// 记录过了多长时间
+			const elapsed = timeAnimation - startAnimationTime;
+			// 计算进度
 			progress.value = Math.max(0, Math.min(100, getProgress(duration, elapsed)));
 
-			// 循环每一帧
 			if (!import.meta.env.SSR) {
 				rafId = requestAnimationFrame(step);
 			}
-		}
+		};
 
 		// 启动第一帧
 		if (!import.meta.env.SSR) {
@@ -202,31 +190,23 @@ export function createLoadingIndicator(opts: Partial<LoadingProps> = {}) {
 	}
 
 	// 设置进度
-	function set(at = 0, opts: { force?: boolean } = {}) {
+	function set(at: number) {
 		if (import.meta.env.SSR) {
 			return;
-		}
-
-		// 等于100则完成
-		if (at >= 100) {
-			return finish({ force: opts.force });
 		}
 
 		// 清理进度条开始加载时的定时器
 		clear();
 
 		// 初始化进度从at开始
-		progress.value = at < 0 ? 0 : at;
+		progress.value = at;
 
-		// 设置进度条显示前等待时间
-		const throttleTime = opts.force ? 0 : throttle;
-
-		if (throttleTime && !import.meta.env.SSR) {
-			// 等待 throttleTime 后显示并加载进度条
+		if (!import.meta.env.SSR) {
+			// 等待 throttle 后显示并加载进度条
 			throttleTimeout = setTimeout(() => {
 				isLoading.value = true;
 				startProgress();
-			}, throttleTime);
+			}, throttle);
 		} else {
 			// 服务端则直接显示
 			isLoading.value = true;
@@ -234,16 +214,15 @@ export function createLoadingIndicator(opts: Partial<LoadingProps> = {}) {
 		}
 	}
 
-	const start = (opts: { force?: boolean } = {}) => {
-		// 先清除所有定时器
+	const start = () => {
+		// 先清除隐藏和重制定时器
 		clearTimeouts();
 		// 没有报错
 		error.value = false;
 		// 设置进度
-		set(0, opts);
+		set(0);
 	};
 
-	let cleanup = () => {};
 	if (!import.meta.env.SSR) {
 		const router = useRouter();
 		router.onBeforeRouteChange = () => {
@@ -252,16 +231,9 @@ export function createLoadingIndicator(opts: Partial<LoadingProps> = {}) {
 		router.onAfterRouteChange = () => {
 			finish();
 		};
-
-		cleanup = () => {
-			router.onBeforeRouteChange = undefined;
-			router.onAfterRouteChange = undefined;
-			clear();
-		};
 	}
 
 	return {
-		cleanup,
 		progress: computed(() => progress.value),
 		isLoading: computed(() => isLoading.value),
 		error: computed(() => error.value),
@@ -277,7 +249,7 @@ let loadingIndicator: LoadingIndicator | null = null;
 // 记录当前有多少组件在使用这个 loading 指示器
 let loadingDeps = 0;
 
-export function useLoadingIndicator(opts: Partial<LoadingProps> = {}): Omit<LoadingIndicator, 'cleanup'> {
+export function useLoadingIndicator(opts: Partial<LoadingProps> = {}): LoadingIndicator {
 	if (!loadingIndicator) {
 		// 创建 loading 实例
 		loadingIndicator = createLoadingIndicator(opts);
@@ -291,7 +263,6 @@ export function useLoadingIndicator(opts: Partial<LoadingProps> = {}): Omit<Load
 			loadingDeps--;
 
 			if (loadingDeps === 0) {
-				loadingIndicator?.cleanup();
 				loadingIndicator = null;
 			}
 		});
