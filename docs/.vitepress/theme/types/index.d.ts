@@ -80,7 +80,6 @@ interface LoadingProps {
 }
 
 interface LoadingIndicator {
-	cleanup: () => void;
 	progress: Ref<number>;
 	isLoading: Ref<boolean>;
 	error: Ref<boolean>;
