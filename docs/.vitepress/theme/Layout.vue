@@ -56,6 +56,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 		<BranchCanvas />
 	</ClientOnly>
 
+	<VPLoadingIndicator color="var(--color-blog-accent)" />
+
 	<MainLayout>
 		<component :is="layouts[frontmatter.layout] || 'Content'" />
 	</MainLayout>
