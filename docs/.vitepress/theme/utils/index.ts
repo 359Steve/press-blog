@@ -86,3 +86,216 @@ export function stats(posts: Post[], labelName: string) {
 			: allPosts.length,
 	};
 }
+
+/**
+ * 近段进度比例
+ * @param duration 动画总时长
+ * @param elapsed 过了多长时间
+ * @returns number
+ */
+function defaultEstimatedProgress(duration: number, elapsed: number): number {
+	const completionPercentage = (elapsed / duration) * 100;
+	return (2 / Math.PI) * 100 * Math.atan(completionPercentage / 50);
+}
+
+export function createLoadingIndicator(opts: Partial<LoadingProps> = {}) {
+	/**
+	 * duration：默认动画总时长 2000ms
+	 * throttle：显示 loading 前的最短等待时间，防止短请求闪烁
+	 * hideDelay：结束后延迟隐藏 loading（避免瞬间消失）
+	 * resetDelay：隐藏后延迟重置进度值
+	 */
+	const { duration = 2000, throttle = 200, hideDelay = 500, resetDelay = 400 } = opts;
+
+	// 获取进度比例方法
+	const getProgress = opts.estimatedProgress || defaultEstimatedProgress;
+
+	// 进度比例
+	const progress = shallowRef(0);
+	// 是否显示进度条
+	const isLoading = shallowRef(false);
+	// 是否报错
+	const error = shallowRef(false);
+
+	// 是否完成
+	let done = false;
+	let rafId: number;
+
+	let throttleTimeout: number | NodeJS.Timeout;
+	// 隐藏进度条定时器
+	let hideTimeout: number | NodeJS.Timeout;
+	// 充值进度定时器
+	let resetTimeout: number | NodeJS.Timeout;
+
+	// 清除定时器
+	function clearTimeouts() {
+		if (!import.meta.env.SSR) {
+			clearTimeout(hideTimeout);
+			clearTimeout(resetTimeout);
+		}
+	}
+	function clear() {
+		if (!import.meta.env.SSR) {
+			clearTimeout(throttleTimeout);
+			cancelAnimationFrame(rafId);
+		}
+	}
+
+	// 隐藏进度条
+	function hide() {
+		if (!import.meta.env.SSR) {
+			hideTimeout = setTimeout(() => {
+				isLoading.value = false;
+				resetTimeout = setTimeout(() => {
+					progress.value = 0;
+				}, resetDelay);
+			}, hideDelay);
+		}
+	}
+
+	// 强制完成
+	function finish(opts: { force?: boolean; error?: boolean } = {}) {
+		progress.value = 100;
+		done = true;
+		clear();
+		clearTimeouts();
+		if (opts.error) {
+			error.value = true;
+		}
+		if (opts.force) {
+			progress.value = 0;
+			isLoading.value = false;
+		} else {
+			hide();
+		}
+	}
+
+	// 自动递增进度
+	function startProgress() {
+		// 动画未完成
+		done = false;
+		// 动画开始的时间戳
+		let startTimeStamp: number;
+
+		function step(timeStamp: number): void {
+			if (done) {
+				return;
+			}
+
+			startTimeStamp ??= timeStamp;
+
+			// 记录已经过了多长时间
+			const elapsed = timeStamp - startTimeStamp;
+			// 连续赋值
+			progress.value = Math.max(0, Math.min(100, getProgress(duration, elapsed)));
+
+			// 循环每一帧
+			if (!import.meta.env.SSR) {
+				rafId = requestAnimationFrame(step);
+			}
+		}
+
+		// 启动第一帧
+		if (!import.meta.env.SSR) {
+			rafId = requestAnimationFrame(step);
+		}
+	}
+
+	// 设置进度
+	function set(at = 0, opts: { force?: boolean } = {}) {
+		if (import.meta.env.SSR) {
+			return;
+		}
+
+		// 等于100则完成
+		if (at >= 100) {
+			return finish({ force: opts.force });
+		}
+
+		// 清理进度条开始加载时的定时器
+		clear();
+
+		// 初始化进度从at开始
+		progress.value = at < 0 ? 0 : at;
+
+		// 设置进度条显示前等待时间
+		const throttleTime = opts.force ? 0 : throttle;
+
+		if (throttleTime && !import.meta.env.SSR) {
+			// 等待 throttleTime 后显示并加载进度条
+			throttleTimeout = setTimeout(() => {
+				isLoading.value = true;
+				startProgress();
+			}, throttleTime);
+		} else {
+			// 服务端则直接显示
+			isLoading.value = true;
+			startProgress();
+		}
+	}
+
+	const start = (opts: { force?: boolean } = {}) => {
+		// 先清除所有定时器
+		clearTimeouts();
+		// 没有报错
+		error.value = false;
+		// 设置进度
+		set(0, opts);
+	};
+
+	let cleanup = () => {};
+	if (!import.meta.env.SSR) {
+		const router = useRouter();
+		router.onBeforeRouteChange = () => {
+			start();
+		};
+		router.onAfterRouteChange = () => {
+			finish();
+		};
+
+		cleanup = () => {
+			router.onBeforeRouteChange = undefined;
+			router.onAfterRouteChange = undefined;
+			clear();
+		};
+	}
+
+	return {
+		cleanup,
+		progress: computed(() => progress.value),
+		isLoading: computed(() => isLoading.value),
+		error: computed(() => error.value),
+		start,
+		set,
+		finish,
+		clear,
+	};
+}
+
+// 存储唯一的 loading 实例
+let loadingIndicator: LoadingIndicator | null = null;
+// 记录当前有多少组件在使用这个 loading 指示器
+let loadingDeps = 0;
+
+export function useLoadingIndicator(opts: Partial<LoadingProps> = {}): Omit<LoadingIndicator, 'cleanup'> {
+	if (!loadingIndicator) {
+		// 创建 loading 实例
+		loadingIndicator = createLoadingIndicator(opts);
+	}
+
+	// 判断是否在客户端以及是否在组件响应式作用里
+	if (!import.meta.env.SSR && getCurrentScope()) {
+		loadingDeps++;
+
+		onScopeDispose(() => {
+			loadingDeps--;
+
+			if (loadingDeps === 0) {
+				loadingIndicator?.cleanup();
+				loadingIndicator = null;
+			}
+		});
+	}
+
+	return loadingIndicator!;
+}
