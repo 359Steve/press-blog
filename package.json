@@ -33,7 +33,8 @@
 		"simple-git": "^3.32.2",
 		"unplugin-auto-import": "^21.0.0",
 		"unplugin-vue-components": "^31.0.0",
-		"vitepress": "^1.6.4"
+		"vitepress": "^1.6.4",
+		"vp-loading-indicator": "^1.0.0"
 	},
 	"devDependencies": {
 		"@antfu/eslint-config": "^7.2.0",
