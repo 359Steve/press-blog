@@ -39,6 +39,5 @@ declare module 'vue' {
     RecordLayout: typeof import('./../components/layouts/RecordLayout.vue')['default']
     SearchMask: typeof import('./../components/modal/SearchMask.vue')['default']
     TRexRunner: typeof import('./../components/TRexRunner.vue')['default']
-    VPLoadingIndicator: typeof import('./../components/VPLoadingIndicator.vue')['default']
   }
 }
