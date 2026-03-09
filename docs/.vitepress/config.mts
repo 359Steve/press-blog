@@ -150,8 +150,6 @@ export default defineConfig({
 		logo: '/images/avatar.png',
 		logoLink: '/',
 
-		outline: { level: [2, 4], label: '本页目录' },
-
 		search: {
 			provider: 'local',
 			options: {
@@ -180,6 +178,9 @@ export default defineConfig({
 	},
 
 	markdown: {
+		headers: {
+			level: [2, 3, 4, 5, 6],
+		},
 		container: {
 			detailsLabel: '点我查看代码',
 		},
