@@ -110,6 +110,8 @@ const defaultEstimatedProgress = (duration: number, elapsed: number): number => 
 
 若需要手动控制（例如在非 VitePress 的 Vue 应用里），可以使用返回的方法：
 
+:::doctable
+
 | 属性/方法          | 类型                   | 说明                              |
 | ------------------ | ---------------------- | --------------------------------- |
 | `progress`         | `ShallowRef<number>`   | 当前进度 0–100                    |
@@ -119,6 +121,8 @@ const defaultEstimatedProgress = (duration: number, elapsed: number): number => 
 | `end()`            | `() => void`           | 直接到 100% 并进入隐藏流程        |
 | `setIndicator(at)` | `(at: number) => void` | 设置初始进度再启动                |
 | `clearStart()`     | `() => void`           | 取消尚未开始的 throttle/RAF       |
+
+:::
 
 ---
 
