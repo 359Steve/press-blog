@@ -31,32 +31,36 @@ function getNearestHeader(els: NodeListOf<Element>) {
 	return active;
 }
 
-watch(
-	headers,
-	(newValue) => {
-		watcher?.();
-		watcher = null;
+onMounted(() => {
+	watch(
+		headers,
+		(newValue) => {
+			watcher?.();
+			watcher = null;
 
-		if (Array.isArray(newValue) && newValue.length) {
-			nextTick(() => {
-				h2Elements = document.querySelectorAll('.vp-doc h2');
+			if (Array.isArray(newValue) && newValue.length) {
+				nextTick(() => {
+					if (typeof document !== 'undefined') {
+						h2Elements = document.querySelectorAll('.vp-doc h2');
 
-				watcher = watch(
-					debounceScroll,
-					() => {
-						activeHeaderText.value = getNearestHeader(h2Elements);
-					},
-					{
-						immediate: debounceScroll.value >= 140,
-					},
-				);
-			});
-		} else {
-			activeHeaderText.value = '';
-		}
-	},
-	{ immediate: true },
-);
+						watcher = watch(
+							debounceScroll,
+							() => {
+								activeHeaderText.value = getNearestHeader(h2Elements!);
+							},
+							{
+								immediate: debounceScroll.value >= 140,
+							},
+						);
+					}
+				});
+			} else {
+				activeHeaderText.value = '';
+			}
+		},
+		{ immediate: true },
+	);
+});
 </script>
 
 <template>
