@@ -79,9 +79,6 @@ export default defineConfig({
 		],
 		['meta', { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' }],
 		['meta', { name: 'theme-color', content: '#0f0f0f', media: '(prefers-color-scheme: dark)' }],
-		['meta', { property: 'og:type', content: 'website' }],
-		['meta', { property: 'og:title', content: 'JoJo的个人博客' }],
-		['meta', { property: 'og:description', content: 'JoJo的个人博客，分享技术文章、生活记录和项目经验' }],
 	],
 
 	cleanUrls: true,
@@ -181,6 +178,45 @@ export default defineConfig({
 			copyright: 'Copyright © 2025-present Joseph Joestar',
 			message: '蜀ICP备2025171383号',
 		},
+	},
+
+	transformPageData(pageData) {
+		const DEFAULT_TITLE = 'JoJo的个人博客';
+		const DEFAULT_DESC = 'JoJo的个人博客，分享技术文章、生活记录和项目经验';
+		const DEFAULT_OG_IMAGE = `${SITE_URL}/images/avatar.png`;
+
+		const title = pageData.frontmatter.title || pageData.title || DEFAULT_TITLE;
+		const description = pageData.frontmatter.description || DEFAULT_DESC;
+
+		const rawPath = pageData.relativePath.replace(/\.md$/, '');
+		const canonicalPath = rawPath === 'index' ? '' : rawPath;
+		const canonicalUrl = `${SITE_URL}/${canonicalPath}`;
+
+		const coverRaw: string | undefined = pageData.frontmatter.cover;
+		const ogImage = coverRaw ? `${SITE_URL}${coverRaw}` : DEFAULT_OG_IMAGE;
+
+		const layout: string | undefined = pageData.frontmatter.layout;
+		const isArticle = layout === 'index' || layout === 'record';
+
+		pageData.frontmatter.head ??= [];
+		pageData.frontmatter.head.push(
+			['meta', { property: 'og:type', content: isArticle ? 'article' : 'website' }],
+			['meta', { property: 'og:title', content: title }],
+			['meta', { property: 'og:description', content: description }],
+			['meta', { property: 'og:url', content: canonicalUrl }],
+			['meta', { property: 'og:image', content: ogImage }],
+			['meta', { name: 'twitter:card', content: coverRaw ? 'summary_large_image' : 'summary' }],
+			['meta', { name: 'twitter:title', content: title }],
+			['meta', { name: 'twitter:description', content: description }],
+			['meta', { name: 'twitter:image', content: ogImage }],
+		);
+
+		if (isArticle && pageData.frontmatter.date) {
+			pageData.frontmatter.head.push([
+				'meta',
+				{ property: 'article:published_time', content: String(pageData.frontmatter.date) },
+			]);
+		}
 	},
 
 	markdown: {
