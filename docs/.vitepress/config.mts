@@ -87,6 +87,10 @@ export default defineConfig({
 	cleanUrls: true,
 	srcDir: 'src',
 
+	sitemap: {
+		hostname: SITE_URL,
+	},
+
 	vite: {
 		server: {
 			port: 3000,
