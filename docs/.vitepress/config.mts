@@ -8,6 +8,8 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vitepress';
 
+const SITE_URL = 'https://www.polnareff.me';
+
 function registerComponentContainer(md: MarkdownIt, name: string, component: string) {
 	md.use(container, name, {
 		render(tokens: any, idx: number) {
