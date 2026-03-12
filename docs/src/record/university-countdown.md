@@ -1,7 +1,8 @@
 ---
 layout: record
 title: 倒带般的夕阳加速着倒数的大学时光，不经意的角落也有不一样的风景
-description: 绵阳最后的记忆
+description: 大学最后一个月，没有轰轰烈烈，只有夕阳准时落下、室友的生日蛋糕、橱窗外流动的街景，以及慢慢学会与时间和解
+date: 2024-06-01
 ---
 
 > 光影里，所有熟悉的街角都在低声告别。
@@ -22,11 +23,11 @@ description: 绵阳最后的记忆
 
 :::contentimage
 
-![arm1](/images/record/biye1.png)
-![arm1](/images/record/biye2.png)
-![arm1](/images/record/biye3.png)
-![arm1](/images/record/biye4.png)
-![arm1](/images/record/biye5.png)
-![arm1](/images/record/biye6.png)
+![biye1](/images/record/biye1.png)
+![biye2](/images/record/biye2.png)
+![biye3](/images/record/biye3.png)
+![biye4](/images/record/biye4.png)
+![biye5](/images/record/biye5.png)
+![biye6](/images/record/biye6.png)
 
 :::

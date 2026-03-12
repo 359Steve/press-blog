@@ -1,7 +1,8 @@
 ---
 layout: record
 title: 怀揣着好奇，第一次参观漫展活动
-description: 成都漫展
+description: 2024年6月，第一次踏入成都漫展现场，与喜欢的 up 主合影，近距离感受二次元爱好者聚在一起的那种热烈氛围
+date: 2024-06-09
 ---
 
 > 二次元世界在眼前闪现，心脏也跟着跳起来。
@@ -28,8 +29,8 @@ description: 成都漫展
 
 :::contentimage
 
-![arm1](/images/record/comic1.png)
-![arm1](/images/record/comic2.png)
-![arm1](/images/record/comic3.png)
+![comic1](/images/record/comic1.png)
+![comic2](/images/record/comic2.png)
+![comic3](/images/record/comic3.png)
 
 :::

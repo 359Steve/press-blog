@@ -1,7 +1,8 @@
 ---
 layout: record
-title: 从未知到熟悉、从激动到平静飞速的结束这里的第一年
-description: 重庆老厂古镇
+title: 从未知到熟悉、从激动到平静，飞速走过在重庆的第一年
+description: 2025年三月来到重庆，带着期待与忐忑开始第一份工作，这一年过得比想象中快，也比想象中真实
+date: 2026-01-01
 ---
 
 > 第一年的热烈，换来了此刻的安静。
@@ -20,11 +21,11 @@ description: 重庆老厂古镇
 
 :::contentimage
 
-![arm1](/images/record/laochang1.png)
-![arm1](/images/record/laochang2.png)
-![arm1](/images/record/laochang3.png)
-![arm1](/images/record/laochang4.png)
-![arm1](/images/record/laochang5.png)
-![arm1](/images/record/laochang6.png)
+![laochang1](/images/record/laochang1.png)
+![laochang2](/images/record/laochang2.png)
+![laochang3](/images/record/laochang3.png)
+![laochang4](/images/record/laochang4.png)
+![laochang5](/images/record/laochang5.png)
+![laochang6](/images/record/laochang6.png)
 
 :::

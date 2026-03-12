@@ -1,7 +1,8 @@
 ---
 layout: record
-title: 国一个半月的暑假工为了实现看一次大海的愿望
-description: 珠海两日游
+title: 为了看一次大海，我在广东打了一个半月的暑假工
+description: 2024年夏天，独自前往广东打工，在奶茶店后厨度过了一个半月，最后去珠海看了人生第一次大海，也爬了一座险些没水喝的凤凰山
+date: 2024-08-10
 ---
 
 > 海在前方，我在路上。
@@ -26,7 +27,7 @@ description: 珠海两日游
 
 :::contentimage
 
-![arm1](/images/record/zhuhai1.png)
-![arm1](/images/record/zhuhai2.png)
+![zhuhai1](/images/record/zhuhai1.png)
+![zhuhai2](/images/record/zhuhai2.png)
 
 :::

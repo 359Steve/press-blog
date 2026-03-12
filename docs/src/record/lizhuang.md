@@ -1,7 +1,8 @@
 ---
 layout: record
 title: 悲伤前的李庄古镇，流光溢彩、华灯初上，心情却有一丝暗淡
-description: 李庄古镇
+description: 那一晚李庄古镇的灯光漂亮，水影摇曳，却怎么也高兴不起来，后来才明白，那是离别在靠近之前提前来打了个招呼
+date: 2024-07-15
 ---
 
 > 灯火再美，也照不亮心底的幽暗。
@@ -24,13 +25,13 @@ description: 李庄古镇
 
 :::contentimage
 
-![arm1](/images/record/lizhuang1.png)
-![arm1](/images/record/lizhuang2.png)
-![arm1](/images/record/lizhuang3.png)
-![arm1](/images/record/lizhuang4.png)
-![arm1](/images/record/lizhuang5.png)
-![arm1](/images/record/lizhuang6.png)
-![arm1](/images/record/lizhuang7.png)
-![arm1](/images/record/lizhuang8.png)
+![lizhuang1](/images/record/lizhuang1.png)
+![lizhuang2](/images/record/lizhuang2.png)
+![lizhuang3](/images/record/lizhuang3.png)
+![lizhuang4](/images/record/lizhuang4.png)
+![lizhuang5](/images/record/lizhuang5.png)
+![lizhuang6](/images/record/lizhuang6.png)
+![lizhuang7](/images/record/lizhuang7.png)
+![lizhuang8](/images/record/lizhuang8.png)
 
 :::
