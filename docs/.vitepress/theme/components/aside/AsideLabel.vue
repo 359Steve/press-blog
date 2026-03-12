@@ -53,7 +53,6 @@ function goToTag(tagName: string) {
 			<div
 				v-for="tag in tagList"
 				:key="tag.name"
-				type="button"
 				class="text-blog-accent! inline-flex cursor-pointer items-center gap-1 rounded-full px-2 py-1 text-xs font-medium transition-opacity hover:opacity-80"
 				:style="{ color: tag.color, backgroundColor: `${tag.color}18` }"
 				@click="goToTag(tag.name)"
