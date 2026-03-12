@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.polnareff.me/sitemap.xml
+Sitemap: https://press-blog-blond.vercel.app/sitemap.xml

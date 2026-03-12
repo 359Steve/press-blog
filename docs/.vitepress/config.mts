@@ -8,7 +8,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vitepress';
 
-const SITE_URL = 'https://www.polnareff.me';
+const SITE_URL = 'https://press-blog-blond.vercel.app';
 
 function registerComponentContainer(md: MarkdownIt, name: string, component: string) {
 	md.use(container, name, {
