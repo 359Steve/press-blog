@@ -10,12 +10,10 @@ const { open } = useModals();
 			type="button"
 			class="text-blog-tertiary! h-full w-full text-left text-base"
 			aria-label="搜索"
-			data-v-dc969bf6=""
-			data-v-76d3335c=""
 			@click="open('SearchMask')"
 		>
-			<span class="vpi-search" aria-hidden="true" data-v-76d3335c="" />
-			<span class="text" data-v-76d3335c="">搜索</span>
+			<span class="vpi-search" aria-hidden="true" />
+			<span class="text">搜索</span>
 		</button>
 	</div>
 </template>
