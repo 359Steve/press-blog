@@ -18,9 +18,9 @@ if (images.length > 0) {
 		message: `Compress ${images.length} images?`,
 	});
 
-	compressImages(images);
-
 	if (!confirm) process.exit(0);
+
+	compressImages(images);
 } else {
 	process.exit(0);
 }
