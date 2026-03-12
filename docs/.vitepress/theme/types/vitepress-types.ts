@@ -14,3 +14,11 @@ export type SocialWithColor = DefaultTheme.SocialLink & {
 	color?: string;
 	bgcolor?: string;
 };
+
+/**
+ * @description 扩展footer类型
+ */
+export type PressFooter = DefaultTheme.Footer & {
+	copyright: string;
+	message: string;
+};
