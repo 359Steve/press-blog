@@ -22,6 +22,7 @@ declare module 'vue' {
     BlogLayout: typeof import('./../components/layouts/BlogLayout.vue')['default']
     ContentImage: typeof import('./../components/md/ContentImage.vue')['default']
     DocTable: typeof import('./../components/DocTable.vue')['default']
+    FilterLabel: typeof import('./../components/index/FilterLabel.vue')['default']
     FooterBox: typeof import('./../components/footer/FooterBox.vue')['default']
     HeaderBox: typeof import('./../components/header/HeaderBox.vue')['default']
     ImageMask: typeof import('./../components/modal/ImageMask.vue')['default']
