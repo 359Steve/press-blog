@@ -3,7 +3,6 @@ import { data as posts } from '../../content/blog.data';
 
 const router = useRouter();
 const useindex = useIndex();
-const { setLabelName } = useindex;
 const { labelName } = storeToRefs(useindex);
 
 const filteredPosts = computed(() => {
@@ -17,11 +16,7 @@ const filteredPosts = computed(() => {
 </script>
 
 <template>
-	<div v-if="labelName" class="text-blog-secondary mb-4 flex items-center gap-2 text-sm">
-		<span>当前筛选：</span>
-		<span class="font-medium">#{{ labelName }}</span>
-		<a class="text-blog-accent! ml-1 hover:underline!" @click="setLabelName('')">清除</a>
-	</div>
+	<FilterLabel :label-name />
 	<div v-if="filteredPosts && filteredPosts.length > 0" class="index-list grid w-full grid-cols-1 gap-5 sm:gap-6">
 		<div
 			v-for="item in filteredPosts"

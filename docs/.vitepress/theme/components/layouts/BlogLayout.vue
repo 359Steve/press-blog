@@ -4,7 +4,6 @@ import { getMonthName, groupedPosts, stats } from '../../utils';
 
 const router = useRouter();
 const useindex = useIndex();
-const { setLabelName } = useindex;
 const { labelName } = storeToRefs(useindex);
 
 const classify = computed(() => groupedPosts(posts, labelName.value));
@@ -48,11 +47,7 @@ const gatherList = computed(() => {
 		</div>
 
 		<!-- 标签筛选提示 -->
-		<div v-if="labelName" class="text-blog-secondary mb-4 flex items-center gap-2 text-sm">
-			<span>当前筛选：</span>
-			<span class="font-medium">#{{ labelName }}</span>
-			<a class="text-blog-accent! ml-1 hover:underline!" @click="setLabelName('')">清除</a>
-		</div>
+		<FilterLabel :label-name />
 
 		<div v-if="classify.length > 0" class="relative">
 			<div
