@@ -1,5 +1,5 @@
 import type MarkdownIt from 'markdown-it';
-import type { NavItemWithIcon, SocialWithColor } from './theme/types/vitepress-types';
+import type { NavItemWithIcon, PressNotFound, SocialWithColor } from './theme/types/vitepress-types';
 import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import attrs from 'markdown-it-attrs';
