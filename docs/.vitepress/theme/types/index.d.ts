@@ -30,7 +30,6 @@ interface Post {
 interface ImageType {
 	src: string;
 	alt: string;
-	is_live: boolean;
 	[key: string]: any;
 }
 
