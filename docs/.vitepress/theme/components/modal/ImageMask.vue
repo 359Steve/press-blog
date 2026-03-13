@@ -1,31 +1,8 @@
 <script lang="ts" setup>
-// import * as livephotoskit from 'livephotoskit';
-// const { augmentElementAsPlayer } = livephotoskit;
-
 defineProps<{
 	src: string;
 	alt: string;
 }>();
-// const livePhotoRef = useTemplateRef<HTMLDivElement>('livePhotoRef');
-
-// watch(
-// 	() => getPreviewVisible(),
-// 	(visible) => {
-// 		if (!visible) return;
-
-// 		nextTick(() => {
-// 			const el = livePhotoRef.value;
-// 			if (!el) return;
-
-// 			augmentElementAsPlayer(el, {
-// 				photoSrc: getPreviewSrc(),
-// 				videoSrc: getIsLive(),
-// 			});
-
-// 			document.querySelector('.lpk-badge')?.addEventListener('click', (e) => e.stopImmediatePropagation(), true);
-// 		});
-// 	},
-// );
 </script>
 
 <template>
