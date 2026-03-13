@@ -1,10 +1,16 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import type { PressNotFound } from '../types/vitepress-types';
+
+const { theme } = useData<{
+	notFound: PressNotFound;
+}>();
+
+const icon = computed(() => theme.value.notFound.icon);
+</script>
 
 <template>
 	<div class="flex h-full w-full flex-col justify-center text-center">
-		<div
-			class="h-62.5 w-full bg-[url(/images/404-ezgif.com-gif-maker.gif)] bg-contain bg-center bg-no-repeat sm:h-87.5 md:h-100"
-		>
+		<div :style="{ backgroundImage: `url(${icon})` }" class="h-62.5 w-full bg-contain bg-center bg-no-repeat sm:h-87.5 md:h-100">
 			<span class="text-center text-6xl sm:text-7xl md:text-8xl">404</span>
 		</div>
 
