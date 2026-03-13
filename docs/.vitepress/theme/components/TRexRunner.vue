@@ -68,6 +68,7 @@ const dino = reactive({
 });
 // 仙人掌对象
 const cactuses = ref<CactusType[]>([]);
+const rafId = ref(0);
 
 // 更新地面位置
 function updateGround(delta: number) {
@@ -203,7 +204,7 @@ function update(time: number) {
 	// 首次调用初始化时间戳
 	if (!gameState.lastTime) {
 		gameState.lastTime = time;
-		requestAnimationFrame(update);
+		rafId.value = requestAnimationFrame(update);
 		return;
 	}
 
@@ -228,7 +229,7 @@ function update(time: number) {
 	}
 
 	gameState.lastTime = time;
-	requestAnimationFrame(update);
+	rafId.value = requestAnimationFrame(update);
 }
 
 // 开始游戏
@@ -243,7 +244,7 @@ function startGame() {
 	dino.currentImg = dinoStaticImg.value;
 	gameState.lastTime = 0;
 
-	requestAnimationFrame(update);
+	rafId.value = requestAnimationFrame(update);
 }
 
 function handleJump() {
@@ -283,6 +284,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+	cancelAnimationFrame(rafId.value);
 	document.removeEventListener('keydown', startGame);
 	document.removeEventListener('keydown', handleJump);
 	document.removeEventListener('touchstart', handleJump);
