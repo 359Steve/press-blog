@@ -8,8 +8,8 @@ const { sectionScrollTop } = storeToRefs(useIndex());
 
 const headers = computed(() => page.value?.headers.filter((i) => i.level === 2));
 const activeHeaderText = ref<string>('');
-const activeHeader = useDebounce(activeHeaderText, 80);
-const debounceScroll = useDebounce(sectionScrollTop, 80);
+const activeHeader = refDebounced(activeHeaderText, 80);
+const debounceScroll = refDebounced(sectionScrollTop, 80);
 
 let h2Elements: NodeListOf<Element>;
 let watcher: WatchHandle | null = null;
