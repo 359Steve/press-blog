@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import VPLocalSearchBox from 'vitepress/dist/client/theme-default/components/VPLocalSearchBox.vue';
-
 const emit = defineEmits<{
 	(e: 'close'): void;
 }>();
+
+const VPLocalSearchBox = defineAsyncComponent(
+	() => import('vitepress/dist/client/theme-default/components/VPLocalSearchBox.vue'),
+);
 
 function handleClose() {
 	emit('close');
