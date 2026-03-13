@@ -8,9 +8,10 @@ export type NavItemWithIcon = DefaultTheme.NavItemWithLink & {
 };
 
 /**
- * @description 扩展导航栏社交账户类型
+ * @description 扩展导航栏社交账户类型，icon 固定为 Iconify 字符串
  */
-export type SocialWithColor = DefaultTheme.SocialLink & {
+export type SocialWithColor = Omit<DefaultTheme.SocialLink, 'icon'> & {
+	icon: string;
 	color?: string;
 	bgcolor?: string;
 };
