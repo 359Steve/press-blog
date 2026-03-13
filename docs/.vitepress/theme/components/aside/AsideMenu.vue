@@ -31,7 +31,7 @@ function isActive(item: NavItemWithIcon): boolean {
 				]"
 				@click="$emit('toPath', item.link)"
 			>
-				<Icon :icon="item.icon" width="18" />
+				<Icon v-if="item.icon" :icon="item.icon" width="18" />
 				<span>{{ item.text }}</span>
 			</li>
 		</ul>

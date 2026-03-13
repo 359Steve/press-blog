@@ -18,7 +18,7 @@ const { socialLinks } = defineProps<{
 					:style="{ backgroundColor: item.bgcolor }"
 					class="flex h-fit w-fit items-center justify-center rounded-[50%] p-1.5"
 				>
-					<Icon :icon="item.icon as string" :color="item.color" width="20" />
+					<Icon :icon="item.icon" :color="item.color" width="20" />
 				</a>
 			</span>
 		</div>
