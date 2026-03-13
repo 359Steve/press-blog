@@ -3,7 +3,6 @@ const { images } = defineProps<{
 	images: {
 		src: string;
 		alt: string;
-		is_live: boolean;
 	}[];
 }>();
 
