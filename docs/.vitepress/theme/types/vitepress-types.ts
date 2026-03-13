@@ -22,3 +22,10 @@ export type PressFooter = DefaultTheme.Footer & {
 	copyright: string;
 	message: string;
 };
+
+/**
+ * @description 扩展notfound配置
+ */
+export type PressNotFound = DefaultTheme.NotFoundOptions & {
+	icon: string;
+};
