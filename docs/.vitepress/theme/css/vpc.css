@@ -83,7 +83,6 @@
 .vp-doc .stroke-year {
 	@apply absolute top-8 -z-1 text-[8em] font-bold text-transparent opacity-[0.1];
 	-webkit-text-stroke-width: 6px;
-	--un-text-stroke-opacity: 1;
 	-webkit-text-stroke-color: rgb(170 170 170 / 1);
 }
 
