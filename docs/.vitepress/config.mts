@@ -31,20 +31,11 @@ function registerComponentContainer(md: MarkdownIt, name: string, component: str
 						t.children?.forEach((child: any) => {
 							if (child.type === 'image') {
 								const attrs = Object.fromEntries(child.attrs || []);
-
-								const isLiveRaw: string = child.attrGet('is_live') || 'false';
 								const alt = child.children?.map((c: any) => c.content).join('') || '';
-								let is_live = false;
-								try {
-									is_live = JSON.parse(isLiveRaw.toLowerCase()) === true;
-								} catch {
-									// leave false if parse fails
-								}
 
 								images.push({
 									...attrs,
 									alt,
-									is_live,
 								} as ImageType);
 							}
 						});
@@ -235,7 +226,6 @@ export default defineConfig({
 		},
 		config(md) {
 			md.use(attrs);
-			registerComponentContainer(md, 'toclist', 'TocList');
 			registerComponentContainer(md, 'doctable', 'DocTable');
 			registerComponentContainer(md, 'contentimage', 'ContentImage');
 		},
