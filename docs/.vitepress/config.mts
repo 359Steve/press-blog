@@ -153,6 +153,9 @@ export default defineConfig({
 
 		logo: '/images/avatar.png',
 		logoLink: '/',
+		notFound: {
+			icon: '/images/404-ezgif.com-gif-maker.gif',
+		} as PressNotFound,
 
 		search: {
 			provider: 'local',
