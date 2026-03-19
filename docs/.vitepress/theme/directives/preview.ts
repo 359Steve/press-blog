@@ -5,12 +5,7 @@ export const preview: Directive<HTMLElement, ImageType> = {
 		const handler = () => {
 			const { open } = useModals();
 			if (binding.value) {
-				const data = binding.value;
-
-				open('ImageMask', {
-					src: data.src,
-					alt: data.alt,
-				});
+				open('ImageMask', binding.value);
 			}
 		};
 
