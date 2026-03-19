@@ -93,3 +93,7 @@
 .vp-doc.record a {
 	@apply hover:text-blog-accent text-lg font-normal text-(--vp-c-text-1) no-underline;
 }
+
+.lpk-badge {
+	@apply cursor-pointer;
+}
