@@ -21,6 +21,7 @@ const translate = ref<boolean>(true);
 					v-preview="{
 						src: photo.url,
 						alt: '照片墙',
+						live: photo.live,
 					}"
 					class="w-full"
 					:src="photo.url"
