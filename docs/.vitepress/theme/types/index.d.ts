@@ -30,6 +30,7 @@ interface Post {
 interface ImageType {
 	src: string;
 	alt: string;
+	live?: Photo['live'];
 	[key: string]: any;
 }
 
@@ -62,4 +63,5 @@ interface PhotoMate {
 interface Photo extends PhotoMate {
 	name: string;
 	url: string;
+	live?: Pick<Photo, 'url' | 'name'>;
 }
