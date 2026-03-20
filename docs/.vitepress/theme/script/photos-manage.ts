@@ -97,20 +97,20 @@ async function processPhoto(filepath: string) {
 	await fs.writeFile(jsonPath, JSON.stringify(jsonConfig, null, 2));
 }
 
-// 清除多余的json文件
-async function cleanOrphanJson() {
-	const jsonFiles = await fg('**/*.json', fgOpt);
-	for (const json of jsonFiles) {
-		const base = json.replace(/\.json$/i, '');
+// 清除多余的文件
+async function cleanOrphanFile() {
+	const orphanFiles = await fg('**/*.{json,mov}', fgOpt);
+	for (const file of orphanFiles) {
+		const base = file.replace(/\.\w+$/, '');
 		const exists = IMAGE_EXTS.some((ext) => existsSync(`${base}.${ext}`));
-		if (!exists) await fs.unlink(json);
+		if (!exists) await fs.unlink(file);
 	}
 }
 
 async function main() {
 	const files = await getImageFiles();
 	for (const file of files) await processPhoto(file);
-	await cleanOrphanJson();
+	await cleanOrphanFile();
 }
 
 void main();
