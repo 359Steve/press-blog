@@ -114,6 +114,12 @@ export default defineConfig({
 			{ text: '心路历程', link: '/record', activeMatch: '^/record(/|$)', icon: 'ri:article-fill' },
 			{ text: '珍藏回忆', link: '/photos', activeMatch: '^/photos(/|$)', icon: 'ri:camera-3-fill' },
 			{ text: '关于博客', link: '/about', activeMatch: '^/about(/|$)', icon: 'ri:game-fill' },
+			{
+				text: '浮漂日记',
+				link: '/fishing',
+				activeMatch: '^/fishing(/|$)',
+				icon: 'fluent:mail-fish-hook-16-filled',
+			},
 		] as NavItemWithIcon[],
 
 		socialLinks: [
