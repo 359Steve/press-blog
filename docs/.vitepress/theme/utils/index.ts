@@ -1,7 +1,9 @@
+import type { GroupedPost, Post } from '../types/content-data';
+
 /**
  * 转换日期
  */
-export function transformDate(raw: Date): Post['date'] {
+export function transformDate(raw: Date): Post['frontmatter']['date'] {
 	raw.setUTCHours(12);
 	return {
 		time: +raw,
@@ -28,13 +30,15 @@ export function getMonthName(month: number) {
 export function groupedPosts(posts: Post[], labelName: string) {
 	const list = posts ?? [];
 	const tagName = labelName;
-	const filtered = tagName ? list.filter((item) => item.tags?.some((t) => t.name === tagName)) : list;
+	const filtered = tagName
+		? list.filter(({ frontmatter: item }) => item.tags?.some((t) => t.name === tagName))
+		: list;
 
 	// 按年份和月份分组
 	const grouped: Record<string, GroupedPost> = {};
 
 	filtered.forEach((post) => {
-		const time = post?.date?.time;
+		const time = post?.frontmatter.date.time;
 		const date = typeof time === 'number' && Number.isFinite(time) ? new Date(time) : new Date(0);
 		const year = date.getFullYear();
 		const month = date.getMonth() + 1;
@@ -68,11 +72,11 @@ export function stats(posts: Post[], labelName: string) {
 	const years = new Set<number>();
 	const categorys = new Set<string>();
 
-	allPosts.forEach((post) => {
+	allPosts.forEach(({ frontmatter: post }) => {
 		post.tags?.forEach((tag) => allTags.add(tag.name));
 		years.add(new Date(post.date.time).getFullYear());
-		if (post.category != null && post.category !== '') {
-			categorys.add(post.category);
+		if (Array.isArray(post.category)) {
+			post.category.forEach((i) => categorys.add(i));
 		}
 	});
 

@@ -81,10 +81,10 @@ const gatherList = computed(() => {
 				<!-- 文章列表 -->
 				<div class="space-y-3">
 					<article
-						v-for="post in group.posts"
-						:key="post.url"
+						v-for="{ frontmatter: post, ...args } in group.posts"
+						:key="args.url"
 						class="glass group cursor-pointer overflow-hidden rounded-lg border border-black/5 p-4 transition-all duration-200 dark:border-white/8"
-						@click="router.go(post.url)"
+						@click="router.go(args.url)"
 					>
 						<div class="flex flex-col gap-2">
 							<!-- 标题和日期 -->

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import type { Post } from '@/theme/types/content-data';
 import { data as posts } from '../../content/blog.data';
 
 const { showCount = false, showShadow = true } = defineProps<{
@@ -11,9 +12,9 @@ const router = useRouter();
 const { setLabelName } = useIndex();
 
 const tagList = computed(() => {
-	const map = new Map<string, Post['tags'][number] & { count: number }>();
+	const map = new Map<string, Post['frontmatter']['tags'][number] & { count: number }>();
 	for (const post of posts) {
-		for (const tag of post.tags ?? []) {
+		for (const tag of post.frontmatter.tags ?? []) {
 			if (!tag?.name) continue;
 
 			const existing = map.get(tag.name);

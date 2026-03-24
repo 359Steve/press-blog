@@ -1,3 +1,4 @@
+import type { Post, PostFrontmatter } from '../types/content-data';
 import { createContentLoader } from 'vitepress';
 import { transformDate } from '../utils';
 
@@ -9,19 +10,17 @@ export default createContentLoader('index/*.md', {
 	transform(raw): Post[] {
 		return raw
 			.map(({ frontmatter, ...extra }) => {
-				const dateRaw = frontmatter.date != null ? new Date(frontmatter.date) : new Date();
+				const newData = frontmatter as PostFrontmatter & { date: string };
+				const dateRaw = newData.date != null ? new Date(newData.date) : new Date();
 				const date = Number.isNaN(dateRaw.getTime()) ? transformDate(new Date(0)) : transformDate(dateRaw);
 				return {
-					title: frontmatter.title ?? '',
-					cover: frontmatter.cover ?? '',
-					description: frontmatter.description ?? '',
-					category: frontmatter.category ?? '',
-					date,
-					author: frontmatter.author ?? '',
-					tags: frontmatter.tags ?? [],
+					frontmatter: {
+						...newData,
+						date,
+					},
 					...extra,
 				};
 			})
-			.sort((a, b) => b.date.time - a.date.time);
+			.sort((a, b) => b.frontmatter.date.time - a.frontmatter.date.time);
 	},
 });
