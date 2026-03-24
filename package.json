@@ -13,6 +13,7 @@
 		"format:check": "prettier --check \"**/*.{ts,vue,js,json,md}\""
 	},
 	"dependencies": {
+		"@amap/amap-jsapi-loader": "^1.0.1",
 		"@iconify/vue": "^5.0.0",
 		"@unpic/placeholder": "^0.1.2",
 		"@vueuse/core": "^14.2.1",
@@ -47,6 +48,7 @@
 		"prettier": "^3.8.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"prompts": "^2.4.2",
+		"sass-embedded": "^1.98.0",
 		"sharp": "^0.34.5",
 		"simple-git": "^3.33.0",
 		"tsx": "^4.19.2"
