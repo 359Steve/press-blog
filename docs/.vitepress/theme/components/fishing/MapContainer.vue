@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import AMapLoader from '@amap/amap-jsapi-loader';
-
 const {
 	lng = 116.397428,
 	lat = 39.90923,
@@ -17,6 +15,8 @@ const isInfoOpen = ref(true);
 
 onMounted(() => {
 	nextTick(async () => {
+		const AMapLoader = await import('@amap/amap-jsapi-loader');
+
 		window._AMapSecurityConfig = {
 			securityJsCode: '717239097f7a3d9de73e5f5df0a72196',
 		};
