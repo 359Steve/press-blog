@@ -3,7 +3,7 @@ const { frontmatter } = useData();
 </script>
 
 <template>
-	<IndexListLayout v-if="frontmatter.index" />
+	<IndexDetailLayout v-if="frontmatter.index" />
 	<IndexSearchLayout v-else />
 </template>
 

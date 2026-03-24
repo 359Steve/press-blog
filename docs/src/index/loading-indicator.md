@@ -4,7 +4,8 @@ index: true
 title: 'VP Loading Indicator 基于 Vue 3，适配 VitePress'
 cover: '/images/posts/loading-indicator/1.png'
 description: '基于 Vue 3 的 VitePress 顶部加载进度条组件，适用于文档站或 Vue 应用中的页面加载指示'
-category: bar
+category:
+    - bar
 tags:
     - name: VitePress
       icon: vscode-icons:folder-type-vitepress-opened

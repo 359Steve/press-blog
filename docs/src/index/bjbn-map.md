@@ -4,7 +4,8 @@ index: true
 title: '封装 BJBN 3.0通用地图组件'
 cover: '/images/posts/bjbn-map/1.png'
 description: '第一次参加工作给公司封装的第一个插件bjbn-map-container，也是我第一个开源项目'
-category: map
+category:
+    - map
 tags:
     - name: Map
       icon: mdi:map-check

@@ -4,7 +4,8 @@ index: true
 title: 'Branch Canvas 基于 Vue 3 + Canvas 实现'
 cover: '/images/posts/branch-canvas/1.png'
 description: '一个基于 Vue 3 的轻量级柳枝背景插件，可以轻松在网页或组件中生成飘动的柳枝背景效果，适合用于网站、博客、活动页面等场景，增加自然灵动的视觉感'
-category: bar
+category:
+    - bar
 tags:
     - name: Vue
       icon: vscode-icons:file-type-vue
