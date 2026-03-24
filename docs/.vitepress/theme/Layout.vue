@@ -4,6 +4,7 @@ import BranchCanvas from 'branch-canvas';
 import VPLoadingIndicator from 'vp-loading-indicator';
 import AboutLayout from './components/layouts/AboutLayout.vue';
 import BlogLayout from './components/layouts/BlogLayout.vue';
+import FishingLayout from './components/layouts/FishingLayout.vue';
 import IndexLayout from './components/layouts/IndexLayout.vue';
 import PhotosLayout from './components/layouts/PhotosLayout.vue';
 import RecordLayout from './components/layouts/RecordLayout.vue';
@@ -16,6 +17,7 @@ const layouts: Record<string, Component> = {
 	record: RecordLayout,
 	about: AboutLayout,
 	photos: PhotosLayout,
+	fishing: FishingLayout,
 };
 
 function enableTransitions() {
