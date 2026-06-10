@@ -27,25 +27,11 @@ interface PostFrontmatter extends FrontmatterBase {
 	}[];
 }
 
-/**
- * @description 钓点 frontmatter 类型
- */
-interface FishingFrontmatter extends FrontmatterBase {
-	id: string;
-	province: string;
-	city: string;
-	lat: number;
-	lng: number;
-	type: string;
-	night: boolean;
-}
-
 interface Content<T extends Record<string, any>> extends ContentData {
 	frontmatter: T;
 }
 
 type Post = Content<PostFrontmatter>;
-type Fishing = Content<FishingFrontmatter>;
 
 /**
  * @description 文章归档类型
@@ -55,5 +41,3 @@ interface GroupedPost {
 	month: number;
 	posts: Post[];
 }
-
-export type { Fishing, FishingFrontmatter, GroupedPost, Post, PostFrontmatter };
