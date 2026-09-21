@@ -5,7 +5,7 @@ const { visible, component, props } = storeToRefs(modal);
 </script>
 
 <template>
-	<MaskBox :visible @close="close">
-		<component v-if="component" :is="component" v-bind="props ?? {}" @close="close" />
-	</MaskBox>
+    <MaskBox :visible @close="close">
+        <component :is="component" v-if="component" v-bind="props ?? {}" @close="close" />
+    </MaskBox>
 </template>

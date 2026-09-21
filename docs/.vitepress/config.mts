@@ -11,222 +11,222 @@ import { defineConfig } from 'vitepress';
 const SITE_URL = 'https://jojo.polnareff.me';
 
 function registerComponentContainer(md: MarkdownIt, name: string, component: string) {
-	md.use(container, name, {
-		render(tokens: any, idx: number) {
-			const token = tokens[idx];
-			if (name !== 'contentimage') {
-				return token.nesting === 1 ? `<${component}>\n` : `</${component}>\n`;
-			}
+    md.use(container, name, {
+        render(tokens: any, idx: number) {
+            const token = tokens[idx];
+            if (name !== 'contentimage') {
+                return token.nesting === 1 ? `<${component}>\n` : `</${component}>\n`;
+            }
 
-			if (token.nesting === 1) {
-				let end = idx + 1;
-				while (tokens[end].type !== `container_${name}_close`) end++;
+            if (token.nesting === 1) {
+                let end = idx + 1;
+                while (tokens[end].type !== `container_${name}_close`) end++;
 
-				const inner = tokens.slice(idx + 1, end);
+                const inner = tokens.slice(idx + 1, end);
 
-				const images: ImageType[] = [];
+                const images: ImageType[] = [];
 
-				inner.forEach((t: any) => {
-					if (t.type === 'inline') {
-						t.children?.forEach((child: any) => {
-							if (child.type === 'image') {
-								const attrs = Object.fromEntries(child.attrs || []);
-								const alt = child.children?.map((c: any) => c.content).join('') || '';
+                inner.forEach((t: any) => {
+                    if (t.type === 'inline') {
+                        t.children?.forEach((child: any) => {
+                            if (child.type === 'image') {
+                                const attrs = Object.fromEntries(child.attrs || []);
+                                const alt = child.children?.map((c: any) => c.content).join('') || '';
 
-								images.push({
-									...attrs,
-									alt,
-								} as ImageType);
-							}
-						});
-					}
-				});
+                                images.push({
+                                    ...attrs,
+                                    alt,
+                                } as ImageType);
+                            }
+                        });
+                    }
+                });
 
-				return `<${component} :images='${JSON.stringify(images)}'>`;
-			}
+                return `<${component} :images='${JSON.stringify(images)}'>`;
+            }
 
-			return `</${component}>`;
-		},
-	});
+            return `</${component}>`;
+        },
+    });
 }
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-	lang: 'zh-CN',
-	title: 'JoJo的个人博客',
-	titleTemplate: ':title | JoJo',
-	description: 'JoJo的个人博客，分享技术文章、生活记录和项目经验',
+    lang: 'zh-CN',
+    title: 'JoJo的个人博客',
+    titleTemplate: ':title | JoJo',
+    description: 'JoJo的个人博客，分享技术文章、生活记录和项目经验',
 
-	base: '/',
+    base: '/',
 
-	head: [
-		['link', { rel: 'icon', href: '/favicon.ico' }],
-		['link', { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/images/avatar.png' }],
-		[
-			'link',
-			{
-				rel: 'stylesheet',
-				href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap',
-			},
-		],
-		['meta', { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' }],
-		['meta', { name: 'theme-color', content: '#0f0f0f', media: '(prefers-color-scheme: dark)' }],
-	],
+    head: [
+        ['link', { rel: 'icon', href: '/favicon.ico' }],
+        ['link', { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/images/avatar.png' }],
+        [
+            'link',
+            {
+                rel: 'stylesheet',
+                href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap',
+            },
+        ],
+        ['meta', { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' }],
+        ['meta', { name: 'theme-color', content: '#0f0f0f', media: '(prefers-color-scheme: dark)' }],
+    ],
 
-	cleanUrls: true,
-	srcDir: 'src',
+    cleanUrls: true,
+    srcDir: 'src',
 
-	sitemap: {
-		hostname: SITE_URL,
-	},
+    sitemap: {
+        hostname: SITE_URL,
+    },
 
-	vite: {
-		server: {
-			port: 3000,
-		},
-		plugins: [
-			AutoImport({
-				imports: ['vitepress', 'vue', '@vueuse/core', 'pinia'],
-				dirs: ['../.vitepress/theme/store'],
-				dts: '../.vitepress/theme/types/auto-imports.d.ts',
-			}),
+    vite: {
+        server: {
+            port: 3000,
+        },
+        plugins: [
+            AutoImport({
+                imports: ['vitepress', 'vue', '@vueuse/core', 'pinia'],
+                dirs: ['../.vitepress/theme/store'],
+                dts: '../.vitepress/theme/types/auto-imports.d.ts',
+            }),
 
-			Components({
-				dirs: ['../.vitepress/theme/components'],
-				extensions: ['vue'],
-				dts: '../.vitepress/theme/types/auto-components.d.ts',
-			}),
-			tailwindcss(),
-		],
-		resolve: {
-			alias: {
-				'@': path.resolve(__dirname, '../.vitepress'),
-			},
-		},
-	},
+            Components({
+                dirs: ['../.vitepress/theme/components'],
+                extensions: ['vue'],
+                dts: '../.vitepress/theme/types/auto-components.d.ts',
+            }),
+            tailwindcss(),
+        ],
+        resolve: {
+            alias: {
+                '@': path.resolve(__dirname, '../.vitepress'),
+            },
+        },
+    },
 
-	themeConfig: {
-		siteTitle: false,
-		i18nRouting: false,
-		nav: [
-			{ text: '回到首页', link: '/', activeMatch: '^/(index/.*)?$', icon: 'ri:ghost-smile-fill' },
-			{ text: '文章归档', link: '/blog', activeMatch: '^/blog(/|$)', icon: 'mdi:bookmark-multiple' },
-			{ text: '心路历程', link: '/record', activeMatch: '^/record(/|$)', icon: 'ri:article-fill' },
-			{ text: '珍藏回忆', link: '/photos', activeMatch: '^/photos(/|$)', icon: 'ri:camera-3-fill' },
-		] as NavItemWithIcon[],
+    themeConfig: {
+        siteTitle: false,
+        i18nRouting: false,
+        nav: [
+            { text: '回到首页', link: '/', activeMatch: '^/(index/.*)?$', icon: 'ri:ghost-smile-fill' },
+            { text: '文章归档', link: '/blog', activeMatch: '^/blog(/|$)', icon: 'mdi:bookmark-multiple' },
+            { text: '心路历程', link: '/record', activeMatch: '^/record(/|$)', icon: 'ri:article-fill' },
+            { text: '珍藏回忆', link: '/photos', activeMatch: '^/photos(/|$)', icon: 'ri:camera-3-fill' },
+        ] as NavItemWithIcon[],
 
-		socialLinks: [
-			{ icon: 'ri:github-fill', link: 'https://github.com/359Steve', bgcolor: '#f4f4f5', color: '#181717' },
-			{
-				icon: 'ri:bilibili-fill',
-				link: 'https://space.bilibili.com/457627448?spm_id_from=333.1007.0.0',
-				bgcolor: '#ffeaf2',
-				color: '#fb7299',
-			},
-			{ icon: 'ri:youtube-fill', link: 'https://www.youtube.com/@hujosef', bgcolor: '#ffeaea', color: '#ff0000' },
-			{
-				icon: 'ri:facebook-circle-fill',
-				link: 'https://facebook.com',
-				bgcolor: '#edf4ff',
-				color: '#1877f2',
-			},
-			{
-				icon: 'ri:instagram-line',
-				link: 'https://www.instagram.com/josehqiao/',
-				bgcolor: '#f8f0ff',
-				color: '#c13584',
-			},
-			{ icon: 'ri:telegram-2-fill', link: 'https://telegram.org/', bgcolor: '#eaf7ff', color: '#26a5e4' },
-			{ icon: 'ri:tiktok-line', link: 'https://www.tiktok.com/@josefqiao', bgcolor: '#f3f4f6', color: '#000000' },
-			{ icon: 'ri:weibo-fill', link: 'https://weibo.com/u/7361217822', bgcolor: '#ffeff1', color: '#e6162d' },
-		] as SocialWithColor[],
+        socialLinks: [
+            { icon: 'ri:github-fill', link: 'https://github.com/359Steve', bgcolor: '#f4f4f5', color: '#181717' },
+            {
+                icon: 'ri:bilibili-fill',
+                link: 'https://space.bilibili.com/457627448?spm_id_from=333.1007.0.0',
+                bgcolor: '#ffeaf2',
+                color: '#fb7299',
+            },
+            { icon: 'ri:youtube-fill', link: 'https://www.youtube.com/@hujosef', bgcolor: '#ffeaea', color: '#ff0000' },
+            {
+                icon: 'ri:facebook-circle-fill',
+                link: 'https://facebook.com',
+                bgcolor: '#edf4ff',
+                color: '#1877f2',
+            },
+            {
+                icon: 'ri:instagram-line',
+                link: 'https://www.instagram.com/josehqiao/',
+                bgcolor: '#f8f0ff',
+                color: '#c13584',
+            },
+            { icon: 'ri:telegram-2-fill', link: 'https://telegram.org/', bgcolor: '#eaf7ff', color: '#26a5e4' },
+            { icon: 'ri:tiktok-line', link: 'https://www.tiktok.com/@josefqiao', bgcolor: '#f3f4f6', color: '#000000' },
+            { icon: 'ri:weibo-fill', link: 'https://weibo.com/u/7361217822', bgcolor: '#ffeff1', color: '#e6162d' },
+        ] as SocialWithColor[],
 
-		logo: '/images/avatar.png',
-		logoLink: '/',
-		notFound: {
-			icon: '/images/404-ezgif.com-gif-maker.gif',
-		} as PressNotFound,
+        logo: '/images/avatar.png',
+        logoLink: '/',
+        notFound: {
+            icon: '/images/404-ezgif.com-gif-maker.gif',
+        } as PressNotFound,
 
-		search: {
-			provider: 'local',
-			options: {
-				translations: {
-					button: {
-						buttonText: '搜索文档',
-						buttonAriaLabel: '搜索文档',
-					},
-					modal: {
-						noResultsText: '无法找到相关结果',
-						resetButtonTitle: '清除查询条件',
-						footer: {
-							selectText: '选择',
-							navigateText: '切换',
-							closeText: '关闭',
-						},
-					},
-				},
-			},
-		},
+        search: {
+            provider: 'local',
+            options: {
+                translations: {
+                    button: {
+                        buttonText: '搜索文档',
+                        buttonAriaLabel: '搜索文档',
+                    },
+                    modal: {
+                        noResultsText: '无法找到相关结果',
+                        resetButtonTitle: '清除查询条件',
+                        footer: {
+                            selectText: '选择',
+                            navigateText: '切换',
+                            closeText: '关闭',
+                        },
+                    },
+                },
+            },
+        },
 
-		footer: {
-			copyright: 'Copyright © 2025-present Joseph Joestar',
-			message: '蜀ICP备2025171383号',
-		},
-	},
+        footer: {
+            copyright: 'Copyright © 2025-present Joseph Joestar',
+            message: '蜀ICP备2025171383号',
+        },
+    },
 
-	transformPageData(pageData) {
-		const DEFAULT_TITLE = 'JoJo的个人博客';
-		const DEFAULT_DESC = 'JoJo的个人博客，分享技术文章、生活记录和项目经验';
-		const DEFAULT_OG_IMAGE = `${SITE_URL}/images/avatar.png`;
+    transformPageData(pageData) {
+        const DEFAULT_TITLE = 'JoJo的个人博客';
+        const DEFAULT_DESC = 'JoJo的个人博客，分享技术文章、生活记录和项目经验';
+        const DEFAULT_OG_IMAGE = `${SITE_URL}/images/avatar.png`;
 
-		const title = pageData.frontmatter.title || pageData.title || DEFAULT_TITLE;
-		const description = pageData.frontmatter.description || DEFAULT_DESC;
+        const title = pageData.frontmatter.title || pageData.title || DEFAULT_TITLE;
+        const description = pageData.frontmatter.description || DEFAULT_DESC;
 
-		const rawPath = pageData.relativePath.replace(/\.md$/, '');
-		const canonicalPath = rawPath === 'index' ? '' : rawPath;
-		const canonicalUrl = `${SITE_URL}/${canonicalPath}`;
+        const rawPath = pageData.relativePath.replace(/\.md$/, '');
+        const canonicalPath = rawPath === 'index' ? '' : rawPath;
+        const canonicalUrl = `${SITE_URL}/${canonicalPath}`;
 
-		const coverRaw: string | undefined = pageData.frontmatter.cover;
-		const ogImage = coverRaw ? `${SITE_URL}${coverRaw}` : DEFAULT_OG_IMAGE;
+        const coverRaw: string | undefined = pageData.frontmatter.cover;
+        const ogImage = coverRaw ? `${SITE_URL}${coverRaw}` : DEFAULT_OG_IMAGE;
 
-		const layout: string | undefined = pageData.frontmatter.layout;
-		const isArticle = layout === 'index' || layout === 'record';
+        const layout: string | undefined = pageData.frontmatter.layout;
+        const isArticle = layout === 'index' || layout === 'record';
 
-		pageData.frontmatter.head ??= [];
-		pageData.frontmatter.head.push(
-			['meta', { property: 'og:type', content: isArticle ? 'article' : 'website' }],
-			['meta', { property: 'og:title', content: title }],
-			['meta', { property: 'og:description', content: description }],
-			['meta', { property: 'og:url', content: canonicalUrl }],
-			['meta', { property: 'og:image', content: ogImage }],
-			['meta', { name: 'twitter:card', content: coverRaw ? 'summary_large_image' : 'summary' }],
-			['meta', { name: 'twitter:title', content: title }],
-			['meta', { name: 'twitter:description', content: description }],
-			['meta', { name: 'twitter:image', content: ogImage }],
-		);
+        pageData.frontmatter.head ??= [];
+        pageData.frontmatter.head.push(
+            ['meta', { property: 'og:type', content: isArticle ? 'article' : 'website' }],
+            ['meta', { property: 'og:title', content: title }],
+            ['meta', { property: 'og:description', content: description }],
+            ['meta', { property: 'og:url', content: canonicalUrl }],
+            ['meta', { property: 'og:image', content: ogImage }],
+            ['meta', { name: 'twitter:card', content: coverRaw ? 'summary_large_image' : 'summary' }],
+            ['meta', { name: 'twitter:title', content: title }],
+            ['meta', { name: 'twitter:description', content: description }],
+            ['meta', { name: 'twitter:image', content: ogImage }],
+        );
 
-		if (isArticle && pageData.frontmatter.date) {
-			pageData.frontmatter.head.push([
-				'meta',
-				{ property: 'article:published_time', content: String(pageData.frontmatter.date) },
-			]);
-		}
-	},
+        if (isArticle && pageData.frontmatter.date) {
+            pageData.frontmatter.head.push([
+                'meta',
+                { property: 'article:published_time', content: String(pageData.frontmatter.date) },
+            ]);
+        }
+    },
 
-	markdown: {
-		headers: {
-			level: [2, 3, 4, 5, 6],
-		},
-		container: {
-			detailsLabel: '点我查看代码',
-		},
-		image: {
-			lazyLoading: true,
-		},
-		config(md) {
-			md.use(attrs);
-			registerComponentContainer(md, 'doctable', 'DocTable');
-			registerComponentContainer(md, 'contentimage', 'ContentImage');
-		},
-	},
+    markdown: {
+        headers: {
+            level: [2, 3, 4, 5, 6],
+        },
+        container: {
+            detailsLabel: '点我查看代码',
+        },
+        image: {
+            lazyLoading: true,
+        },
+        config(md) {
+            md.use(attrs);
+            registerComponentContainer(md, 'doctable', 'DocTable');
+            registerComponentContainer(md, 'contentimage', 'ContentImage');
+        },
+    },
 });

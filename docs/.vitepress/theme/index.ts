@@ -10,10 +10,10 @@ import 'vitepress/theme';
 import '@/theme/css/style.css';
 
 export default {
-	Layout,
-	enhanceApp({ app }) {
-		app.use(createPinia());
-		app.directive('unwrap', unwrap).directive('preview', preview);
-		app.component('Icon', Icon).component('DocTable', DocTable).component('ContentImage', ContentImage);
-	},
+    Layout,
+    enhanceApp({ app }) {
+        app.use(createPinia());
+        app.directive('unwrap', unwrap).directive('preview', preview);
+        app.component('Icon', Icon).component('DocTable', DocTable).component('ContentImage', ContentImage);
+    },
 } satisfies Theme;

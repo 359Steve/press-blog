@@ -1,32 +1,32 @@
 <script lang="ts" setup>
 const emit = defineEmits<{
-	(e: 'close'): void;
+    (e: 'close'): void;
 }>();
 
 const VPLocalSearchBox = defineAsyncComponent(
-	() => import('vitepress/dist/client/theme-default/components/VPLocalSearchBox.vue'),
+    () => import('vitepress/dist/client/theme-default/components/VPLocalSearchBox.vue'),
 );
 
 function handleClose() {
-	emit('close');
+    emit('close');
 
-	nextTick(() => {
-		const hash = window.location.hash;
-		if (hash) {
-			setTimeout(() => {
-				const targetId = hash.slice(1);
-				const targetElement = document.getElementById(targetId);
-				if (targetElement) {
-					targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-				}
-			}, 300);
-		}
-	});
+    nextTick(() => {
+        const hash = window.location.hash;
+        if (hash) {
+            setTimeout(() => {
+                const targetId = hash.slice(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 300);
+        }
+    });
 }
 </script>
 
 <template>
-	<VPLocalSearchBox @close="handleClose" />
+    <VPLocalSearchBox @close="handleClose" />
 </template>
 
 <style lang="scss" scoped></style>

@@ -2,20 +2,20 @@
 import type { PressFooter } from '@/theme/types/vitepress-types';
 
 const { theme } = useData<{
-	footer: PressFooter;
+    footer: PressFooter;
 }>();
 const { copyright, message } = theme.value.footer;
 </script>
 
 <template>
-	<div v-if="copyright || message" class="mt-4 w-full truncate py-2 pl-2">
-		<span class="text-blog-secondary mb-4 text-sm">
-			{{ copyright }}
-			<a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="text-blog-tertiary!">
-				{{ message }}
-			</a>
-		</span>
-	</div>
+    <div v-if="copyright || message" class="mt-4 w-full truncate py-2 pl-2">
+        <span class="text-blog-secondary mb-4 text-sm">
+            {{ copyright }}
+            <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="text-blog-tertiary!">
+                {{ message }}
+            </a>
+        </span>
+    </div>
 </template>
 
 <style lang="scss" scoped></style>

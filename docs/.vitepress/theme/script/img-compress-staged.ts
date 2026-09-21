@@ -6,21 +6,21 @@ import { compressImages } from './img-compress';
 const git = Git();
 const file = await git.diff(['--cached', '--name-only']);
 const stagedFiles = file
-	.split('\n')
-	.map((i) => i.trim())
-	.filter(Boolean);
+    .split('\n')
+    .map((i) => i.trim())
+    .filter(Boolean);
 
 const images = stagedFiles.filter((i) => i.match(/\.(png|jpe?g|webp)$/i));
 if (images.length > 0) {
-	const { confirm } = await prompts({
-		type: 'confirm',
-		name: 'confirm',
-		message: `Compress ${images.length} images?`,
-	});
+    const { confirm } = await prompts({
+        type: 'confirm',
+        name: 'confirm',
+        message: `Compress ${images.length} images?`,
+    });
 
-	if (!confirm) process.exit(0);
+    if (!confirm) process.exit(0);
 
-	compressImages(images);
+    compressImages(images);
 } else {
-	process.exit(0);
+    process.exit(0);
 }

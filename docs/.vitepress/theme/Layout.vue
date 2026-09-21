@@ -11,56 +11,58 @@ import RecordLayout from './components/layouts/RecordLayout.vue';
 const { isDark, frontmatter } = useData();
 
 const layouts: Record<string, Component> = {
-	index: IndexLayout,
-	blog: BlogLayout,
-	record: RecordLayout,
-	about: AboutLayout,
-	photos: PhotosLayout,
+    index: IndexLayout,
+    blog: BlogLayout,
+    record: RecordLayout,
+    about: AboutLayout,
+    photos: PhotosLayout,
 };
 
 function enableTransitions() {
-	return 'startViewTransition' in document && window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+    return 'startViewTransition' in document && window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
 }
 
 provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
-	if (!enableTransitions()) {
-		isDark.value = !isDark.value;
-		return;
-	}
+    const endRadius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
 
-	const clipPath = [
-		`circle(0px at ${x}px ${y}px)`,
-		`circle(${Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))}px at ${x}px ${y}px)`,
-	];
+    if (!enableTransitions) {
+        isDark.value = !isDark.value;
+        return;
+    }
 
-	await document.startViewTransition(async () => {
-		isDark.value = !isDark.value;
-		await nextTick();
-	}).ready;
+    const clipPath = [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`];
 
-	document.documentElement.animate(
-		{ clipPath: isDark.value ? clipPath.reverse() : clipPath },
-		{
-			duration: 500,
-			easing: 'ease-in',
-			fill: 'forwards',
-			pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`,
-		},
-	);
+    const transition = document.startViewTransition(() => {
+        isDark.value = !isDark.value;
+    });
+
+    transition.ready.then(() => {
+        document.documentElement.animate(
+            {
+                clipPath,
+            },
+            {
+                duration: 500,
+                easing: 'ease-in',
+                fill: 'forwards',
+                pseudoElement: '::view-transition-new(root)',
+            },
+        );
+    });
 });
 </script>
 
 <template>
-	<ModalHost />
+    <ModalHost />
 
-	<ClientOnly>
-		<BranchCanvas />
-		<VPLoadingIndicator color="var(--color-blog-accent)" />
-	</ClientOnly>
+    <ClientOnly>
+        <BranchCanvas />
+        <VPLoadingIndicator color="var(--color-blog-accent)" />
+    </ClientOnly>
 
-	<MainLayout>
-		<component :is="layouts[frontmatter.layout] || 'Content'" />
-	</MainLayout>
+    <MainLayout>
+        <component :is="layouts[frontmatter.layout] || 'Content'" />
+    </MainLayout>
 </template>
 
 <style lang="scss" scoped></style>
