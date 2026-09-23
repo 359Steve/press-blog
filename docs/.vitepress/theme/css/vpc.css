@@ -92,6 +92,10 @@
     @apply hover:text-blog-accent text-base font-normal text-(--vp-c-text-1) no-underline;
 }
 
+.vp-doc div {
+    @apply w-full;
+}
+
 .lpk-badge {
     @apply cursor-pointer;
 }
