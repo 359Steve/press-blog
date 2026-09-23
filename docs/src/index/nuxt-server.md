@@ -34,6 +34,8 @@ date: 2026-06-10
 
 ### 技术栈概览
 
+:::doctable
+
 | 技术            | 版本    | 用途                              |
 | --------------- | ------- | --------------------------------- |
 | Nuxt 3          | ^3.19.0 | 全栈框架，提供服务端 API（Nitro） |
@@ -44,6 +46,8 @@ date: 2026-06-10
 | Zod             | ^4.1.9  | 请求参数校验                      |
 | jsonwebtoken    | ^9.0.2  | JWT 鉴权                          |
 | nodemailer      | ^7.0.10 | 邮件发送                          |
+
+:::
 
 ---
 
@@ -404,6 +408,8 @@ const result = validateData(CreateBlogSchema, body, (value) => {
 
 Nitro 的文件路由约定非常直觉：文件名中的 `.get`、`.post`、`.put`、`.delete` 后缀直接决定 HTTP 方法，目录结构即路由路径，方括号 `[id]` 表示动态参数。不需要任何额外的路由注册代码。
 
+:::doctable
+
 | 文件名                         | HTTP 方法 | 路由路径                         |
 | ------------------------------ | --------- | -------------------------------- |
 | `blogCreate.post.ts`           | POST      | `/api/blog/blogCreate`           |
@@ -412,6 +418,8 @@ Nitro 的文件路由约定非常直觉：文件名中的 `.get`、`.post`、`.p
 | `blogUpdate.post.ts`           | POST      | `/api/blog/blogUpdate`           |
 | `blogAddView/[id].put.ts`      | PUT       | `/api/blog/blogAddView/:id`      |
 | `blogPublicDetail/[id].get.ts` | GET       | `/api/blog/blogPublicDetail/:id` |
+
+:::
 
 每个路由处理函数遵循同一套模板：读取请求体 → Zod 校验 → 从容器取 Service → 调用业务方法 → 统一错误处理。
 
@@ -520,6 +528,8 @@ export default defineEventHandler(async (event) => {
 
 ### 八、工具函数（server/utils）
 
+:::doctable
+
 | 文件                | 职责                                            |
 | ------------------- | ----------------------------------------------- |
 | `jwt.ts`            | JWT 签发与验证（`signToken` / `verifyToken`）   |
@@ -529,6 +539,8 @@ export default defineEventHandler(async (event) => {
 | `img-compress.ts`   | 图片压缩                                        |
 | `image-metadata.ts` | 读取图片 EXIF 元数据（exifreader）              |
 | `index.ts`          | 公共工具导出（`validateData`、`returnData` 等） |
+
+:::
 
 ---
 
@@ -647,6 +659,8 @@ Admin 后台关闭 SSR 的原因：后台页面无需 SEO，且需要频繁鉴�
 
 ### 十二、API 模块汇总
 
+:::doctable
+
 | 模块     | 路由前缀            | 主要功能                                |
 | -------- | ------------------- | --------------------------------------- |
 | 用户     | `/api/user/`        | 登录、注册、用户信息查询与更新          |
@@ -657,3 +671,5 @@ Admin 后台关闭 SSR 的原因：后台页面无需 SEO，且需要频繁鉴�
 | 统计     | `/api/statistical/` | 博客与日记浏览量数据图表                |
 | 错误上报 | `/api/error/`       | 错误列表查询、删除、邮件通知            |
 | Sitemap  | `/api/sitemap/urls` | 提供给 `@nuxtjs/sitemap` 的动态路由列表 |
+
+:::
