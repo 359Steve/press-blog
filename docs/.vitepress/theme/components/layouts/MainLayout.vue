@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { WatchHandle } from 'vue';
 
+const route = useRoute();
 const { page } = useData();
 const { sectionScrollTop } = storeToRefs(useIndex());
 const sectionEl = useTemplateRef<HTMLElement>('sectionEl');
@@ -8,6 +9,13 @@ let watcher: WatchHandle | null = null;
 let scroll: ReturnType<typeof useScroll> | null = null;
 
 const notMd = computed(() => page.value?.isNotFound);
+
+watch(
+    () => route.path,
+    (newPath) => {
+        newPath && sectionEl.value?.scrollTo(0, 0);
+    },
+);
 
 watch(
     () => page.value.filePath,
