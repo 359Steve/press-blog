@@ -113,6 +113,7 @@ export default defineConfig({
             { text: '文章归档', link: '/blog', activeMatch: '^/blog(/|$)', icon: 'mdi:bookmark-multiple' },
             { text: '心路历程', link: '/record', activeMatch: '^/record(/|$)', icon: 'ri:article-fill' },
             { text: '珍藏回忆', link: '/photos', activeMatch: '^/photos(/|$)', icon: 'ri:camera-3-fill' },
+            { text: '关于博客', link: '/about', activeMatch: '^/about(/|$)', icon: 'ri:game-fill' },
         ] as NavItemWithIcon[],
 
         socialLinks: [
