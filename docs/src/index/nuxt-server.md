@@ -22,7 +22,7 @@ tags:
 date: 2026-06-10
 ---
 
-## 前言
+### 前言
 
 传统的前后端分离项目需要维护两个独立仓库、两套构建流程、两次部署。而 Nuxt 3 内置的 Nitro 服务引擎让我们可以在同一个项目中编写前端页面和后端 API，共享类型定义、统一部署流程，大幅降低全栈开发的心智负担。
 
@@ -32,7 +32,7 @@ date: 2026-06-10
 
 ---
 
-## 技术栈概览
+### 技术栈概览
 
 | 技术            | 版本    | 用途                              |
 | --------------- | ------- | --------------------------------- |
@@ -47,7 +47,7 @@ date: 2026-06-10
 
 ---
 
-## 零、整体目录结构
+### 零、整体目录结构
 
 在展开每个模块之前，先看一下后端代码在 `server/` 目录下的组织方式，建立整体印象：
 
@@ -99,7 +99,7 @@ server/
 
 ---
 
-## 一、项目初始化
+### 一、项目初始化
 
 ```bash
 npx nuxi init jojo-blog
@@ -120,18 +120,18 @@ npm install -D @types/jsonwebtoken @types/nodemailer
 
 ```json
 {
-	"compilerOptions": {
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true
-	}
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    }
 }
 ```
 
 ---
 
-## 二、数据库设计（Prisma Schema）
+### 二、数据库设计（Prisma Schema）
 
-### 2.1 初始化 Prisma
+#### 2.1 初始化 Prisma
 
 ```bash
 npx prisma init
@@ -143,7 +143,7 @@ npx prisma init
 DATABASE_URL="mysql://user:password@localhost:3306/jojo_blog"
 ```
 
-### 2.2 数据模型设计
+#### 2.2 数据模型设计
 
 `prisma/schema.prisma` 定义了以下核心模型：
 
@@ -210,7 +210,7 @@ model blog_views_daily {
 
 **错误上报**：`error_report` 记录用户提交的 bug 反馈。
 
-### 2.3 生成并迁移数据库
+#### 2.3 生成并迁移数据库
 
 ```bash
 npx prisma migrate dev --name init
@@ -219,9 +219,9 @@ npx prisma generate
 
 ---
 
-## 三、基础设施层（server/core）
+### 三、基础设施层（server/core）
 
-### 3.1 Prisma 单例
+#### 3.1 Prisma 单例
 
 `server/core/prisma.ts` 通过挂载到 `globalThis` 避免开发热更新时重复实例化：
 
@@ -231,7 +231,7 @@ export const prisma = globalForPrisma.prisma || new PrismaClient({ log: ['query'
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 ```
 
-### 3.2 Redis 单例
+#### 3.2 Redis 单例
 
 `server/core/redis.ts` 同理，连接本地 Redis：
 
@@ -239,7 +239,7 @@ if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 export const redis = globalForRedis.redis || new Ioredis({ host: '127.0.0.1', port: 6379 });
 ```
 
-### 3.3 IoC 容器（InversifyJS）
+#### 3.3 IoC 容器（InversifyJS）
 
 依赖注入（DI）的核心价值是解耦：API 路由不需要关心 `BlogService` 是怎么创建的，只需要向容器索取一个实现了 `BlogService` 接口的对象即可。这让后续替换实现、添加测试 Mock 都变得很简单。
 
@@ -253,11 +253,11 @@ container.bind(BlogRepository).toSelf().inSingletonScope();
 
 // 绑定 Service，手动注入 Repository 依赖
 container
-	.bind(BLOG_SERVICE)
-	.toDynamicValue(() => {
-		return new BlogServiceImpl(container.get(BlogRepository));
-	})
-	.inSingletonScope();
+    .bind(BLOG_SERVICE)
+    .toDynamicValue(() => {
+        return new BlogServiceImpl(container.get(BlogRepository));
+    })
+    .inSingletonScope();
 ```
 
 `inSingletonScope()` 确保整个应用生命周期内只创建一个实例，避免每次请求都重复实例化。
@@ -266,9 +266,9 @@ container
 
 ---
 
-## 四、分层架构
+### 四、分层架构
 
-### 4.1 整体层次
+#### 4.1 整体层次
 
 ```
 API 路由 (server/api/**)
@@ -282,7 +282,7 @@ Repository (server/repositories/*.ts)
 Prisma / Redis / 文件系统
 ```
 
-### 4.2 Service 接口定义
+#### 4.2 Service 接口定义
 
 每个业务模块定义一个 Symbol Token 和接口，供容器和路由使用：
 
@@ -291,35 +291,35 @@ Prisma / Redis / 文件系统
 export const BLOG_SERVICE = Symbol('BlogService');
 
 export interface BlogService {
-	createBlog(data: CreateBlogDto): ReturnType<BlogRepository['createBlog']>;
-	getBlogList(data: FindBlogParams): ReturnType<BlogRepository['getBlogList']>;
-	deleteBlog(id: number): ReturnType<BlogRepository['deleteBlog']>;
-	getBlogById(id: number): ReturnType<BlogRepository['getBlogById']>;
-	updateBlog(data: Partial<CreateBlogDto>): ReturnType<BlogRepository['updateBlog']>;
-	uploadfrontCover(
-		files: ReturnFunction<typeof readMultipartFormData>,
-	): ReturnType<BlogRepository['uploadfrontCover']>;
-	addBlogView(id: number, ip: string, userAgent: string): ReturnType<BlogRepository['addBlogView']>;
+    createBlog(data: CreateBlogDto): ReturnType<BlogRepository['createBlog']>;
+    getBlogList(data: FindBlogParams): ReturnType<BlogRepository['getBlogList']>;
+    deleteBlog(id: number): ReturnType<BlogRepository['deleteBlog']>;
+    getBlogById(id: number): ReturnType<BlogRepository['getBlogById']>;
+    updateBlog(data: Partial<CreateBlogDto>): ReturnType<BlogRepository['updateBlog']>;
+    uploadfrontCover(
+        files: ReturnFunction<typeof readMultipartFormData>,
+    ): ReturnType<BlogRepository['uploadfrontCover']>;
+    addBlogView(id: number, ip: string, userAgent: string): ReturnType<BlogRepository['addBlogView']>;
 }
 ```
 
-### 4.3 ServiceImpl 实现
+#### 4.3 ServiceImpl 实现
 
 `ServiceImpl` 只做转发，不包含业务逻辑，业务逻辑统一下沉到 Repository：
 
 ```typescript
 // server/serviceImpl/BlogServiceImpl.ts
 export class BlogServiceImpl implements BlogService {
-	constructor(private blogRepository: BlogRepository) {}
+    constructor(private blogRepository: BlogRepository) {}
 
-	createBlog(data: CreateBlogDto) {
-		return this.blogRepository.createBlog(data);
-	}
-	// ... 其他方法同理
+    createBlog(data: CreateBlogDto) {
+        return this.blogRepository.createBlog(data);
+    }
+    // ... 其他方法同理
 }
 ```
 
-### 4.4 Repository 实现要点
+#### 4.4 Repository 实现要点
 
 Repository 是真正的业务逻辑层，以博客为例包含以下几个核心设计：
 
@@ -360,14 +360,14 @@ const fingerprint = md5(`${ip}-${userAgent}`);
 const key = `blog:view:${id}:${fingerprint}`;
 const exists = await redis.exists(key);
 if (!exists) {
-	await redis.setex(key, 86400, '1');
-	await prisma.blog.update({ where: { id }, data: { views: { increment: 1 } } });
+    await redis.setex(key, 86400, '1');
+    await prisma.blog.update({ where: { id }, data: { views: { increment: 1 } } });
 }
 ```
 
 ---
 
-## 五、请求校验（Zod DTO）
+### 五、请求校验（Zod DTO）
 
 Zod 的核心优势是"Schema 即类型"——一份 Schema 定义同时承担运行时校验和 TypeScript 类型推导两个职责，不需要重复写类型声明。
 
@@ -376,14 +376,14 @@ Zod 的核心优势是"Schema 即类型"——一份 Schema 定义同时承担�
 ```typescript
 // server/dto/CreateBlogDto.ts
 export const CreateBlogSchema = z.object({
-	front_cover: z.string().trim().min(1, '封面不能为空'),
-	title: z.string().trim().min(1, '标题不能为空'),
-	subtitle: z.string().trim().min(1, '副标题不能为空'),
-	content: z.string().trim().min(1, '内容不能为空'),
-	date_path: z.string().trim().min(1, '日期路径不能为空'),
-	id: z.number().optional(),
-	views: z.number().optional(),
-	tags: z.array(z.number()).optional().default([]),
+    front_cover: z.string().trim().min(1, '封面不能为空'),
+    title: z.string().trim().min(1, '标题不能为空'),
+    subtitle: z.string().trim().min(1, '副标题不能为空'),
+    content: z.string().trim().min(1, '内容不能为空'),
+    date_path: z.string().trim().min(1, '日期路径不能为空'),
+    id: z.number().optional(),
+    views: z.number().optional(),
+    tags: z.array(z.number()).optional().default([]),
 });
 
 export type CreateBlogDto = z.infer<typeof CreateBlogSchema>;
@@ -393,14 +393,14 @@ export type CreateBlogDto = z.infer<typeof CreateBlogSchema>;
 
 ```typescript
 const result = validateData(CreateBlogSchema, body, (value) => {
-	sendErrorWithMessage(event, 400, value);
-	return null;
+    sendErrorWithMessage(event, 400, value);
+    return null;
 });
 ```
 
 ---
 
-## 六、API 路由层（server/api）
+### 六、API 路由层（server/api）
 
 Nitro 的文件路由约定非常直觉：文件名中的 `.get`、`.post`、`.put`、`.delete` 后缀直接决定 HTTP 方法，目录结构即路由路径，方括号 `[id]` 表示动态参数。不需要任何额外的路由注册代码。
 
@@ -418,21 +418,21 @@ Nitro 的文件路由约定非常直觉：文件名中的 `.get`、`.post`、`.p
 ```typescript
 // server/api/blog/blogCreate.post.ts
 export default defineEventHandler(async (event) => {
-	const body = await readBody<CreateBlogDto>(event);
+    const body = await readBody<CreateBlogDto>(event);
 
-	const result = validateData(CreateBlogSchema, body, (value) => {
-		sendErrorWithMessage(event, 400, value);
-		return null;
-	});
-	if (!result) return null;
+    const result = validateData(CreateBlogSchema, body, (value) => {
+        sendErrorWithMessage(event, 400, value);
+        return null;
+    });
+    if (!result) return null;
 
-	try {
-		const blogService = container.get<BlogService>(BLOG_SERVICE);
-		return await blogService.createBlog(result);
-	} catch {
-		sendErrorWithMessage(event, 500, '博客创建失败');
-		return null;
-	}
+    try {
+        const blogService = container.get<BlogService>(BLOG_SERVICE);
+        return await blogService.createBlog(result);
+    } catch {
+        sendErrorWithMessage(event, 500, '博客创建失败');
+        return null;
+    }
 });
 ```
 
@@ -441,19 +441,19 @@ export default defineEventHandler(async (event) => {
 ```typescript
 // server/api/blog/blogPublicDetail/[id].get.ts
 export default defineEventHandler(async (event) => {
-	const id = Number(getRouterParam(event, 'id'));
-	if (isNaN(id)) {
-		sendErrorWithMessage(event, 400, '无效的博客 ID');
-		return null;
-	}
-	const blogService = container.get<BlogService>(BLOG_SERVICE);
-	return await blogService.getBlogById(id);
+    const id = Number(getRouterParam(event, 'id'));
+    if (isNaN(id)) {
+        sendErrorWithMessage(event, 400, '无效的博客 ID');
+        return null;
+    }
+    const blogService = container.get<BlogService>(BLOG_SERVICE);
+    return await blogService.getBlogById(id);
 });
 ```
 
 ---
 
-## 七、鉴权中间件（server/middleware/auth.ts）
+### 七、鉴权中间件（server/middleware/auth.ts）
 
 Nuxt 的 `server/middleware/` 目录下的文件会自动对所有请求生效，不需要显式挂载。鉴权中间件统一拦截 `/api/**` 请求，通过白名单机制区分公开接口和需要鉴权的接口。
 
@@ -461,18 +461,18 @@ Nuxt 的 `server/middleware/` 目录下的文件会自动对所有请求生效�
 
 ```typescript
 const whitelist = [
-	'/api/user/userPublicQuery',
-	'/api/blog/blogPublicQuery',
-	'/api/user/user-login',
-	'/api/user/user-register',
-	'/api/record/recordPublicQuery',
-	// ...
+    '/api/user/userPublicQuery',
+    '/api/blog/blogPublicQuery',
+    '/api/user/user-login',
+    '/api/user/user-register',
+    '/api/record/recordPublicQuery',
+    // ...
 ];
 
 // 带动态参数的路由用正则匹配
 const whitelistPatterns = [
-	/^\/api\/blog\/blogPublicDetail(\/\d+)?(\?.*)?$/,
-	/^\/api\/blog\/blogAddView(\/\d+)?(\?.*)?$/,
+    /^\/api\/blog\/blogPublicDetail(\/\d+)?(\?.*)?$/,
+    /^\/api\/blog\/blogAddView(\/\d+)?(\?.*)?$/,
 ];
 ```
 
@@ -485,40 +485,40 @@ const whitelistPatterns = [
 
 ```typescript
 export default defineEventHandler(async (event) => {
-	const url = getRequestURL(event).pathname;
+    const url = getRequestURL(event).pathname;
 
-	// 白名单直接放行
-	if (whitelist.includes(url)) return;
-	if (whitelistPatterns.some((pattern) => pattern.test(url))) return;
+    // 白名单直接放行
+    if (whitelist.includes(url)) return;
+    if (whitelistPatterns.some((pattern) => pattern.test(url))) return;
 
-	// 优先从 Cookie 取（SSR 场景）
-	const cookies = parseCookies(event);
-	let token = cookies.userState;
+    // 优先从 Cookie 取（SSR 场景）
+    const cookies = parseCookies(event);
+    let token = cookies.userState;
 
-	// 其次从 Authorization 头取（客户端场景）
-	if (!token) {
-		const authHeader = getRequestHeader(event, 'Authorization');
-		token = authHeader?.replace('Bearer ', '');
-	}
+    // 其次从 Authorization 头取（客户端场景）
+    if (!token) {
+        const authHeader = getRequestHeader(event, 'Authorization');
+        token = authHeader?.replace('Bearer ', '');
+    }
 
-	if (!token) {
-		throw createError({ statusCode: 401, message: '未登录' });
-	}
+    if (!token) {
+        throw createError({ statusCode: 401, message: '未登录' });
+    }
 
-	const config = useRuntimeConfig();
-	const payload = verifyToken(token, config.jwtSecret);
-	if (!payload) {
-		throw createError({ statusCode: 401, message: 'Token 已过期或无效' });
-	}
+    const config = useRuntimeConfig();
+    const payload = verifyToken(token, config.jwtSecret);
+    if (!payload) {
+        throw createError({ statusCode: 401, message: 'Token 已过期或无效' });
+    }
 
-	// 将用户信息挂载到 context，供下游路由使用
-	event.context.user = payload;
+    // 将用户信息挂载到 context，供下游路由使用
+    event.context.user = payload;
 });
 ```
 
 ---
 
-## 八、工具函数（server/utils）
+### 八、工具函数（server/utils）
 
 | 文件                | 职责                                            |
 | ------------------- | ----------------------------------------------- |
@@ -532,7 +532,7 @@ export default defineEventHandler(async (event) => {
 
 ---
 
-## 九、文件存储
+### 九、文件存储
 
 上传的文件统一存储在项目根目录的 `file-system/` 下，不纳入 Git 管理（`.gitignore` 中排除）：
 
@@ -561,7 +561,7 @@ nitro: {
 
 ---
 
-## 十、Nuxt 运行时配置
+### 十、Nuxt 运行时配置
 
 核心敏感配置在 `nuxt.config.ts` 的 `runtimeConfig` 中声明，实际值通过环境变量注入：
 
@@ -585,26 +585,26 @@ runtimeConfig: {
 
 ---
 
-## 十一、部署
+### 十一、部署
 
-### 11.1 构建与进程管理
+#### 11.1 构建与进程管理
 
 项目使用 PM2 管理进程，`ecosystem.config.cjs` 配置如下：
 
 ```javascript
 // ecosystem.config.cjs
 module.exports = {
-	apps: [
-		{
-			name: 'jojo-blog',
-			script: './.output/server/index.mjs',
-			instances: 1,
-			env: {
-				NODE_ENV: 'production',
-				PORT: 3000,
-			},
-		},
-	],
+    apps: [
+        {
+            name: 'jojo-blog',
+            script: './.output/server/index.mjs',
+            instances: 1,
+            env: {
+                NODE_ENV: 'production',
+                PORT: 3000,
+            },
+        },
+    ],
 };
 ```
 
@@ -622,7 +622,7 @@ pm2 restart jojo-blog
 pm2 logs jojo-blog
 ```
 
-### 11.2 Nitro 配置
+#### 11.2 Nitro 配置
 
 `nuxt.config.ts` 中的关键生产配置：
 
@@ -645,7 +645,7 @@ Admin 后台关闭 SSR 的原因：后台页面无需 SEO，且需要频繁鉴�
 
 ---
 
-## 十二、API 模块汇总
+### 十二、API 模块汇总
 
 | 模块     | 路由前缀            | 主要功能                                |
 | -------- | ------------------- | --------------------------------------- |

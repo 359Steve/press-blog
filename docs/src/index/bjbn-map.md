@@ -26,7 +26,7 @@ date: 2025-08-20
 
 ---
 
-## 封装的背景与动机
+### 封装的背景与动机
 
 在公司项目中，**地图几乎是每个核心页面的基础模块**。虽然底层地图资源和配置是统一提供的，但在实际开发中，每个页面都需要重复做以下事情：
 
@@ -48,13 +48,13 @@ date: 2025-08-20
 
 ---
 
-## 渲染地图
+### 渲染地图
 
-### 设计目标
+#### 设计目标
 
 第一版的目标非常克制，只解决[「地图能不能快速渲染出来」]这个问题。不考虑切换、不考虑状态、不考虑复杂交互。组件对外只暴露最小必要参数，容器 ID、宽高、地图配置。
 
-### 核心思路
+#### 核心思路
 
 1. 按需加载地图 SDK
 
@@ -66,7 +66,7 @@ date: 2025-08-20
 
 ---
 
-## 问题出现
+### 问题出现
 
 随着项目推进，地图相关的需求逐渐复杂：
 
@@ -82,13 +82,13 @@ date: 2025-08-20
 
 ---
 
-## 引入“地图切换”的能力
+### 引入“地图切换”的能力
 
-### 为什么选择组件内部切换
+#### 为什么选择组件内部切换
 
 一开始我考虑过：由父组件完全控制地图销毁与重建，但很快发现，这会让父组件承担大量与地图 SDK 强耦合的逻辑。最终决定：地图的生命周期，应该完全由 MapContainer 负责。业务层只需要告诉我：当前选中的是哪一套地图配置。
 
-### mapConfigs + currentMapConfig
+#### mapConfigs + currentMapConfig
 
 组件开始接收两类配置：
 
@@ -112,7 +112,7 @@ date: 2025-08-20
 
 ---
 
-## 地图生命周期管理
+### 地图生命周期管理
 
 在实际使用中，一个很关键的点是：
 
@@ -146,13 +146,13 @@ date: 2025-08-20
 
 ---
 
-## 对外能力暴露
+### 对外能力暴露
 
 一个组件如果“过度封装”，反而会限制业务。所以在设计时，我保留了一个原则：
 
 > **核心流程我来管，能力你可以随时拿走。**
 
-### expose 的内容
+#### expose 的内容
 
 - 通过 expose，对外提供：
 
@@ -166,7 +166,7 @@ date: 2025-08-20
 
 ---
 
-## BJBN 3.0 通用地图组件
+### BJBN 3.0 通用地图组件
 
 回过头看整个过程，其实并不是“一次性设计出完美架构”，而是：
 
@@ -180,7 +180,7 @@ date: 2025-08-20
 
 ---
 
-## 一些个人感受
+### 一些个人感受
 
 第一个开源项目，不必追求“架构完美”，真实业务，是最好的设计文档，封装的本质不是隐藏，而是分层，希望这篇记录，能给正在做组件封装的你一点参考。如果你也在做地图相关的封装，欢迎一起交流👋
 
@@ -474,17 +474,17 @@ export default defineComponent({
 
 ```vue
 <MapContainer
-	v-if="mapConfigs && mapConfigs.length > 0"
-	box-id="Map"
-	:show-select="true"
-	:map-configs="mapConfigs"
-	v-model:currentMapConfig="currentMapConfig"
-	:right="30"
-	:top="30"
-	:width="150"
-	:height="32"
-	@map-change="mapChange"
-	@init-geo-box="initGeoBox"
+    v-if="mapConfigs && mapConfigs.length > 0"
+    box-id="Map"
+    :show-select="true"
+    :map-configs="mapConfigs"
+    v-model:currentMapConfig="currentMapConfig"
+    :right="30"
+    :top="30"
+    :width="150"
+    :height="32"
+    @map-change="mapChange"
+    @init-geo-box="initGeoBox"
 >
 </MapContainer>
 ```

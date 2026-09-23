@@ -9,9 +9,9 @@ const getDate = computed(() => (frontmatter.value.date ? transformDate(new Date(
 
 <template>
     <div class="vp-doc mt-6 w-full">
-        <h1 class="text-3xl font-semibold">
+        <span class="text-2xl font-semibold">
             {{ frontmatter.title }}
-        </h1>
+        </span>
         <p v-if="getDate" class="text-blog-tertiary my-2">发布于 {{ getDate.string }}</p>
         <Content />
         <div class="text-blog-tertiary mt-10 flex w-fit items-center gap-1 text-lg" @click="router.go('/index')">

@@ -1,97 +1,97 @@
 :root {
-	--vp-c-brand-1: #f43f5e;
+    --vp-c-brand-1: #f43f5e;
 }
 
 ::selection {
-	background: var(--color-blog-accent);
-	color: white;
+    background: var(--color-blog-accent);
+    color: white;
 }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-	animation: none;
-	mix-blend-mode: normal;
+    animation: none;
+    mix-blend-mode: normal;
 }
 
 ::view-transition-old(root) {
-	z-index: 1;
+    z-index: 1;
 }
 
 ::view-transition-new(root) {
-	z-index: 9999;
+    z-index: 9999;
 }
 
 .VPSwitchAppearance {
-	width: 22px !important;
+    width: 22px !important;
 }
 
 .VPSwitchAppearance .check {
-	transform: none !important;
+    transform: none !important;
 }
 
 .vp-doc p,
 .vp-doc blockquote > p {
-	@apply text-lg leading-8;
+    @apply text-base leading-8;
 }
 
 .vp-doc p img {
-	@apply my-5 w-full cursor-pointer object-cover;
+    @apply my-5 w-full cursor-pointer object-cover;
 }
 
 .vp-doc hr {
-	@apply mx-auto my-10 w-12.5 border-t border-gray-300 dark:border-gray-600;
+    @apply mx-auto my-10 w-12.5 border-t border-gray-300 dark:border-gray-600;
 }
 
 .vp-doc a {
-	@apply text-blog-accent hover:text-blog-accent underline-offset-4;
+    @apply text-blog-accent hover:text-blog-accent underline-offset-4;
 }
 
 .vp-doc table {
-	@apply my-0 table w-max min-w-full table-fixed border-collapse;
+    @apply my-0 table w-max min-w-full table-fixed border-collapse;
 }
 
 .vp-doc :is(h1, h2, h3, h4, h5, h6) {
-	@apply border-0 pt-0;
+    @apply border-0 pt-0;
 }
 
 .vp-doc ul li {
-	@apply list-disc;
+    @apply list-disc;
 }
 
 .vp-doc ol li {
-	@apply list-decimal;
+    @apply list-decimal;
 }
 
 .vp-doc .toc ul li {
-	@apply list-none text-[0.85rem];
+    @apply list-none text-[0.85rem];
 }
 
 .vp-doc .toc ul li a {
-	@apply text-blog-tertiary hover:text-blog-secondary dark:text-blog-tertiary dark:hover:text-blog-secondary transition-colors;
+    @apply text-blog-tertiary hover:text-blog-secondary dark:text-blog-tertiary dark:hover:text-blog-secondary transition-colors;
 }
 
 .VPLocalSearchBox .backdrop {
-	@apply bg-inherit!;
+    @apply bg-inherit!;
 }
 
 .vp-doc blockquote {
-	@apply border-l-blog-accent border-l-2 italic;
+    @apply border-l-blog-accent border-l-2 italic;
 }
 
 .vp-doc .stroke-year {
-	@apply absolute top-8 -z-1 text-[8em] font-bold text-transparent opacity-[0.1];
-	-webkit-text-stroke-width: 6px;
-	-webkit-text-stroke-color: rgb(170 170 170 / 1);
+    @apply absolute top-8 -z-1 text-[8em] font-bold text-transparent opacity-[0.1];
+    -webkit-text-stroke-width: 6px;
+    -webkit-text-stroke-color: rgb(170 170 170 / 1);
 }
 
 .vp-doc.record li {
-	@apply hover:text-blog-accent text-lg font-normal text-(--vp-c-text-1) no-underline;
+    @apply hover:text-blog-accent text-lg font-normal text-(--vp-c-text-1) no-underline;
 }
 
 .vp-doc.record a {
-	@apply hover:text-blog-accent text-lg font-normal text-(--vp-c-text-1) no-underline;
+    @apply hover:text-blog-accent text-base font-normal text-(--vp-c-text-1) no-underline;
 }
 
 .lpk-badge {
-	@apply cursor-pointer;
+    @apply cursor-pointer;
 }

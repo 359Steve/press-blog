@@ -26,7 +26,7 @@ date: 2026-03-02
 
 ---
 
-## 我把一个直播里的小 Demo，做成了一个开源组件
+### 我把一个直播里的小 Demo，做成了一个开源组件
 
 有时候，一个很有意思的开源项目，并不是从一个宏大的计划开始的。可能只是某次直播、某段代码、或者一个看起来很随意的小实验。这个组件 `Branch Canvas` 的灵感，就来自于一次 **[@antfu](https://github.com/antfu)** 的直播。当时他在直播里写了一个用 **Canvas 生成树枝生长动画** 的小 Demo。代码不复杂，但效果非常有意思：线条会从屏幕边缘慢慢生长出来，像树枝一样不断分叉，最后形成一种自然的背景纹理。那一刻我就在想：
 
@@ -36,7 +36,7 @@ date: 2026-03-02
 
 ---
 
-## 最终效果
+### 最终效果
 
 组件会在页面背景生成一种“树枝生长”的动态效果：
 
@@ -50,7 +50,7 @@ date: 2026-03-02
 
 ---
 
-## 为什么会想做这个组件
+### 为什么会想做这个组件
 
 很多网站都会使用背景动画，比如：
 
@@ -72,52 +72,52 @@ date: 2026-03-02
 
 ---
 
-## 技术实现思路
+### 技术实现思路
 
 这个组件的核心其实非常简单：**不断生成新的线段，并随机产生分叉。** 整体流程大概是这样的：生成起点 > 绘制一段线条 > 计算终点 > 随机决定是否分叉 > 把新分支加入下一帧任务。随着帧数增加，树枝会逐渐长满整个屏幕。
 
 ---
 
-## Canvas 初始化
+### Canvas 初始化
 
 为了保证在高 DPI 屏幕上显示清晰，需要根据 `devicePixelRatio` 调整画布分辨率。
 
 ```ts
 function initCanvas(canvas: HTMLCanvasElement, width = 400, height = 400) {
-	const ctx = canvas.getContext('2d')!;
+    const ctx = canvas.getContext('2d')!;
 
-	const dpr = window.devicePixelRatio || 1;
+    const dpr = window.devicePixelRatio || 1;
 
-	canvas.width = width * dpr;
-	canvas.height = height * dpr;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
 
-	canvas.style.width = `${width}px`;
-	canvas.style.height = `${height}px`;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
 
-	ctx.scale(dpr, dpr);
+    ctx.scale(dpr, dpr);
 
-	return ctx;
+    return ctx;
 }
 ```
 
 ---
 
-## 极坐标计算
+### 极坐标计算
 
 树枝生长其实就是：从某个点，沿某个角度延伸一段距离。所以使用极坐标来计算新的坐标。
 
 ```ts
 function polar2cart(x = 0, y = 0, r = 0, theta = 0) {
-	const dx = r * Math.cos(theta);
-	const dy = r * Math.sin(theta);
+    const dx = r * Math.cos(theta);
+    const dy = r * Math.sin(theta);
 
-	return [x + dx, y + dy];
+    return [x + dx, y + dy];
 }
 ```
 
 ---
 
-## 树枝分叉算法
+### 树枝分叉算法
 
 每画一条线，就会随机生成两个新的方向。
 
@@ -126,7 +126,7 @@ const rad1 = rad + random() * r15;
 const rad2 = rad - random() * r15;
 
 if (random() < rate) {
-	steps.value.push(() => step(ctx, nx, ny, rad1, counter));
+    steps.value.push(() => step(ctx, nx, ny, rad1, counter));
 }
 ```
 
@@ -134,22 +134,22 @@ if (random() < rate) {
 
 ---
 
-## 从四个方向开始生长
+### 从四个方向开始生长
 
 初始化时会在屏幕四周生成种子。
 
 ```ts
 steps.value = [
-	() => step(ctx, randomMiddle * width, 0, r90),
-	() => step(ctx, randomMiddle * width, height, -r90),
-	() => step(ctx, 0, randomMiddle * height, 0),
-	() => step(ctx, width, randomMiddle * height, Math.PI),
+    () => step(ctx, randomMiddle * width, 0, r90),
+    () => step(ctx, randomMiddle * width, height, -r90),
+    () => step(ctx, 0, randomMiddle * height, 0),
+    () => step(ctx, width, randomMiddle * height, Math.PI),
 ];
 ```
 
 ---
 
-## 边缘渐隐效果
+### 边缘渐隐效果
 
 如果线条直接到达边缘，会显得有些生硬。所以我给组件加了一个 **径向渐变遮罩**。
 

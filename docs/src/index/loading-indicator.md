@@ -26,7 +26,7 @@ date: 2026-03-04
 
 ---
 
-## 特性
+### 特性
 
 - 基于 Vue 3 Composition API
 - 自动监听 VitePress 路由
@@ -38,7 +38,7 @@ date: 2026-03-04
 
 ---
 
-## 为什么不直接用 NProgress？
+### 为什么不直接用 NProgress？
 
 确实可以。但我想实现：
 
@@ -51,16 +51,16 @@ date: 2026-03-04
 
 ---
 
-## 核心设计思路
+### 核心设计思路
 
-### 进度计算策略（缓动算法）
+#### 进度计算策略（缓动算法）
 
 默认进度算法：
 
 ```ts
 const defaultEstimatedProgress = (duration: number, elapsed: number): number => {
-	const completionPercentage = (elapsed / duration) * 100;
-	return (2 / Math.PI) * 100 * Math.atan(completionPercentage / 50);
+    const completionPercentage = (elapsed / duration) * 100;
+    return (2 / Math.PI) * 100 * Math.atan(completionPercentage / 50);
 };
 ```
 
@@ -68,7 +68,7 @@ const defaultEstimatedProgress = (duration: number, elapsed: number): number => 
 
 ---
 
-### 时序控制（throttle / hideDelay / resetDelay）
+#### 时序控制（throttle / hideDelay / resetDelay）
 
 - **throttle**：点击链接后，先等这么长时间再显示进度条，避免极短请求造成「闪一下就没」。
 - **hideDelay**：进度到 100% 后，延迟这么久再隐藏条，避免瞬间消失。
@@ -78,13 +78,13 @@ const defaultEstimatedProgress = (duration: number, elapsed: number): number => 
 
 ---
 
-### 单例与作用域销毁
+#### 单例与作用域销毁
 
 全局只维护一个 `LoadingIndicator` 实例，多个地方调用 `useLoadingIndicator()` 拿到的是同一个实例。用 `indicatorUseCount` 记录当前有多少组件在用；当这些组件都卸载（`onScopeDispose`）且计数归零时，才把单例置空，避免在 SPA 里重复注册路由钩子、产生多个进度条逻辑。
 
 ---
 
-## 组件 API（Props）
+### 组件 API（Props）
 
 :::doctable
 
@@ -105,7 +105,7 @@ const defaultEstimatedProgress = (duration: number, elapsed: number): number => 
 
 ---
 
-## useLoadingIndicator 返回值
+### useLoadingIndicator 返回值
 
 在非 SSR 环境下，`createLoadingIndicator` 内部会挂到 VitePress 的 `router.onBeforeRouteChange` / `router.onAfterRouteChange`，所以**只挂一个进度条组件**就会在路由切换时自动跑。
 
@@ -127,16 +127,16 @@ const defaultEstimatedProgress = (duration: number, elapsed: number): number => 
 
 ---
 
-## 在 VitePress 中集成
+### 在 VitePress 中集成
 
 在主题的根布局里挂一个组件即可，建议包在 `ClientOnly` 里，避免 SSR 报错：
 
 ```vue
 <template>
-	<ClientOnly>
-		<VPLoadingIndicator color="var(--color-blog-accent)" />
-	</ClientOnly>
-	<!-- 其余 layout -->
+    <ClientOnly>
+        <VPLoadingIndicator color="var(--color-blog-accent)" />
+    </ClientOnly>
+    <!-- 其余 layout -->
 </template>
 
 <script setup>
@@ -148,7 +148,7 @@ import VPLoadingIndicator from 'vp-loading-indicator';
 
 ---
 
-## 组件与工具代码结构
+### 组件与工具代码结构
 
 **进度条组件**：根据 `useLoadingIndicator` 的 `progress`、`isLoading`、`error` 渲染一根固定在顶部的条，用 `transform: scaleX(progress%)` 做宽度动画，用 `backgroundSize` 配合渐变实现「条纹向右推进」的效果。
 
@@ -156,7 +156,7 @@ import VPLoadingIndicator from 'vp-loading-indicator';
 
 ---
 
-## 小结
+### 小结
 
 VP Loading Indicator 用 Vue 3 响应式 + 单例 composable + VitePress 路由钩子，实现了一个可配置、可扩展的顶部加载条：默认 atan 缓动、可自定义进度函数，throttle/hideDelay/resetDelay 控制时序，单例在组件全部卸载后自动清理。如果你也在用 VitePress 或 Vue 3 文档站，不妨按需接入或在此基础上改一版自己的进度条。
 
