@@ -24,6 +24,7 @@ watchEffect(() => {
         augmentElementAsPlayer(el, {
             photoSrc: src,
             videoSrc: live?.url,
+            autoplay: true,
         });
 
         const badge = document.querySelector('.lpk-badge');
