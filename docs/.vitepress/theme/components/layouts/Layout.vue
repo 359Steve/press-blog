@@ -2,11 +2,11 @@
 import type { Component } from 'vue';
 import BranchCanvas from 'branch-canvas';
 import VPLoadingIndicator from 'vp-loading-indicator';
-import AboutLayout from './components/layouts/AboutLayout.vue';
-import BlogLayout from './components/layouts/BlogLayout.vue';
-import IndexLayout from './components/layouts/IndexLayout.vue';
-import PhotosLayout from './components/layouts/PhotosLayout.vue';
-import RecordLayout from './components/layouts/RecordLayout.vue';
+import AboutLayout from './AboutLayout.vue';
+import BlogLayout from './BlogLayout.vue';
+import IndexLayout from './IndexLayout.vue';
+import PhotosLayout from './PhotosLayout.vue';
+import RecordLayout from './RecordLayout.vue';
 
 const { isDark, frontmatter } = useData();
 

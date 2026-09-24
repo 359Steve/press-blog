@@ -4,8 +4,8 @@ import { createPinia } from 'pinia';
 import { preview } from '@/theme/directives/preview';
 import { unwrap } from '@/theme/directives/unwrap';
 import DocTable from './components/DocTable.vue';
+import Layout from './components/layouts/Layout.vue';
 import ContentImage from './components/md/ContentImage.vue';
-import Layout from './Layout.vue';
 import 'vitepress/theme';
 import '@/theme/css/style.css';
 

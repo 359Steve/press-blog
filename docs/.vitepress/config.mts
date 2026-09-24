@@ -1,4 +1,4 @@
-import type MarkdownIt from 'markdown-it';
+import type { MarkdownRenderer } from 'vitepress';
 import type { NavItemWithIcon, PressNotFound, SocialWithColor } from './theme/types/vitepress-types';
 import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
@@ -10,7 +10,7 @@ import { defineConfig } from 'vitepress';
 
 const SITE_URL = 'https://jojo.polnareff.me';
 
-function registerComponentContainer(md: MarkdownIt, name: string, component: string) {
+function registerComponentContainer(md: MarkdownRenderer, name: string, component: string) {
     md.use(container, name, {
         render(tokens: any, idx: number) {
             const token = tokens[idx];
