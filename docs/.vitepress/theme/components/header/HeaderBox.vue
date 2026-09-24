@@ -1,14 +1,13 @@
 <script lang="ts" setup>
 const { frontmatter } = useData();
-const useHeader = useJojoHeader();
-const { setShowSidebar } = useHeader;
+const { showSidebar } = storeToRefs(useJojoHeader());
 </script>
 
 <template>
     <header
         class="bg-bg-blog-primary sticky top-0 z-40 flex items-center justify-between gap-4 px-4 py-3 shadow-[0_2px_5px_var(--color-blog-shadow)] lg:hidden"
     >
-        <button class="px-3 py-2" @click="setShowSidebar(true)">
+        <button class="px-3 py-2" @click="showSidebar = true">
             <Icon icon="ri:menu-2-fill" width="24" />
         </button>
         <Transition name="marquee" mode="out-in">

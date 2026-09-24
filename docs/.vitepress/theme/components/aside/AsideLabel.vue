@@ -9,7 +9,7 @@ const { showCount = false, showShadow = true } = defineProps<{
 
 const route = useRoute();
 const router = useRouter();
-const { setLabelName } = useIndex();
+const { labelName } = storeToRefs(useIndex());
 
 const tagList = computed(() => {
     const map = new Map<string, Post['frontmatter']['tags'][number] & { count: number }>();
@@ -37,7 +37,7 @@ const tagList = computed(() => {
 });
 
 function goToTag(tagName: string) {
-    setLabelName(tagName);
+    labelName.value = tagName;
     if (route.path !== '/' && route.path !== '/blog') {
         router.go('/');
     }

@@ -2,9 +2,7 @@
 import type { NavItemWithIcon, SocialWithColor } from '@/theme/types/vitepress-types';
 
 const router = useRouter();
-const useHeader = useJojoHeader();
-const { showSidebar } = storeToRefs(useHeader);
-const { setShowSidebar } = useHeader;
+const { showSidebar } = storeToRefs(useJojoHeader());
 const { theme } = useData<{
     logo: string;
     logoLink: string;
@@ -19,7 +17,7 @@ function toPath(path: string): void {
 </script>
 
 <template>
-    <div v-if="showSidebar" class="fixed inset-0 z-40 bg-black/40 lg:hidden" @click="setShowSidebar(false)" />
+    <div v-if="showSidebar" class="fixed inset-0 z-40 bg-black/40 lg:hidden" @click="showSidebar = false" />
     <aside
         class="bg-bg-blog-primary scroll-y-hidden fixed inset-y-0 left-0 z-50 h-full w-64 transform px-2 transition-transform lg:static lg:w-60 lg:translate-x-0 lg:bg-inherit lg:px-0"
         :class="showSidebar ? 'translate-x-0' : '-translate-x-full'"

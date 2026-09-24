@@ -7,10 +7,10 @@ export const useModals = defineStore('useModals', () => {
 
     /** 弹层是否可见 */
     const visible = ref<boolean>(false);
-    /** 当前渲染的弹层组件 */
+    /** 当前渲染的弹层组件，仅整体替换 */
     const component = shallowRef<Component | null>(null);
-    /** 当前弹层组件接收的 props */
-    const props = ref<AllModalProps>();
+    /** 当前弹层组件接收的 props，仅整体替换 */
+    const props = shallowRef<AllModalProps>();
 
     /** 可打开的弹层组件映射 */
     const currentComponent = {

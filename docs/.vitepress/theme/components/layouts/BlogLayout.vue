@@ -3,8 +3,7 @@ import { data as posts } from '../../content/blog.data';
 import { getMonthName, groupedPosts, stats } from '../../utils';
 
 const router = useRouter();
-const useindex = useIndex();
-const { labelName } = storeToRefs(useindex);
+const { labelName } = storeToRefs(useIndex());
 
 const classify = computed(() => groupedPosts(posts, labelName.value));
 const gather = computed(() => stats(posts, labelName.value));
@@ -47,7 +46,7 @@ const gatherList = computed(() => {
         </div>
 
         <!-- 标签筛选提示 -->
-        <FilterLabel :label-name />
+        <FilterLabel />
 
         <div v-if="classify.length > 0" class="relative">
             <div

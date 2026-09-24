@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-// 仙人掌对象类型
 interface CactusType {
     x: number;
     y: number;
@@ -7,8 +6,43 @@ interface CactusType {
     height: number;
 }
 
+interface DinoParameter {
+    width: number;
+    height: number;
+}
+
+interface GameStatic {
+    GROUND_Y: number;
+    GRAVITY: number;
+    JUMP_SPEED: number;
+    SPEED_INCREASE: number;
+    MIN_CACTUS_DISTANCE: number;
+}
+
+interface GameState {
+    playing: boolean;
+    score: number;
+    speedScale: number;
+    lastTime: number;
+    groundX: number;
+}
+
+interface DinoState {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    vy: number;
+    isJumping: boolean;
+    frame: number;
+    frameTimer: number;
+    frameInterval: number;
+    currentImg: HTMLImageElement;
+}
+
 const DinoBox = useTemplateRef<HTMLElement>('DinoBox');
-const dinoParameter = reactive({
+/** 画布尺寸，字段均为原始值且会原地更新 */
+const dinoParameter = shallowReactive<DinoParameter>({
     width: 0,
     height: 0,
 });
@@ -21,7 +55,8 @@ function createImage(src: string) {
 }
 
 const Dino = useTemplateRef<HTMLCanvasElement>('Dino');
-const ctx = ref<CanvasRenderingContext2D | null>(null);
+/** Canvas 2D 上下文，仅整体替换 */
+const ctx = shallowRef<CanvasRenderingContext2D | null>(null);
 // 恐龙运动时图片
 const dinoRunImg = computed(() => [
     createImage('/images/dino/dino-run-0.png'),
@@ -36,25 +71,25 @@ const groundImg = computed(() => createImage('/images/dino/ground.png'));
 // 仙人掌图片
 const cactusImg = computed(() => createImage('/images/dino/cactus.png'));
 
-// 游戏常量
-const gameStatic = reactive({
-    GROUND_Y: 200, // 地面Y坐标
-    GRAVITY: 0.0021, // 重力加速度
-    JUMP_SPEED: 0.65, // 跳跃初速度
-    SPEED_INCREASE: 0.00002, // 速度增加量
-    MIN_CACTUS_DISTANCE: 120, // 最小仙人掌距离
-});
-// 状态常量
-const gameState = reactive({
-    playing: false, // 游戏进行中
-    score: 0, // 分数
-    speedScale: 1, // 速度倍数
-    lastTime: 0, // 上一帧时间戳
-    groundX: 0, // 地面X坐标
+/** 游戏物理常量，运行期不会修改 */
+const gameStatic: GameStatic = {
+    GROUND_Y: 200,
+    GRAVITY: 0.0021,
+    JUMP_SPEED: 0.65,
+    SPEED_INCREASE: 0.00002,
+    MIN_CACTUS_DISTANCE: 120,
+};
+/** 游戏运行状态，字段均为原始值且会原地更新 */
+const gameState = shallowReactive<GameState>({
+    playing: false,
+    score: 0,
+    speedScale: 1,
+    lastTime: 0,
+    groundX: 0,
 });
 
-// 恐龙对象
-const dino = reactive({
+/** 恐龙状态，字段原地更新，图片仅整体替换 */
+const dino = shallowReactive<DinoState>({
     x: 40,
     y: gameStatic.GROUND_Y,
     width: 44,
@@ -66,9 +101,10 @@ const dino = reactive({
     frameInterval: 100,
     currentImg: dinoStaticImg.value,
 });
-// 仙人掌对象
-const cactuses = ref<CactusType[]>([]);
-const rafId = ref(0);
+/** 仙人掌列表，绘制走 Canvas，仅需跟踪数组整体替换 */
+const cactuses = shallowRef<CactusType[]>([]);
+/** 动画帧 id */
+const rafId = ref<number>(0);
 
 // 更新地面位置
 function updateGround(delta: number) {

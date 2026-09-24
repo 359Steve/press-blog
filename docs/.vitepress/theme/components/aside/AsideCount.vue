@@ -2,8 +2,7 @@
 import { stats } from '@/theme/utils';
 import { data as posts } from '../../content/blog.data';
 
-const useindex = useIndex();
-const { labelName } = storeToRefs(useindex);
+const { labelName } = storeToRefs(useIndex());
 
 const gather = computed(() => stats(posts, labelName.value));
 </script>

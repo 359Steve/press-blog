@@ -9,7 +9,8 @@ const { src, alt, live } = defineProps<{
 
 const { augmentElementAsPlayer } = livephotoskit;
 const livePhotoRef = useTemplateRef<HTMLDivElement>('livePhotoRef');
-const btn = ref<Element | null>(null);
+/** Live Photo 角标 DOM，仅整体替换 */
+const btn = shallowRef<Element | null>(null);
 
 function handleClick(e: Event) {
     e.stopImmediatePropagation();

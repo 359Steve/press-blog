@@ -2,8 +2,7 @@
 import { data as posts } from '@/theme/content/blog.data';
 
 const router = useRouter();
-const useindex = useIndex();
-const { labelName } = storeToRefs(useindex);
+const { labelName } = storeToRefs(useIndex());
 
 const filteredPosts = computed(() => {
     const list = posts ?? [];
@@ -17,7 +16,7 @@ const filteredPosts = computed(() => {
 
 <template>
     <div class="w-full px-2">
-        <FilterLabel :label-name />
+        <FilterLabel />
         <div v-if="filteredPosts && filteredPosts.length > 0" class="index-list grid w-full grid-cols-1 gap-5 sm:gap-6">
             <div
                 v-for="{ frontmatter: item, ...args } in filteredPosts"

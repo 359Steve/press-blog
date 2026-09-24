@@ -2,6 +2,7 @@
 import { blurhashToGradientCssObject } from '@unpic/placeholder';
 import photos from '@/theme/photos/data';
 
+/** 是否使用宫格裁切布局 */
 const translate = ref<boolean>(true);
 </script>
 

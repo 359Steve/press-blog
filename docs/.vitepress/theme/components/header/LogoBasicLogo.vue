@@ -1,9 +1,13 @@
 <script lang="ts" setup>
 const router = useRouter();
-const pathRefs = ref<SVGPathElement[]>([]);
-const times = ref<number[]>([0, 1, 1.5, 2.5, 3.2, 4.2]);
+/** SVG path 节点列表，按索引写入，元素本身不需要深层代理 */
+const pathRefs = shallowReactive<SVGPathElement[]>([]);
+/** 各 path 正向绘制的启动时间（秒） */
+const times: number[] = [0, 1, 1.5, 2.5, 3.2, 4.2];
+/** 动画定时器 id 列表，会原地 push 并整体清空 */
 const animationTimeouts = ref<ReturnType<typeof setTimeout>[]>([]);
-const isAnimating = ref(false);
+/** 动画是否正在循环播放 */
+const isAnimating = ref<boolean>(false);
 
 /* ====== 可调节节奏参数 ====== */
 const pauseAfterDraw = 2000; // 绘制完成后停顿
@@ -20,7 +24,7 @@ function clearAllTimeouts(): void {
 
 // 重置所有路径状态
 function resetPaths(): void {
-    pathRefs.value.forEach((path) => {
+    pathRefs.forEach((path) => {
         if (!path) return;
 
         path.style.animation = 'none';
@@ -34,12 +38,12 @@ function resetPaths(): void {
 function play(): void {
     resetPaths();
 
-    pathRefs.value.forEach((path, i) => {
+    pathRefs.forEach((path, i) => {
         if (!path) return;
 
         const timeout = setTimeout(() => {
             path.style.animation = 'var(--animate-grow)';
-        }, times.value[i] * 1000);
+        }, times[i] * 1000);
 
         animationTimeouts.value.push(timeout);
     });
@@ -48,12 +52,12 @@ function play(): void {
 // 反向回退
 function reverse(): void {
     // 最后一个path执行的时间
-    const drawEnd = times.value[times.value.length - 1] * 1000;
+    const drawEnd = times[times.length - 1] * 1000;
 
     // 整体回退停顿 +2s
     const timeout = setTimeout(() => {
         // 倒序所有path
-        const reversed = Array.from(pathRefs.value).reverse();
+        const reversed = Array.from(pathRefs).reverse();
 
         reversed.forEach((path, i) => {
             if (!path) return;
@@ -77,8 +81,8 @@ function playSequence(): void {
     play();
     reverse();
 
-    const drawEnd = times.value[times.value.length - 1] * 1000;
-    const reverseDuration = pathRefs.value.length * reverseStepDelay;
+    const drawEnd = times[times.length - 1] * 1000;
+    const reverseDuration = pathRefs.length * reverseStepDelay;
 
     // 绘制 → 停 → 回退 → 停”流程一共需要的时间
     const totalDuration = drawEnd + pauseAfterDraw + reverseDuration + pauseAfterReverse;
