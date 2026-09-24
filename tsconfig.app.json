@@ -1,0 +1,26 @@
+{
+	"extends": "@vue/tsconfig/tsconfig.dom.json",
+	"compilerOptions": {
+		"paths": {
+			"@/*": [
+				"./docs/.vitepress/*"
+			]
+		},
+		"composite": true,
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+		/* Linting */
+		"strict": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noEmit": true,
+		"erasableSyntaxOnly": true,
+		"noUncheckedSideEffectImports": true
+	},
+	"include": [
+		"docs/.vitepress/**/*.ts",
+		"docs/.vitepress/**/*.mts",
+		"docs/.vitepress/**/*.d.ts",
+		"docs/.vitepress/**/*.vue",
+	]
+}
