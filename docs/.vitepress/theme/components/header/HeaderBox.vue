@@ -11,8 +11,10 @@ const { showSidebar } = storeToRefs(useJojoHeader());
             <Icon icon="ri:menu-2-fill" width="24" />
         </button>
         <Transition name="marquee" mode="out-in">
-            <div :key="frontmatter.title" class="flex-1">
-                <span class="truncate text-base">{{ frontmatter.title }}</span>
+            <div :key="frontmatter.title" class="min-w-0 flex-1">
+                <span class="block truncate text-sm">
+                    {{ frontmatter.title }}
+                </span>
             </div>
         </Transition>
         <div class="box-border h-6 w-12">
@@ -21,19 +23,4 @@ const { showSidebar } = storeToRefs(useJojoHeader());
     </header>
 </template>
 
-<style lang="postcss" scoped>
-.marquee-enter-active,
-.marquee-leave-active {
-    transition: all 0.35s ease;
-}
-
-.marquee-enter-from {
-    transform: translateY(100%);
-    opacity: 0;
-}
-
-.marquee-leave-to {
-    transform: translateY(-100%);
-    opacity: 0;
-}
-</style>
+<style lang="postcss" scoped></style>

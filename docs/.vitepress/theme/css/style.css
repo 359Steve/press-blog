@@ -8,183 +8,198 @@
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-	list-style: none;
+    box-sizing: border-box;
+    list-style: none;
 }
 
 html,
 body,
 #app {
-	font-family:
-		inter,
-		ui-sans-serif,
-		system-ui,
-		-apple-system,
-		BlinkMacSystemFont,
-		Segoe UI,
-		Roboto,
-		Helvetica Neue,
-		Arial,
-		Noto Sans,
-		sans-serif,
-		'Apple Color Emoji',
-		'Segoe UI Emoji',
-		Segoe UI Symbol,
-		'Noto Color Emoji';
+    font-family:
+        inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        Helvetica Neue,
+        Arial,
+        Noto Sans,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        Segoe UI Symbol,
+        'Noto Color Emoji';
 
-	padding: 0;
-	margin: 0;
-	height: 100%;
-	scrollbar-color: var(--color-scrollbar-color) transparent;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    scrollbar-color: var(--color-scrollbar-color) transparent;
 }
 
 html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb,
 #app::-webkit-scrollbar-thumb {
-	border-radius: 2px;
+    border-radius: 2px;
 }
 
 @theme {
-	--color-blue-300: #93c5fd;
-	--color-blue-400: #60a5fa;
-	--color-blue-500: #3b82f6;
-	--color-indigo-300: #a5b4fc;
-	--color-violet-200: #ddd6fe;
+    --color-blue-300: #93c5fd;
+    --color-blue-400: #60a5fa;
+    --color-blue-500: #3b82f6;
+    --color-indigo-300: #a5b4fc;
+    --color-violet-200: #ddd6fe;
 
-	--color-black: #000000;
-	--color-white: #ffffff;
-	--color-transparent: transparent;
-	--color-scrollbar-color: #eeeeee;
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-transparent: transparent;
+    --color-scrollbar-color: #eeeeee;
 
-	--animate-aurora: aurora 60s linear infinite;
-	--animate-grow: grow 5s ease forwards;
-	--animate-shrink: shrink 1s ease forwards;
+    --animate-aurora: aurora 60s linear infinite;
+    --animate-grow: grow 5s ease forwards;
+    --animate-shrink: shrink 1s ease forwards;
 
-	--color-blog-primary: #1a1a1a;
-	--color-bg-blog-primary: #ffffff;
-	--color-blog-tertiary: #9ca3af;
-	--color-blog-secondary: #6b7280;
-	--color-blog-accent: #f43f5e;
-	--color-blog-shadow: rgba(156, 163, 175, 0.3);
-	--color-blog-glass: rgba(0 0 0 / 0.01);
+    --color-blog-primary: #1a1a1a;
+    --color-bg-blog-primary: #ffffff;
+    --color-blog-tertiary: #9ca3af;
+    --color-blog-secondary: #6b7280;
+    --color-blog-accent: #f43f5e;
+    --color-blog-shadow: rgba(156, 163, 175, 0.3);
+    --color-blog-glass: rgba(0 0 0 / 0.01);
 
-	@keyframes aurora {
-		from {
-			background-position:
-				50% 50%,
-				50% 50%;
-		}
-		to {
-			background-position:
-				350% 50%,
-				350% 50%;
-		}
-	}
-	@keyframes grow {
-		0% {
-			stroke-dasharray: 0 350px;
-			opacity: 0;
-		}
-		10% {
-			opacity: 1;
-		}
-		40% {
-			stroke-dasharray: 350px 0;
-		}
-		100% {
-			stroke-dasharray: 350px 0;
-			opacity: 1;
-		}
-	}
-	@keyframes shrink {
-		0% {
-			stroke-dasharray: 350px 0;
-			opacity: 1;
-		}
-		99% {
-			stroke-dasharray: 0 350px;
-			opacity: 1;
-		}
-		100% {
-			stroke-dasharray: 0 350px;
-			opacity: 0;
-		}
-	}
+    @keyframes aurora {
+        from {
+            background-position:
+                50% 50%,
+                50% 50%;
+        }
+        to {
+            background-position:
+                350% 50%,
+                350% 50%;
+        }
+    }
+    @keyframes grow {
+        0% {
+            stroke-dasharray: 0 350px;
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        40% {
+            stroke-dasharray: 350px 0;
+        }
+        100% {
+            stroke-dasharray: 350px 0;
+            opacity: 1;
+        }
+    }
+    @keyframes shrink {
+        0% {
+            stroke-dasharray: 350px 0;
+            opacity: 1;
+        }
+        99% {
+            stroke-dasharray: 0 350px;
+            opacity: 1;
+        }
+        100% {
+            stroke-dasharray: 0 350px;
+            opacity: 0;
+        }
+    }
 }
 
 @layer base {
-	:root {
-		--aurora: repeating-linear-gradient(
-			100deg,
-			var(--color-blue-500) 10%,
-			var(--color-indigo-300) 15%,
-			var(--color-blue-300) 20%,
-			var(--color-violet-200) 25%,
-			var(--color-blue-400) 30%
-		);
+    :root {
+        --aurora: repeating-linear-gradient(
+            100deg,
+            var(--color-blue-500) 10%,
+            var(--color-indigo-300) 15%,
+            var(--color-blue-300) 20%,
+            var(--color-violet-200) 25%,
+            var(--color-blue-400) 30%
+        );
 
-		--record-gradient: repeating-linear-gradient(
-			100deg,
-			var(--color-white) 0%,
-			var(--color-white) 7%,
-			var(--color-transparent) 10%,
-			var(--color-transparent) 12%,
-			var(--color-white) 16%
-		);
+        --record-gradient: repeating-linear-gradient(
+            100deg,
+            var(--color-white) 0%,
+            var(--color-white) 7%,
+            var(--color-transparent) 10%,
+            var(--color-transparent) 12%,
+            var(--color-white) 16%
+        );
 
-		--prose-width: 120ch;
-		--prose-margin: calc(calc(calc(100vw - min(var(--prose-width), 100%)) / 2) - 8px);
-	}
+        --prose-width: 120ch;
+        --prose-margin: calc(calc(calc(100vw - min(var(--prose-width), 100%)) / 2) - 8px);
+    }
 
-	.dark {
-		--color-scrollbar-color: #111111;
-		--color-blog-primary: #ffffff;
-		--color-bg-blog-primary: #1a1a1a;
-		--color-blog-tertiary: #98989f;
-		--color-blog-secondary: #9ca3af;
-		--color-blog-accent: #f43f5e;
-		--color-blog-shadow: rgba(0, 0, 0, 0.8);
-		--color-blog-glass: rgba(255, 255, 255, 0.03);
+    .dark {
+        --color-scrollbar-color: #111111;
+        --color-blog-primary: #ffffff;
+        --color-bg-blog-primary: #1a1a1a;
+        --color-blog-tertiary: #98989f;
+        --color-blog-secondary: #9ca3af;
+        --color-blog-accent: #f43f5e;
+        --color-blog-shadow: rgba(0, 0, 0, 0.8);
+        --color-blog-glass: rgba(255, 255, 255, 0.03);
 
-		--record-gradient: repeating-linear-gradient(
-			100deg,
-			var(--color-black) 0%,
-			var(--color-black) 7%,
-			var(--color-transparent) 10%,
-			var(--color-transparent) 12%,
-			var(--color-black) 16%
-		);
-	}
+        --record-gradient: repeating-linear-gradient(
+            100deg,
+            var(--color-black) 0%,
+            var(--color-black) 7%,
+            var(--color-transparent) 10%,
+            var(--color-transparent) 12%,
+            var(--color-black) 16%
+        );
+    }
 }
 
 @layer components {
-	.aurora-bg {
-		@apply after:animate-aurora pointer-events-none absolute -inset-2.5 bg-size-[300%,200%] bg-position-[50%_50%,50%_50%] opacity-50 blur-[10px] invert filter will-change-transform after:absolute after:inset-0 after:bg-size-[200%,100%] after:bg-fixed after:mix-blend-difference after:content-[''] dark:invert-0;
-		background-image: var(--record-gradient), var(--aurora);
-	}
+    .aurora-bg {
+        @apply after:animate-aurora pointer-events-none absolute -inset-2.5 bg-size-[300%,200%] bg-position-[50%_50%,50%_50%] opacity-50 blur-[10px] invert filter will-change-transform after:absolute after:inset-0 after:bg-size-[200%,100%] after:bg-fixed after:mix-blend-difference after:content-[''] dark:invert-0;
+        background-image: var(--record-gradient), var(--aurora);
+    }
 
-	.aurora-bg::after {
-		background-image: var(--record-gradient), var(--aurora);
-	}
+    .aurora-bg::after {
+        background-image: var(--record-gradient), var(--aurora);
+    }
+
+    .marquee-enter-active,
+    .marquee-leave-active {
+        transition: all 0.35s ease;
+    }
+
+    .marquee-enter-from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    .marquee-leave-to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
 }
 
 @layer utilities {
-	.mask-bg {
-		@apply mask-[radial-gradient(ellipse_at_100%_0%,black_10%,var(--color-transparent)_90%)];
-	}
+    .mask-bg {
+        @apply mask-[radial-gradient(ellipse_at_100%_0%,black_10%,var(--color-transparent)_90%)];
+    }
 
-	.glass {
-		background: var(--color-blog-glass);
-		backdrop-filter: blur(10px);
-	}
+    .glass {
+        background: var(--color-blog-glass);
+        backdrop-filter: blur(10px);
+    }
 
-	.scroll-y-hidden {
-		overflow-y: auto;
-		scrollbar-width: none;
-		-ms-overflow-style: none;
-	}
+    .scroll-y-hidden {
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
 
-	.scroll-y-hidden::-webkit-scrollbar {
-		display: none;
-	}
+    .scroll-y-hidden::-webkit-scrollbar {
+        display: none;
+    }
 }
