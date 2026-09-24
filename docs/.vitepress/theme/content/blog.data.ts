@@ -7,6 +7,11 @@ export { data };
 
 export default createContentLoader('index/*.md', {
     excerpt: true,
+    /**
+     * 规范化文章 frontmatter 日期，并按发布时间倒序排列
+     * @param raw - VitePress 原始内容数据
+     * @returns 处理后的文章列表
+     */
     transform(raw): Post[] {
         return raw
             .map(({ frontmatter, ...extra }) => {

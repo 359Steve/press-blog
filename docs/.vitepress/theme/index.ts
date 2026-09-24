@@ -1,4 +1,4 @@
-import type { Theme } from 'vitepress';
+import type { EnhanceAppContext, Theme } from 'vitepress';
 import { Icon } from '@iconify/vue';
 import { createPinia } from 'pinia';
 import { preview } from '@/theme/directives/preview';
@@ -10,8 +10,13 @@ import 'vitepress/theme';
 import '@/theme/css/style.css';
 
 export default {
+    /** 自定义站点布局 */
     Layout,
-    enhanceApp({ app }) {
+    /**
+     * 增强 VitePress 应用：注册 Pinia、自定义指令与全局组件
+     * @param ctx - VitePress 应用增强上下文
+     */
+    enhanceApp({ app }: EnhanceAppContext): void {
         app.use(createPinia());
         app.directive('unwrap', unwrap).directive('preview', preview);
         app.component('Icon', Icon).component('DocTable', DocTable).component('ContentImage', ContentImage);

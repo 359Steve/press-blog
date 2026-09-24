@@ -1,28 +1,41 @@
-// 获取实况视频
+type PhotoAsset = Pick<Photo, 'name' | 'url'>;
+
+type PhotoMetaEntry = {
+    name: string;
+    data: PhotoMate;
+};
+
+/** 相册中的实况视频资源列表 */
 const movModules = Object.entries(
     import.meta.glob<string>('./album/**/*.mov', {
         eager: true,
         query: '?url',
         import: 'default',
     }),
-).map(([name, url]) => {
+).map(([name, url]): PhotoAsset => {
     name = name.replace(/\.\w+$/, '').replace(/^\.\//, '');
     return {
         name,
         url,
     };
 });
-function metaMov(name: string) {
+
+/**
+ * 根据图片名称查找对应的实况视频
+ * @param name - 图片文件名（不含扩展名）
+ * @returns 同名实况视频资源，未找到时返回 undefined
+ */
+function metaMov(name: string): PhotoAsset | undefined {
     return movModules.find((item) => item.name.endsWith(name));
 }
 
-// 获取json数据
+/** 相册图片对应的 JSON 元数据列表 */
 const metaInfo = Object.entries(
     import.meta.glob<PhotoMate>('./album/**/*.json', {
         eager: true,
         import: 'default',
     }),
-).map(([name, data]) => {
+).map(([name, data]): PhotoMetaEntry => {
     name = name.replace(/\.\w+$/, '').replace(/^\.\//, '');
     return {
         name,
@@ -30,7 +43,7 @@ const metaInfo = Object.entries(
     };
 });
 
-// 获取照片数据
+/** 相册照片数据，按文件名倒序排列 */
 const photos = Object.entries(
     import.meta.glob<string>('./album/**/*.{jpg,png,JPG,PNG}', {
         eager: true,

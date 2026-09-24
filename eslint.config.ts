@@ -12,7 +12,7 @@ export default antfu(
         ignores: ['**/dist', '**/node_modules', '**/.vite', '**/auto-imports.d.ts', '**/components.d.ts', 'public/**'],
         rules: {
             'unused-imports/no-unused-vars': [
-                'warn',
+                'error',
                 {
                     argsIgnorePattern: '^_',
                     varsIgnorePattern: '^_',

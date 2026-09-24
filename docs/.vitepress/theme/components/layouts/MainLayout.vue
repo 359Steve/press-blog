@@ -1,47 +1,26 @@
 <script lang="ts" setup>
-import type { WatchHandle } from 'vue';
-
 const route = useRoute();
 const { page } = useData();
-const { sectionScrollTop } = storeToRefs(useIndex());
+const { scrollMap } = useIndex();
 const sectionEl = useTemplateRef<HTMLElement>('sectionEl');
-let watcher: WatchHandle | null = null;
-let scroll: ReturnType<typeof useScroll> | null = null;
 
 const notMd = computed(() => page.value?.isNotFound);
 
 watch(
     () => route.path,
     (newPath) => {
-        newPath && sectionEl.value?.scrollTo(0, 0);
+        const top = scrollMap.get(newPath) || 0;
+        if (newPath && sectionEl) {
+            sectionEl.value?.scrollTo(0, top);
+        }
     },
 );
 
-watch(
-    () => page.value.filePath,
-    () => {
-        watcher?.();
-        watcher = null;
-        scroll = null;
-        nextTick(() => {
-            const scroll = useScroll(sectionEl);
-            const { y } = scroll;
+function setScroll(e: Event) {
+    const target = e.target as HTMLElement;
 
-            watcher = watch(
-                y,
-                (newValue) => {
-                    sectionScrollTop.value = newValue;
-                },
-                {
-                    immediate: true,
-                },
-            );
-        });
-    },
-    {
-        immediate: true,
-    },
-);
+    scrollMap.set(route.path, target.scrollTop);
+}
 </script>
 
 <template>
@@ -51,7 +30,7 @@ watch(
         <div class="mx-auto flex h-[calc(100%-48px)] max-w-6xl gap-2 px-4 py-6 lg:h-full">
             <AsideBox />
             <!-- 主内容 -->
-            <section ref="sectionEl" class="scroll-y-hidden w-full flex-1 pb-3">
+            <section ref="sectionEl" class="scroll-y-hidden w-full flex-1 pb-3" @scroll="setScroll">
                 <NotFound v-if="notMd" />
                 <slot v-else />
             </section>
