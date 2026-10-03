@@ -102,6 +102,7 @@ async function processPhoto(filepath: string): Promise<void> {
     if (ext !== '.heic' && basename(filepath).startsWith('p-')) return;
 
     let buffer = await fs.readFile(filepath);
+    const exif = ExifReader.load(buffer);
 
     // HEIC 转 JPG
     if (ext === '.heic') {
@@ -110,7 +111,6 @@ async function processPhoto(filepath: string): Promise<void> {
     }
 
     const img = sharp(buffer);
-    const exif = ExifReader.load(buffer);
     const date = await parsePhotoDate(exif, filepath);
     if (!date) return;
 

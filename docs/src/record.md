@@ -10,6 +10,14 @@ record: true
 
 <div class="relative h-[100px]">
 
+## 2026 {.stroke-year}
+
+</div>
+
+- [2020年暑假四人结伴冒雨畅游宝石山与西湖断桥，热烈莽撞；2026年步入职场后二人重游故地，相同山水，心境全然不同，读懂了成长的松弛与沉淀。](/record/xihu)
+
+<div class="relative h-[100px]">
+
 ## 2025 {.stroke-year}
 
 </div>
