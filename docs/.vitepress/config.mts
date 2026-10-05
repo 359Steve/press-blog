@@ -62,11 +62,13 @@ export default defineConfig({
     head: [
         ['link', { rel: 'icon', href: '/favicon.ico' }],
         ['link', { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/images/avatar.png' }],
+        ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+        ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
         [
             'link',
             {
                 rel: 'stylesheet',
-                href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap',
+                href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
             },
         ],
         ['meta', { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' }],

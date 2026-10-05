@@ -6,7 +6,7 @@ import { unwrap } from '@/theme/directives/unwrap';
 import DocTable from './components/DocTable.vue';
 import Layout from './components/layouts/Layout.vue';
 import ContentImage from './components/md/ContentImage.vue';
-import 'vitepress/theme';
+import 'vitepress/theme-without-fonts';
 import '@/theme/css/style.css';
 
 export default {
